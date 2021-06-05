@@ -1,7 +1,7 @@
 # README
----
+
 ## PROJETO PAYNOW - TREINADEV 06
----
+
 ### Sobre o projeto
 Uma escola de programação, a CodePlay, decidiu lançar uma plataforma de cursos online de
 programação. Você já está trabalhando nesse projeto e agora vamos começar uma nova etapa:
@@ -21,3 +21,10 @@ o meio de pagamento. E a cada nova venda realizada, devem ser armazenados dados 
 cliente, do produto selecionado e do meio de pagamento escolhido. Um recibo deve ser emitido
 para cada pagamento e esse recibo deve ser acessível para os clientes finais, alunos da
 CodePlay no nosso contexto.
+
+### Configurações
+* Ruby 3.0.1
+* Rails 6.1.3.2
+* Testes:
+  - Rspec
+  - Capybara
