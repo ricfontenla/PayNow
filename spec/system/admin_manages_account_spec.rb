@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'Admin manages account' do
   context 'and tries to login' do
-    it 'and succeds' do
+    it 'sucessfully' do
       admin = Admin.create!(email: 'ademir@paynow.com.br', 
                             password: '123456')
 
@@ -13,6 +13,7 @@ describe 'Admin manages account' do
       click_on 'Entrar'
 
       expect(current_path).to eq(root_path)
+      expect(page).to have_link('Sair', href: destroy_admin_session_path)
     end
 
     it 'and mistakes password or email' do
@@ -51,12 +52,24 @@ describe 'Admin manages account' do
       token = admin.send_reset_password_instructions
 
       visit edit_admin_password_path(reset_password_token: token)
-      save_page
       fill_in 'Senha', with: '654321'
       fill_in 'Confirmar senha', with: '654321'
       click_on 'Alterar minha senha'
       expect(page).to have_content('Sua senha foi alterada com sucesso. Você está logado.')
       expect(current_path).to eq (root_path)
     end  
+  end
+
+  context 'and tries to logout' do
+    it 'sucessfully' do
+      admin = Admin.create!(email: 'ademir@paynow.com.br', 
+                            password: '123456')
+
+      login_as admin, scope: :admin
+      visit root_path
+      click_on 'Sair'
+
+      expect(page).to_not have_link('Sair', href: destroy_admin_session_path)
+    end
   end
 end
