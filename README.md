@@ -28,10 +28,18 @@ CodePlay no nosso contexto.
 * Testes:
   - Rspec
   - Capybara
+  - Shoulda Matchers
+
+### Como iniciar o projeto 
+* Clone o projeto para sua máquina, e dentro da pasta do projeto, rode o comando ```bin/setup``` em seu terminal
+* Você pode utilizar o comando ```rails s``` para ver a aplicação funcionando localmente no endereço ```http://localhost:3000```
+
+### Testes
+* Para executar os testes, utilize o comando ```rspec```
 
 ## Informações deste projeto
-# Administradores
-* Administradores não possuem página de registro e devem ser registrados pelo console.
-* Login de administradores deve ser feito acessando new_admin_session_path
-Ex:
-  http://localhost:3000/admins/sign_in
+### Administradores
+* Administradores não possuem página de registro e devem ser registrados pelo console e **precisam** possuir um e-mail com o dominio @paynow.com.br.
+* Login de administradores deve ser feito acessando new_admin_session_path.
+  - Ex:
+    ```http://localhost:3000/admins/sign_in```

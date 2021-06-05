@@ -7,6 +7,7 @@ pt-BR:
         other: 'Administradores(as)'
     attributes:
       admin:
+        email: 'Email'
         password: 'Senha'
         password_confirmation: 'Confirmar senha'
   admins:
@@ -15,3 +16,14 @@ pt-BR:
         title: 'Área do Administrador'
         remember_me: 'Lembrar-se de mim'
         login: 'Entrar'
+    shared:
+      links:
+        forgot: 'Esqueceu sua senha?'
+        login: 'Entrar'
+    passwords:
+      new:
+        title: 'Esqueceu sua senha?'
+        send_me: 'Enviar instruções para trocar a senha'
+      edit:
+        title: 'Cadastrar nova senha'
+        change_password: 'Alterar minha senha'
