@@ -1,0 +1,17 @@
+---
+pt-BR:
+  activerecord:
+    models:
+      admin:
+        one: 'Administrador(a)'
+        other: 'Administradores(as)'
+    attributes:
+      admin:
+        password: 'Senha'
+        password_confirmation: 'Confirmar senha'
+  admins:
+    sessions:
+      new:
+        title: 'Área do Administrador'
+        remember_me: 'Lembrar-se de mim'
+        login: 'Entrar'

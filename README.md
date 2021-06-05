@@ -28,3 +28,10 @@ CodePlay no nosso contexto.
 * Testes:
   - Rspec
   - Capybara
+
+## Informações deste projeto
+# Administradores
+* Administradores não possuem página de registro e devem ser registrados pelo console.
+* Login de administradores deve ser feito acessando new_admin_session_path
+Ex:
+  http://localhost:3000/admins/sign_in
