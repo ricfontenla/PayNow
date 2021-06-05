@@ -1,5 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Admin, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+describe Admin do
+  it { should allow_value("ademir@paynow.com.br").for(:email) }
+  it { should_not allow_value("ademir@google.com").for(:email).with_message('não é válido') }
 end
