@@ -4,11 +4,18 @@
 <h3>Métodos Cadastrados:</h3>
 <% if @payment_methods.any? %>
   <div class="card" style="width: 18rem;">
-    <div class="card-body">
-      <% @payment_methods.each do |payment_method| %>
+
+    <% @payment_methods.each do |payment_method| %>
+      <% if payment_method.category_icon.attached? %>
+        <%= image_tag payment_method.category_icon %>
+      <% end %>
+
+      <div class="card-body">
         <h5 class="card-title"><%= link_to payment_method.name, [:admin, payment_method] %></h5>
         <p class="card-text"><b>Status:</b> <%= payment_method.active ? 'Ativo' : 'Inativo' %></p>
-    <% end %>
+      </div>
+    <% end %>  
+
   </div>
 <% else %>
   <p>Nenhum método cadastrado.</p>
