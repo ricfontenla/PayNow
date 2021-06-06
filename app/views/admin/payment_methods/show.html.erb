@@ -8,4 +8,6 @@
   <dd><%= number_to_currency @payment_method.max_fee %></dd>
   <dt>Status:</dt>
   <dd><%= @payment_method.active ? 'Ativo' : 'Inativo' %></dd>
+  <dt>Categoria:</dt>
+  <dd><%= PaymentMethod.human_attribute_name("role.#{@payment_method.category}") %></dd>
 </dl>

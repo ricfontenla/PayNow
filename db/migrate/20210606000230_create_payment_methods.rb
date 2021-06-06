@@ -4,7 +4,7 @@ class CreatePaymentMethods < ActiveRecord::Migration[6.1]
       t.string :name
       t.decimal :billing_fee
       t.decimal :max_fee
-      t.boolean :active, null: false, default: true
+      t.boolean :active, null: false, default: false
 
       t.timestamps
     end

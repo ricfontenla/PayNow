@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_06_000230) do
+ActiveRecord::Schema.define(version: 2021_06_06_025739) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -28,9 +28,10 @@ ActiveRecord::Schema.define(version: 2021_06_06_000230) do
     t.string "name"
     t.decimal "billing_fee"
     t.decimal "max_fee"
-    t.boolean "active", default: true, null: false
+    t.boolean "active", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "category"
   end
 
 end

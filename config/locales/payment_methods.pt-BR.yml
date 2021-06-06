@@ -4,3 +4,10 @@ pt-BR:
     payment_methods:
       index:
         title: 'Gerenciar Métodos de Pagamentos'
+  activerecord:
+    attributes:
+      payment_method/role:
+        boleto: 'Boleto'
+        card: 'Cartão'
+        pix: 'PIX'
+
