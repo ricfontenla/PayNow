@@ -3,14 +3,22 @@
 
 <dl>
   <% if @payment_method.category_icon.attached? %>
-    <%= image_tag @payment_method.category_icon %>
+    <%= image_tag @payment_method.category_icon, size: '50' %>
   <% end %>
   <dt>Taxa por cobrança (%):</dt>
   <dd><%= number_with_delimiter(@payment_method.billing_fee, delimiter: ',') %></dd>
   <dt>Taxa máxima:</dt>
   <dd><%= number_to_currency @payment_method.max_fee %></dd>
   <dt>Status:</dt>
-  <dd><%= @payment_method.active ? 'Ativo' : 'Inativo' %></dd>
+  <dd><%= @payment_method.status ? 'Ativo' : 'Inativo' %></dd>
   <dt>Categoria:</dt>
-  <dd><%= PaymentMethod.human_attribute_name("role.#{@payment_method.category}") %></dd>
+  <dd><%= PaymentMethod.human_attribute_name("category.#{@payment_method.category}") %></dd>
 </dl>
+
+<div>
+  <%= link_to 'Deletar', [:admin, @payment_method], method: :delete, 
+                          data: { comfirm: 'Tem certeza' }, class: 'btn btn-dark' %>
+  <%= link_to 'Atualizar', edit_admin_payment_method_path(@payment_method), 
+                           class: 'btn btn-dark' %>
+  <%= link_to 'Voltar', admin_payment_methods_path, class: 'btn btn-dark' %>
+</div>

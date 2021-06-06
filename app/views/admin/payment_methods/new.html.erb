@@ -1,0 +1,36 @@
+<h1><%= t('.title') %></h1>
+<hr class="my-4">
+
+<div>
+  <% if @payment_method.errors.any? %>
+    <p>Foram encontrados <%= @payment_method.errors.count %> error(s): </p>
+    <ul>
+      <% @payment_method.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>
+
+<%= form_with model: [:admin, @payment_method] do |form| %>
+  <dl>
+    <dt><%= form.label :name %></dt>
+    <dd><%= form.text_field :name %></dd>
+
+    <dt><%= form.label :billing_fee %></dt>
+    <dd><%= form.number_field :billing_fee, step: 0.1 %></dd>
+
+    <dt><%= form.label :max_fee %></dt>
+    <dd><%= form.number_field :max_fee,  step: 0.1 %></dd>
+
+    <dt><%= form.label :status %></dt>
+    <dd><%= form.select :status, [['Ativo', true], ['Inativo', false]] %></dd>
+
+    <dt><%= form.label :category %></dt>
+    <dd><%= form.select :category, [['Boleto', :boleto], ['Cartão', :card], ['PIX', :pix]], include_blank: true%></dd>
+  </dl>
+  <%= form.submit t('.submit'), class: 'btn btn-dark' %>
+<% end %>
+<div class="py-3">
+  <%= link_to 'Cancelar', admin_payment_methods_path, class: 'btn btn-dark' %>
+</div>

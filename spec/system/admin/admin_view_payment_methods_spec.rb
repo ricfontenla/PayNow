@@ -5,19 +5,19 @@ describe "Admin view payment methods" do
     boleto = PaymentMethod.create!(name: 'Boleto do Banco Laranja', 
                                    billing_fee: 2.5, 
                                    max_fee: 100.0,
-                                   active: true,
+                                   status: true,
                                    category: :boleto)
     boleto.category_icon
-            .attach(io: File.open('spec/fixtures/boleto.png'), 
+            .attach(io: File.open(Rails.root.join('app/assets/images/icons/boleto.png')), 
                     filename: 'boleto.png')
 
     card = PaymentMethod.create!(name: 'PISA', 
                                  billing_fee: 5, 
                                  max_fee: 250,
-                                 active: false,
+                                 status: false,
                                  category: 2)
     card.category_icon
-          .attach(io: File.open('spec/fixtures/card.png'), 
+          .attach(io: File.open(Rails.root.join('app/assets/images/icons/card.png')), 
                   filename: 'card.png')
 
     admin_login
@@ -37,19 +37,19 @@ describe "Admin view payment methods" do
     boleto = PaymentMethod.create!(name: 'Boleto do Banco Laranja', 
                                    billing_fee: 2.5, 
                                    max_fee: 100.0,
-                                   active: true,
+                                   status: true,
                                    category: :boleto)
     boleto.category_icon
-            .attach(io: File.open('spec/fixtures/boleto.png'), 
+            .attach(io: File.open(Rails.root.join('app/assets/images/icons/boleto.png')), 
                     filename: 'boleto.png')
 
     card = PaymentMethod.create!(name: 'PISA', 
                                  billing_fee: 5, 
                                  max_fee: 250,
-                                 active: false,
+                                 status: false,
                                  category: 2)
     card.category_icon
-          .attach(io: File.open('spec/fixtures/card.png'), 
+          .attach(io: File.open(Rails.root.join('app/assets/images/icons/card.png')), 
                   filename: 'card.png')
 
     admin_login

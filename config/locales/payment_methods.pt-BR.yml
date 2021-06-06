@@ -4,10 +4,27 @@ pt-BR:
     payment_methods:
       index:
         title: 'Gerenciar Métodos de Pagamentos'
+      new:
+        submit: 'Enviar'
+        title: 'Novo Método de Pagamento'
+      edit:
+        title: 'Atualizar Método de Pagamento'
+        update: 'Atualizar'
+      update:
+        success: 'Método de Pagamento atualizado com sucesso'
+      destroy:
+        success: 'Método de Pagamento apagado com sucesso'
   activerecord:
     attributes:
-      payment_method/role:
+      payment_method/category:
         boleto: 'Boleto'
         card: 'Cartão'
         pix: 'PIX'
+      payment_method:
+        name: 'Nome'
+        billing_fee: 'Taxa por cobrança (%)'
+        max_fee: 'Taxa máxima de cobrança'
+        status: 'Status'
+        category: 'Categoria'
+
 
