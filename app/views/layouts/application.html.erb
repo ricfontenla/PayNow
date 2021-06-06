@@ -30,17 +30,19 @@
       </div>
     </nav>
 
-    <%if notice %>
-       <div class="alert alert-success" role="alert">
-          <%= notice %>
-        </div>
-      <% end %>
-      <%if alert %>
-       <div class="alert alert-danger" role="alert">
-          <%= alert %>
-        </div>
-      <% end %>
+    <p>Olá, visitante</p>
 
+    <%if notice %>
+      <div class="alert alert-success" role="alert">
+        <%= notice %>
+      </div>
+    <% end %>
+    <%if alert %>
+      <div class="alert alert-danger" role="alert">
+        <%= alert %>
+      </div>
+    <% end %>
+    
     <div class="container">
       <br/>
       <%= yield %>

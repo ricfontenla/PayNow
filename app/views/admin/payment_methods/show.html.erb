@@ -1,0 +1,11 @@
+<h1><%= @payment_method.name %></h1>
+<hr class="my-4">
+
+<dl>
+  <dt>Taxa por cobrança (%):</dt>
+  <dd><%= number_with_delimiter(@payment_method.billing_fee, delimiter: ',') %></dd>
+  <dt>Taxa máxima:</dt>
+  <dd><%= number_to_currency @payment_method.max_fee %></dd>
+  <dt>Status:</dt>
+  <dd><%= @payment_method.active ? 'Ativo' : 'Inativo' %></dd>
+</dl>

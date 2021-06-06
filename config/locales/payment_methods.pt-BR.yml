@@ -1,0 +1,6 @@
+---
+pt-BR:
+  admin:
+    payment_methods:
+      index:
+        title: 'Gerenciar Métodos de Pagamentos'

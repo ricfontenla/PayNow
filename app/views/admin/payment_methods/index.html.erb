@@ -1,0 +1,15 @@
+<h1><%= t('.title') %></h1>
+<hr class="my-4">
+
+<h3>Métodos Cadastrados:</h3>
+<% if @payment_methods.any? %>
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <% @payment_methods.each do |payment_method| %>
+        <h5 class="card-title"><%= link_to payment_method.name, [:admin, payment_method] %></h5>
+        <p class="card-text"><b>Status:</b> <%= payment_method.active ? 'Ativo' : 'Inativo' %></p>
+    <% end %>
+  </div>
+<% else %>
+  <p>Nenhum método cadastrado.</p>
+<% end %>
