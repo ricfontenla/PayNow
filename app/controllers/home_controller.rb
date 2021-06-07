@@ -10,6 +10,8 @@ class HomeController < ApplicationController
   def verify_layout
     if admin_signed_in?
       'admin'
+    elsif user_signed_in?
+      'user'
     else
       'application'
     end

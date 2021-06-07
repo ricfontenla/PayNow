@@ -17,7 +17,7 @@
 
 <div>
   <%= link_to 'Deletar', [:admin, @payment_method], method: :delete, 
-                          data: { comfirm: 'Tem certeza' }, class: 'btn btn-dark' %>
+                          data: { confirm: 'Tem certeza?' }, class: 'btn btn-dark' %>
   <%= link_to 'Atualizar', edit_admin_payment_method_path(@payment_method), 
                            class: 'btn btn-dark' %>
   <%= link_to 'Voltar', admin_payment_methods_path, class: 'btn btn-dark' %>

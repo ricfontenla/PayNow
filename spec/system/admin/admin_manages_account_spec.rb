@@ -3,11 +3,10 @@ require 'rails_helper'
 describe 'Admin manages account' do
   context 'and tries to login' do
     it 'sucessfully' do
-      admin = Admin.create!(email: 'ademir@paynow.com.br', 
-                            password: '123456')
+      Admin.create!(email: 'ademir@paynow.com.br', 
+                    password: '123456')
 
       visit new_admin_session_path
-
       fill_in 'Email', with: 'ademir@paynow.com.br'
       fill_in 'Senha', with: '123456'
       click_on 'Entrar'
@@ -17,11 +16,10 @@ describe 'Admin manages account' do
     end
 
     it 'and mistakes password or email' do
-      admin = Admin.create!(email: 'ademir@paynow.com.br', 
-                            password: '123456')
+      Admin.create!(email: 'ademir@paynow.com.br', 
+                    password: '123456')
 
       visit new_admin_session_path
-    
       fill_in 'Email', with: 'usermir@dontpaynow.com.br'
       fill_in 'Senha', with: '654321'
       click_on 'Entrar'
@@ -62,10 +60,7 @@ describe 'Admin manages account' do
 
   context 'and tries to logout' do
     it 'sucessfully' do
-      admin = Admin.create!(email: 'ademir@paynow.com.br', 
-                            password: '123456')
-
-      login_as admin, scope: :admin
+      admin_login
       visit root_path
       click_on 'Sair'
 

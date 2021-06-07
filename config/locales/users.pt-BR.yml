@@ -1,0 +1,35 @@
+---
+pt-BR:
+  activerecord:
+    models:
+      user:
+        one: 'Cliente'
+        other: 'Clientes'
+    attributes:
+      user:
+        email: 'Email'
+        password: 'Senha'
+        password_confirmation: 'Confirmar senha'
+        name: 'Nome'
+  users:
+    registrations:
+      new:
+        title: 'Cadastro de Clientes'
+        signup: 'Cadastrar'
+    sessions:
+      new:
+        title: 'Área do Cliente'
+        remember_me: 'Lembrar-se de mim'
+        login: 'Entrar'
+    shared:
+      links:
+        forgot: 'Esqueceu sua senha?'
+        login: 'Entrar'
+        signup: 'Cadastre-se'
+    passwords:
+      new:
+        title: 'Esqueceu sua senha?'
+        send_me: 'Enviar instruções para trocar a senha'
+      edit:
+        title: 'Cadastrar nova senha'
+        change_password: 'Alterar minha senha'
