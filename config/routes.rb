@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :payment_methods
-    resources :companies, only: [:index, :show]
+    resources :companies, only: [:index, :show, :edit, :update] do
+      put 'generate_token', on: :member
+    end
   end
 end

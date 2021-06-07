@@ -3,21 +3,30 @@
 
 <dl>
   <dt>Domínio de email:</dt>
-  <dl><%= @company.email_domain %></dl>
+  <dd><%= @company.email_domain %></dd>
 
   <dt>CNPJ:</dt>
-  <dl><%= @company.cnpj %></dl>
+  <dd><%= @company.cnpj %></dd>
 
-  <dt>Endereço de cobrança</dt>
-  <dl><%= @company.billing_adress %></dl>
+  <dt>Endereço de cobrança:</dt>
+  <dd><%= @company.billing_adress %></dd>
 
-  <dt>Email de cobrança</dt>
-  <dl><%= @company.billing_email %></dl>
+  <dt>Email de cobrança:</dt>
+  <dd><%= @company.billing_email %></dd>
 
-  <dt>Token de autenticação:</dt>
-  <dl><%= @company.token %></dl>
+<div class="row justify-content-start">
+  <div class="col-4">
+    <dt>Token de autenticação:</dt>
+    <dd><%= @company.token %></dd>
+  </div>
+  <div class="col-4">
+    <dd><%= link_to 'Gerar novo token', generate_token_admin_company_path(@company), method: :put, 
+                    data: { confirm: 'Tem certeza?' }, class: 'btn btn-dark' %>
+  </div>
+</div>
 </dl>
 
 <div>
-  <%= link_to 'Voltar', admin_companies_path %>
+  <%= link_to 'Atualizar dados', edit_admin_company_path(@company), class: 'btn btn-dark' %>
+  <%= link_to 'Voltar', admin_companies_path, class: 'btn btn-dark' %>
 </div>
