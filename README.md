@@ -43,3 +43,6 @@ CodePlay no nosso contexto.
 * Login de administradores deve ser feito acessando new_admin_session_path.
   - Ex:
     ```http://localhost:3000/admins/sign_in```
+
+### Usuários
+* Usuários possuem roles de ```customer_admin``` ou ```user``` e não podem ser registrar com emails dos dominios: **Google**, **Yahoo** e **Hotmail**

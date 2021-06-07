@@ -55,7 +55,15 @@ describe 'Customer admin manages account' do
       expect(page).to have_content('não pode ficar em branco', count: 2)
     end
 
-    xit 'and cannot use unauthorized emails' do
+    it 'and cannot use unauthorized emails' do
+      visit root_path
+      click_on 'Cadastre-se'
+      fill_in 'Email', with: 'john_doe@google.com'
+      fill_in 'Senha', with: '123456'
+      fill_in 'Confirmar senha', with: '123456'
+      click_on 'Cadastrar'
+
+      expect(page).to have_content('não é válido')
     end
   end
 
@@ -84,7 +92,7 @@ describe 'Customer admin manages account' do
       fill_in 'Senha', with: '654321'
       fill_in 'Confirmar senha', with: '654321'
       click_on 'Alterar minha senha'
-      
+
       expect(page).to have_content('Sua senha foi alterada com sucesso. Você está logado.')
       expect(current_path).to eq (root_path)
     end  

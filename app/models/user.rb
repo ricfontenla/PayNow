@@ -5,4 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   enum role: { user: 0, customer_admin: 10 }
+
+  INVALID_DOMAINS = /\b[A-Z0-9._%a-z\-]+@(google|yahoo|hotmail)/
+  
+  validates :email, format: { without: INVALID_DOMAINS }
 end
