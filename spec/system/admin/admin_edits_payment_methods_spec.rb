@@ -47,5 +47,6 @@ describe 'Admin edits payment method' do
 
     expect(page).to have_content('Atualizar Método de Pagamento')
     expect(page).to have_content('não pode ficar em branco', count: 2)
+    expect(page).to have_link('Cancelar', href: admin_payment_method_path(card))
   end
 end

@@ -1,0 +1,13 @@
+<h1><%= t('.title') %></h1>
+<hr class="my-4">
+
+<% if @companies.any? %>
+  <% @companies.each do |company| %>
+    <div class="py-3">
+      <h3><%= link_to company.name, [:admin, company] %></h3>
+      <%= company.email_domain %>
+    </div>
+  <% end %>
+<% else%>
+  <p>Nenhum cliente cadastrado</p>
+<% end %>

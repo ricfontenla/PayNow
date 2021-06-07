@@ -1,0 +1,23 @@
+<h1><%= @company.name %></h1>
+<hr class="my-4">
+
+<dl>
+  <dt>Domínio de email:</dt>
+  <dl><%= @company.email_domain %></dl>
+
+  <dt>CNPJ:</dt>
+  <dl><%= @company.cnpj %></dl>
+
+  <dt>Endereço de cobrança</dt>
+  <dl><%= @company.billing_adress %></dl>
+
+  <dt>Email de cobrança</dt>
+  <dl><%= @company.billing_email %></dl>
+
+  <dt>Token de autenticação:</dt>
+  <dl><%= @company.token %></dl>
+</dl>
+
+<div>
+  <%= link_to 'Voltar', admin_companies_path %>
+</div>
