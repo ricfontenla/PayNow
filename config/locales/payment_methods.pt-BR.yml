@@ -4,12 +4,19 @@ pt-BR:
     payment_methods:
       index:
         title: 'Gerenciar Métodos de Pagamentos'
+        new_payment_method: 'Cadastrar Método de Pagamento'
+      show:
+        delete: 'Deletar'
+        update: 'Atualizar'
+        return: 'Voltar'
       new:
         submit: 'Enviar'
         title: 'Novo Método de Pagamento'
+        cancel: 'Cancelar'
       edit:
         title: 'Atualizar Método de Pagamento'
         update: 'Atualizar'
+        cancel: 'Cancelar'
       update:
         success: 'Método de Pagamento atualizado com sucesso'
       destroy:

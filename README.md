@@ -45,4 +45,4 @@ CodePlay no nosso contexto.
     ```http://localhost:3000/admins/sign_in```
 
 ### Usuários
-* Usuários possuem roles de ```customer_admin``` ou ```user``` e não podem ser registrar com emails dos dominios: **Google**, **Yahoo** e **Hotmail**
+* Usuários possuem roles de ```customer_admin``` ou ```user``` e não podem ser registrar com emails dos dominios: **Google**, **Yahoo**, **Hotmail** e **Paynow**

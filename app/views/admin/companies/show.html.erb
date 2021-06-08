@@ -20,13 +20,13 @@
     <dd><%= @company.token %></dd>
   </div>
   <div class="col-4">
-    <dd><%= link_to 'Gerar novo token', generate_token_admin_company_path(@company), method: :put, 
+    <dd><%= link_to t('.new_token'), generate_token_admin_company_path(@company), method: :put, 
                     data: { confirm: 'Tem certeza?' }, class: 'btn btn-dark' %>
   </div>
 </div>
 </dl>
 
 <div>
-  <%= link_to 'Atualizar dados', edit_admin_company_path(@company), class: 'btn btn-dark' %>
-  <%= link_to 'Voltar', admin_companies_path, class: 'btn btn-dark' %>
+  <%= link_to t('.update_info'), edit_admin_company_path(@company), class: 'btn btn-dark' %>
+  <%= link_to t('.return'), admin_companies_path, class: 'btn btn-dark' %>
 </div>

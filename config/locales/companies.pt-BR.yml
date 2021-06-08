@@ -2,16 +2,33 @@
   pt-BR:
     user:
       companies:
+        show:
+          update_info: 'Atualizar dados'
+          new_token: 'Gerar novo token'
         new:
           title: 'Seja um cliente da PayNow'
           submit: 'Cadastrar'
+        edit:
+          title: 'Atualização de Dados de Cliente'
+          submit: 'Atualizar Dados'
+          cancel: 'Cancelar'
+        update:
+          success: 'Cliente atualizado com sucesso'
+        generate_token:
+          success: 'Novo token gerado com sucesso'
+          fail: 'Algo deu errado, não foi possivel realizar esta ação'
     admin:
       companies:
         index:
           title: 'Clientes PayNow'
+        show:
+          new_token: 'Gerar novo token'
+          update_info: 'Atualizar dados'
+          return: 'Voltar'
         edit:
           title: 'Atualização de Dados de Cliente'
           submit: 'Atualizar Dados'
+          cancel: 'Cancelar'
         update:
           success: 'Cliente atualizado com sucesso'
         generate_token:
