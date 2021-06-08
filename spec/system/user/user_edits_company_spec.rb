@@ -58,5 +58,4 @@ it 'successfully' do
 
     expect(page).to have_content('já está em uso', count: 2)
   end
-
 end

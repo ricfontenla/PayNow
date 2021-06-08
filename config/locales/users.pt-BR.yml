@@ -11,6 +11,9 @@ pt-BR:
         password: 'Senha'
         password_confirmation: 'Confirmar senha'
         name: 'Nome'
+      user/role:
+          customer_admin: 'Administrador da Empresa'
+          customer: 'Funcionário'
   users:
     registrations:
       new:

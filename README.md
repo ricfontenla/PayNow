@@ -34,15 +34,19 @@ CodePlay no nosso contexto.
 * Clone o projeto para sua máquina, e dentro da pasta do projeto, rode o comando ```bin/setup``` em seu terminal
 * Você pode utilizar o comando ```rails s``` para ver a aplicação funcionando localmente no endereço ```http://localhost:3000```
 
+
 ### Testes
 * Para executar os testes, utilize o comando ```rspec```
 
 ## Informações deste projeto
 ### Administradores
 * Administradores não possuem página de registro e devem ser registrados pelo console e **precisam** possuir um e-mail com o dominio @paynow.com.br.
-* Login de administradores deve ser feito acessando new_admin_session_path.
-  - Ex:
-    ```http://localhost:3000/admins/sign_in```
+* Login de administradores deve ser feito acessando new_admin_session_path: ```http://localhost:3000/admins/sign_in```
 
 ### Usuários
 * Usuários possuem roles de ```customer_admin``` ou ```user``` e não podem ser registrar com emails dos dominios: **Google**, **Yahoo**, **Hotmail** e **Paynow**
+# Populando o banco de dados
+* Para popular o banco com informaçoes pré definidas, use o comando ```rails db:seed```
+* Administrador gerado: email: ```ademir@paynow.com.br```, senha: ```123456```
+* Usuario administrador de empresa cliente gerado: email: ```john_doe@codeplay.com.br```, senha: ```123456```
+* Usuario funcionario de empresa cliente gerado: email: ```john_doe2@codeplay.com.br```, password: ```123456```

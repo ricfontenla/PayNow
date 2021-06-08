@@ -25,4 +25,12 @@ describe 'user views his company details' do
     expect(page).to have_content('financas@codeplay.com.br')
     expect(page).to have_content(company.token)
   end
+
+  it 'and is not a customer admin' do
+    user_customer_login
+    visit user_company_path(Company.last.token)
+    
+    expect(page).to_not have_content('Atualizar dados')
+    expect(page).to_not have_content('Gerar novo token')
+  end
 end

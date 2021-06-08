@@ -20,12 +20,25 @@
       <dd><%= @company.token %></dd>
     </div>
     <div class="col-4">
-      <dd><%= link_to t('.new_token'), generate_token_user_company_path(@company.token), method: :put, 
-                    data: { confirm: 'Tem certeza?' }, class: 'btn btn-dark' %>
+      <% if current_user.customer_admin?%>
+        <dd><%= link_to t('.new_token'), generate_token_user_company_path(@company.token), method: :put, 
+                      data: { confirm: 'Tem certeza?' }, class: 'btn btn-dark' %>
+      <% end %>
     </div>
   </div>
 </dl>
 
+<% if current_user.customer_admin?%>
+  <div>
+    <%= link_to t('.update_info'), edit_user_company_path(@company.token), class: 'btn btn-dark' %>
+  </div>
+<% end %>
+
+<h3 class="py-3">Membros da empresa:</h3>
 <div>
-  <%= link_to t('.update_info'), edit_user_company_path(@company.token), class: 'btn btn-dark' %>
-</div>
+  <% @company.users.each do |user| %>
+    <h5><%= user.email %></h5>
+    <p><%= User.human_attribute_name("role.#{user.role}") %></p>
+    <p><%= user.status ? 'Ativo' : 'Inativo' %></p>
+  <% end %>
+<div>

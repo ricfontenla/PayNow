@@ -28,4 +28,19 @@ module LoginMacros
                       
     login_as user, scope: :user
   end
+
+  def user_customer_login
+    company = Company.create!(email_domain: 'codeplay.com.br', 
+                              cnpj: '00000000000000', 
+                              name: 'Codeplay Cursos SA', 
+                              billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
+                              billing_email: 'financas@codeplay.com.br',
+                              token: SecureRandom.base58(20))
+    user = User.create!(email: 'jane_doe@codeplay.com.br', 
+                        password: '123456', 
+                        role: 0,
+                        company: company)
+
+    login_as user, scope: :user
+  end
 end

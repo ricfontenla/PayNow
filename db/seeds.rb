@@ -32,13 +32,6 @@ pix.category_icon
         .attach(io: File.open(Rails.root.join('app/assets/images/icons/pix.png')), 
                 filename: 'pix.png')
 
-Company.create!(email_domain: 'cookbook.com.br', 
-                cnpj: '99999999999999', 
-                name: 'Cookbook LTDA', 
-                billing_adress: 'Rua Cereja, numero 99 - Bairro Limão, 11111-111',
-                billing_email: 'financas@cookbook.com.br', 
-                token: SecureRandom.base58(20))
-
 company = Company.create!(email_domain: 'codeplay.com.br', 
                           cnpj: '00000000000000', 
                           name: 'Codeplay Cursos SA', 
@@ -50,3 +43,32 @@ User.create!(email: 'john_doe@codeplay.com.br',
              password: '123456',
              role: 10,
              company: company)
+             
+User.create!(email: 'john_doe2@codeplay.com.br', 
+             password: '123456',
+             role: 0,
+             company: company,
+             status: false)
+
+User.create!(email: 'john_doe3@codeplay.com.br', 
+             password: '123456',
+             role: 0,
+             company: company)
+
+company2 = Company.create!(email_domain: 'cookbook.com.br', 
+                          cnpj: '99999999999999', 
+                          name: 'Cookbook LTDA', 
+                          billing_adress: 'Rua Cereja, numero 99 - Bairro Limão, 11111-111',
+                          billing_email: 'financas@cookbook.com.br', 
+                          token: SecureRandom.base58(20))
+
+User.create!(email: 'john_doe4@cookbook.com.br', 
+             password: '123456',
+             role: 10,
+             company: company2)
+             
+User.create!(email: 'john_doe5@cookbook.com.br', 
+             password: '123456',
+             role: 0,
+             company: company2,
+             status: false)
