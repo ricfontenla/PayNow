@@ -6,11 +6,26 @@ module LoginMacros
     login_as admin, scope: :admin
   end
 
-  def customer_admin_login
-    customer_admin = User.create!(email: 'john_doe@codeplay.com.br', 
+  def user_first_login
+    user = User.create!(email: 'john_doe@codeplay.com.br', 
                         password: '123456',
-                        role: 10)
+                        role: 0)
+                            
+    login_as user, scope: :user
+  end
 
-    login_as customer_admin, scope: :user
+  def user_customer_admin_login
+    company = Company.create!(email_domain: 'codeplay.com.br', 
+                               cnpj: '00000000000000', 
+                               name: 'Codeplay Cursos SA', 
+                               billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
+                               billing_email: 'financas@codeplay.com.br',
+                               token: SecureRandom.base58(20))
+    user = User.create!(email: 'john_doe@codeplay.com.br', 
+                        password: '123456', 
+                        role: 10,
+                        company: company)
+                      
+    login_as user, scope: :user
   end
 end

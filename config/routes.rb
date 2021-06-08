@@ -10,4 +10,8 @@ Rails.application.routes.draw do
       put 'generate_token', on: :member
     end
   end
+
+  namespace :user do
+    resources :companies, only: [:show, :new, :create], param: :token
+  end
 end

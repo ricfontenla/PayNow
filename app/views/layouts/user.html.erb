@@ -22,6 +22,15 @@
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href=<%= root_path %>>Home</a>
             </li>
+              <% if current_user.company %>
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href=<%= user_company_path(current_user.company.token) %>>Minha Empresa</a>  
+                </li>
+              <% else%>
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href=<%= new_user_company_path %>>Cadastre sua Empresa</a>  
+                </li>
+              <% end %>
             <li class="nav-item">
               <a class="nav-link" href=<%= destroy_user_session_path %> data-method='delete'>Sair</a>
             </li>

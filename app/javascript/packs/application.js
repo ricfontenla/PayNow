@@ -8,4 +8,4 @@ import Turbolinks from "turbolinks"
 import * as bootstrap from 'bootstrap'
 
 Rails.start()
-Turbolinks.start()
+// Turbolinks.start()

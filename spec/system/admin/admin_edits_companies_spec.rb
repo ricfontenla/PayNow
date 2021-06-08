@@ -2,12 +2,12 @@ require 'rails_helper'
 
 describe 'admin edits company' do
   it 'sucessfully' do
-    Company.create(email_domain: 'codeplay.com.br', 
-                   cnpj: '00000000000000', 
-                   name: 'Codeplay SA', 
-                   billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
-                   billing_email: 'financas@codeplay.com.br',
-                   token: SecureRandom.base58(20))
+    Company.create!(email_domain: 'codeplay.com.br', 
+                    cnpj: '00000000000000', 
+                    name: 'Codeplay SA', 
+                    billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
+                    billing_email: 'financas@codeplay.com.br',
+                    token: SecureRandom.base58(20))
 
     admin_login
     visit root_path
@@ -31,12 +31,12 @@ describe 'admin edits company' do
   end
 
   it 'and generates a new token' do
-    company = Company.create(email_domain: 'codeplay.com.br', 
-                             cnpj: '00000000000000', 
-                             name: 'Codeplay SA', 
-                             billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
-                             billing_email: 'financas@codeplay.com.br',
-                             token: SecureRandom.base58(20))
+    company = Company.create!(email_domain: 'codeplay.com.br', 
+                              cnpj: '00000000000000', 
+                              name: 'Codeplay SA', 
+                              billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
+                              billing_email: 'financas@codeplay.com.br',
+                              token: SecureRandom.base58(20))
     first_token = company.token
     
     admin_login
@@ -50,12 +50,12 @@ describe 'admin edits company' do
   end
 
   it 'and fields cannot be blank' do
-    Company.create(email_domain: 'codeplay.com.br', 
-                   cnpj: '00000000000000', 
-                   name: 'Codeplay SA', 
-                   billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
-                   billing_email: 'financas@codeplay.com.br',
-                   token: SecureRandom.base58(20))
+    Company.create!(email_domain: 'codeplay.com.br', 
+                    cnpj: '00000000000000', 
+                    name: 'Codeplay SA', 
+                    billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
+                    billing_email: 'financas@codeplay.com.br',
+                    token: SecureRandom.base58(20))
 
     admin_login
     visit edit_admin_company_path(Company.last)
@@ -70,12 +70,12 @@ describe 'admin edits company' do
   end
 
   it 'and fields must be unique' do
-    company = Company.create(email_domain: 'codeplay.com.br', 
-                             cnpj: '00000000000000', 
-                             name: 'Codeplay Cursos SA', 
-                             billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
-                             billing_email: 'financas@codeplay.com.br',
-                             token: SecureRandom.base58(20))
+    company = Company.create!(email_domain: 'codeplay.com.br', 
+                              cnpj: '00000000000000', 
+                              name: 'Codeplay Cursos SA', 
+                              billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
+                              billing_email: 'financas@codeplay.com.br',
+                              token: SecureRandom.base58(20))
     Company.create!(email_domain: 'cookbook.com.br', 
                     cnpj: '99999999999999', 
                     name: 'Cookbook LTDA', 
@@ -95,12 +95,12 @@ describe 'admin edits company' do
   end
 
   it 'and CNPJ must have 14 characters' do
-    Company.create(email_domain: 'codeplay.com.br', 
-                   cnpj: '00000000000000', 
-                   name: 'Codeplay SA', 
-                   billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
-                   billing_email: 'financas@codeplay.com.br',
-                   token: SecureRandom.base58(20))
+    Company.create!(email_domain: 'codeplay.com.br', 
+                    cnpj: '00000000000000', 
+                    name: 'Codeplay SA', 
+                    billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
+                    billing_email: 'financas@codeplay.com.br',
+                    token: SecureRandom.base58(20))
 
     admin_login
     visit edit_admin_company_path(Company.last)

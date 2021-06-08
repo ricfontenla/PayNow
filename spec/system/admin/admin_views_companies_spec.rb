@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'Admin views companies' do
   it 'sucessfully' do
-    Company.create(email_domain: 'codeplay.com.br', 
+    Company.create!(email_domain: 'codeplay.com.br', 
                     cnpj: '00000000000000', 
                     name: 'Codeplay Cursos SA', 
                     billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
@@ -32,12 +32,12 @@ describe 'Admin views companies' do
   end
 
   it 'and view details' do
-    company = Company.create(email_domain: 'codeplay.com.br', 
-                             cnpj: '00000000000000', 
-                             name: 'Codeplay Cursos SA', 
-                             billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
-                             billing_email: 'financas@codeplay.com.br',
-                             token: SecureRandom.base58(20))
+    company = Company.create!(email_domain: 'codeplay.com.br', 
+                              cnpj: '00000000000000', 
+                              name: 'Codeplay Cursos SA', 
+                              billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
+                              billing_email: 'financas@codeplay.com.br',
+                              token: SecureRandom.base58(20))
     Company.create!(email_domain: 'cookbook.com.br', 
                     cnpj: '99999999999999', 
                     name: 'Cookbook LTDA', 

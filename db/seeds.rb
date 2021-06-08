@@ -31,3 +31,22 @@ pix = PaymentMethod.create!(name: 'PIX Banco Roxinho',
 pix.category_icon
         .attach(io: File.open(Rails.root.join('app/assets/images/icons/pix.png')), 
                 filename: 'pix.png')
+
+Company.create!(email_domain: 'cookbook.com.br', 
+                cnpj: '99999999999999', 
+                name: 'Cookbook LTDA', 
+                billing_adress: 'Rua Cereja, numero 99 - Bairro Limão, 11111-111',
+                billing_email: 'financas@cookbook.com.br', 
+                token: SecureRandom.base58(20))
+
+company = Company.create!(email_domain: 'codeplay.com.br', 
+                          cnpj: '00000000000000', 
+                          name: 'Codeplay Cursos SA', 
+                          billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
+                          billing_email: 'financas@codeplay.com.br',
+                          token: SecureRandom.base58(20))
+                          
+User.create!(email: 'john_doe@codeplay.com.br', 
+             password: '123456',
+             role: 10,
+             company: company)

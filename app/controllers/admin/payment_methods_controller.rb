@@ -1,5 +1,5 @@
 class Admin::PaymentMethodsController < Admin::AdminController
-  before_action :set_course, only: [:show, :edit, :update, :destroy]
+  before_action :set_payment_method, only: [:show, :edit, :update, :destroy]
 
   def index
     @payment_methods = PaymentMethod.all
@@ -50,7 +50,7 @@ class Admin::PaymentMethodsController < Admin::AdminController
     params.require(:payment_method).permit(:billing_fee, :max_fee, :status)
   end
 
-  def set_course
+  def set_payment_method
     @payment_method = PaymentMethod.find(params[:id])
   end
 

@@ -1,18 +1,17 @@
 class Admin::CompaniesController < Admin::AdminController
+  before_action :set_company, only: [:show, :edit, :update, :generate_token]
+
   def index
     @companies = Company.all.sort_by { |company| company.name }
   end
 
   def show
-    @company = Company.find(params[:id])
   end
 
   def edit
-    @company = Company.find(params[:id])
   end
 
   def update
-    @company = Company.find(params[:id])
     if @company.update(company_params)
       flash[:notice] = t('.success')
       redirect_to [:admin, @company]
@@ -22,7 +21,6 @@ class Admin::CompaniesController < Admin::AdminController
   end
 
   def generate_token
-    @company = Company.find(params[:id])
     @company.token = create_unique_token
     if @company.save
       flash[:notice] = t('.success')
@@ -36,6 +34,10 @@ class Admin::CompaniesController < Admin::AdminController
   private
   def company_params
     params.require(:company).permit(:name, :cnpj, :billing_adress, :billing_email)
+  end
+
+  def set_company
+    @company = Company.find(params[:id])
   end
 
   def create_unique_token

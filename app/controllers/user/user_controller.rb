@@ -1,3 +1,3 @@
 class User::UserController < ActionController::Base
-  layout 'User'
+  layout 'user'
 end

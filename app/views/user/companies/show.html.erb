@@ -1,0 +1,19 @@
+<h1><%= @company.name %></h1>
+<hr class="my-4">
+
+<dl>
+  <dt>Domínio de email:</dt>
+  <dd><%= @company.email_domain %></dd>
+
+  <dt>CNPJ:</dt>
+  <dd><%= @company.cnpj %></dd>
+
+  <dt>Endereço de cobrança:</dt>
+  <dd><%= @company.billing_adress %></dd>
+
+  <dt>Email de cobrança:</dt>
+  <dd><%= @company.billing_email %></dd>
+
+  <dt>Token de autenticação:</dt>
+  <dd><%= @company.token %></dd>
+</dl>

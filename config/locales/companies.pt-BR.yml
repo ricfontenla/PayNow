@@ -1,5 +1,10 @@
 ---
   pt-BR:
+    user:
+      companies:
+        new:
+          title: 'Seja um cliente da PayNow'
+          submit: 'Cadastrar'
     admin:
       companies:
         index:
