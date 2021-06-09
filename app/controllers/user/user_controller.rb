@@ -1,3 +1,7 @@
 class User::UserController < ActionController::Base
   layout 'user'
+
+  def is_customer_admin?
+    redirect_to root_path unless current_user.customer_admin?
+  end
 end

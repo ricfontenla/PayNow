@@ -58,4 +58,12 @@ it 'successfully' do
 
     expect(page).to have_content('já está em uso', count: 2)
   end
+
+  it 'and fails if is not a customer admin' do
+    user_customer_login
+    visit user_company_path(Company.last.token)
+
+    expect(page).to_not have_content('Gerar novo token')
+    expect(page).to_not have_content('Atualizar dados')
+  end
 end

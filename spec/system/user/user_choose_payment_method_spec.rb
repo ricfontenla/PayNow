@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-xdescribe 'User choose payment method' do
+describe 'User choose payment method' do
   context 'boleto' do
     it 'and registers it successfully' do
       boleto = PaymentMethod.create!(name: 'Boleto do Banco Laranja', 
@@ -17,7 +17,7 @@ xdescribe 'User choose payment method' do
       click_on 'Minha Empresa'
       click_on 'Novo Método de Pagamento'
       click_on 'Boleto do Banco Laranja'
-      click_on 'Cadastrar Dados '
+      click_on 'Cadastrar Dados'
     end
   end
 end

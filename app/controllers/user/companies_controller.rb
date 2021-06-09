@@ -1,4 +1,6 @@
 class User::CompaniesController < User::UserController
+  before_action :authenticate_user!
+  before_action :is_customer_admin?, only: [:edit, :update, :generate_token]
   before_action :associated?, only: [:new, :create]
   before_action :has_company?, only: [:show, :edit, :update]
   before_action :set_company, only: [:show, :edit, :update, :generate_token]

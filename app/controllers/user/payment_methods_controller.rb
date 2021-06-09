@@ -1,4 +1,6 @@
 class User::PaymentMethodsController < User::UserController
+  before_action :authenticate_user!, only: [:index, :show]
+  
   def index
     @company = Company.find_by(token: params[:company_token])
     @payment_methods = PaymentMethod.available
