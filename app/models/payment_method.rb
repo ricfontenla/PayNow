@@ -4,7 +4,7 @@ class PaymentMethod < ApplicationRecord
   validates :name, uniqueness: true
   validates :billing_fee, :max_fee, numericality: { greater_than_or_equal_to: 0 }
   
-  before_create :set_icon
+  after_create :set_icon
 
   enum category: { boleto: 1, card: 2, pix: 3 }
 

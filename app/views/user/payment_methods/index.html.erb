@@ -9,7 +9,7 @@
           <%= image_tag payment_method.category_icon, size: '50' %>
         </div>
         <div class="card-body">
-          <h5 class="card-title"><%= link_to payment_method.name, '#' %></h5>
+          <h5 class="card-title"><%= link_to payment_method.name, user_company_payment_method_path(@company.token, payment_method) %></h5>
         </div>
       </div>
     <% end %>  

@@ -1,4 +1,5 @@
 class Admin::CompaniesController < Admin::AdminController
+  before_action :authenticate_admin!
   before_action :set_company, only: [:show, :edit, :update, :generate_token]
 
   def index
