@@ -19,7 +19,7 @@
 
     <dt><%= form.label :cnpj %></dt>
     <em>(14 dígitos)</em>
-    <dd><%= form.number_field :cnpj %></dd>
+    <dd><%= form.number_field :cnpj, min: 0 %></dd>
 
     <dt><%= form.label :billing_adress %></dt>
     <dd><%= form.text_area :billing_adress %></dd>

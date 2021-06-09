@@ -1,9 +1,9 @@
 class User::CompaniesController < User::UserController
   before_action :associated?, only: [:new, :create]
   before_action :has_company?, only: [:show, :edit, :update]
-
+  before_action :set_company, only: [:show, :edit, :update, :generate_token]
+ 
   def show
-    @company = Company.find_by(token: params[:token])
   end
 
   def new
@@ -23,11 +23,9 @@ class User::CompaniesController < User::UserController
   end
 
   def edit
-    @company = Company.find_by(token: params[:token])
   end
 
   def update
-    @company = Company.find_by(token: params[:token])
     if @company.update(update_company_params)
       flash[:notice] = t('.success')
       redirect_to user_company_path(@company.token)
@@ -37,7 +35,6 @@ class User::CompaniesController < User::UserController
   end
 
   def generate_token
-    @company = Company.find_by(token: params[:token])
     @company.token = create_unique_token
     if @company.save
       flash[:notice] = t('.success')
@@ -56,6 +53,10 @@ class User::CompaniesController < User::UserController
 
   def update_company_params
     params.require(:company).permit(:billing_adress, :billing_email)
+  end
+
+  def set_company
+    @company = Company.find_by(token: params[:token])
   end
 
   def set_email_domain(company)

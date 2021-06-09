@@ -15,7 +15,6 @@ class Admin::PaymentMethodsController < Admin::AdminController
   def create
     @payment_method = PaymentMethod.new(payment_method_params)
     if @payment_method.save
-      set_icon
       redirect_to [:admin, @payment_method]
     else
       render :new
@@ -52,21 +51,5 @@ class Admin::PaymentMethodsController < Admin::AdminController
 
   def set_payment_method
     @payment_method = PaymentMethod.find(params[:id])
-  end
-
-  def set_icon
-    if @payment_method.boleto?
-      @payment_method.category_icon
-        .attach(io: File.open(Rails.root.join('app/assets/images/icons/boleto.png')), 
-                filename: 'boleto.png')
-    elsif @payment_method.card?
-      @payment_method.category_icon
-        .attach(io: File.open(Rails.root.join('app/assets/images/icons/card.png')), 
-                filename: 'card.png')
-    else  @payment_method.pix?
-      @payment_method.category_icon
-        .attach(io: File.open(Rails.root.join('app/assets/images/icons/pix.png')), 
-                filename: 'pix.png')
-    end
   end
 end

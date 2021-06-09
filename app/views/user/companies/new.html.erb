@@ -18,7 +18,7 @@
     <dd><%= form.text_field :name %></dd>
 
     <dt><%= form.label :cnpj %></dt>
-    <dd><%= form.text_field :cnpj %></dd>
+    <dd><%= form.number_field :cnpj, min: 0 %></dd>
 
     <dt><%= form.label :billing_adress %></dt>
     <dd><%= form.text_field :billing_adress %></dd>

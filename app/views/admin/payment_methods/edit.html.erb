@@ -15,10 +15,10 @@
 <%= form_with model: [:admin, @payment_method] do |form| %>
   <dl>
     <dt><%= form.label :billing_fee %></dt>
-    <dd><%= form.number_field :billing_fee, step: 0.1 %></dd>
+    <dd><%= form.number_field :billing_fee, step: 0.1, min: 0 %></dd>
 
     <dt><%= form.label :max_fee %></dt>
-    <dd><%= form.number_field :max_fee,  step: 0.1 %></dd>
+    <dd><%= form.number_field :max_fee,  step: 0.1, min: 0 %></dd>
 
     <dt><%= form.label :status %></dt>
     <dd><%= form.select :status, [['Ativo', true], ['Inativo', false]] %></dd>
