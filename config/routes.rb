@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     resources :companies, only: [:show, :new, :create, :edit, :update], param: :token do
       put 'generate_token', on: :member
       resources :users, only: [:index]
+      resources :payment_methods, only: [:index]
     end
   end
 end

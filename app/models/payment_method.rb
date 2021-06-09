@@ -4,4 +4,7 @@ class PaymentMethod < ApplicationRecord
   validates :name, uniqueness: true
   
   enum category: { boleto: 1, card: 2, pix: 3 }
+
+  scope :available, -> { where(status: true) }
+  
 end

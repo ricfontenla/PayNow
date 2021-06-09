@@ -34,6 +34,10 @@
   </div>
 <% end %>
 
+<div class='py-3'>
+  <%= link_to t('.new_payment_method'), user_company_payment_methods_path(@company.token), class: 'btn btn-dark' %>
+</div>
+
 <h3 class="py-3">Membros da empresa:</h3>
 <div>
   <% @company.users.each do |user| %>

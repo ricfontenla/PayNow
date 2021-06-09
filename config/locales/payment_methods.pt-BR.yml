@@ -1,5 +1,9 @@
 ---
 pt-BR:
+  user:
+    payment_methods:
+      index: 
+        title: 'Métodos de Pagamento Disponíveis'
   admin:
     payment_methods:
       index:

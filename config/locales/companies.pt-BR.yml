@@ -5,6 +5,7 @@
         show:
           update_info: 'Atualizar dados'
           new_token: 'Gerar novo token'
+          new_payment_method: 'Novo Método de Pagamento'
         new:
           title: 'Seja um cliente da PayNow'
           submit: 'Cadastrar'

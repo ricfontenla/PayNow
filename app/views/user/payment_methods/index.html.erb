@@ -1,0 +1,19 @@
+<h1><%= t('.title') %></h1>
+<hr class="my-4">
+
+<% if @payment_methods.any? %>
+  <div class="row">
+    <% @payment_methods.each do |payment_method| %>
+      <div class="card" style="width: 18rem;">
+        <div class="card-header">
+          <%= image_tag payment_method.category_icon, size: '50' %>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title"><%= link_to payment_method.name, '#' %></h5>
+        </div>
+      </div>
+    <% end %>  
+  </div>
+<% else %>
+  <p>Nenhum método de pagamento ativo</p>
+<%end%>
