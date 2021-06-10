@@ -7,10 +7,7 @@ describe 'Admin deletes payment method' do
                                    max_fee: 100.0,
                                    status: true,
                                    category: :boleto)
-    boleto.category_icon
-            .attach(io: File.open(Rails.root.join('app/assets/images/icons/boleto.png')), 
-                    filename: 'boleto.png')
-
+ 
     admin_login
     visit admin_payment_method_path(boleto)
     

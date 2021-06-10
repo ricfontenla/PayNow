@@ -7,18 +7,11 @@ describe "Admin view payment methods" do
                                    max_fee: 100.0,
                                    status: true,
                                    category: :boleto)
-    boleto.category_icon
-            .attach(io: File.open(Rails.root.join('app/assets/images/icons/boleto.png')), 
-                    filename: 'boleto.png')
-
     card = PaymentMethod.create!(name: 'PISA', 
                                  billing_fee: 5, 
                                  max_fee: 250,
                                  status: false,
                                  category: 2)
-    card.category_icon
-          .attach(io: File.open(Rails.root.join('app/assets/images/icons/card.png')), 
-                  filename: 'card.png')
 
     admin_login
     visit root_path
@@ -39,18 +32,11 @@ describe "Admin view payment methods" do
                                    max_fee: 100.0,
                                    status: true,
                                    category: :boleto)
-    boleto.category_icon
-            .attach(io: File.open(Rails.root.join('app/assets/images/icons/boleto.png')), 
-                    filename: 'boleto.png')
-
     card = PaymentMethod.create!(name: 'PISA', 
                                  billing_fee: 5, 
                                  max_fee: 250,
                                  status: false,
                                  category: 2)
-    card.category_icon
-          .attach(io: File.open(Rails.root.join('app/assets/images/icons/card.png')), 
-                  filename: 'card.png')
 
     admin_login
     visit admin_payment_methods_path
