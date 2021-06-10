@@ -1,6 +1,6 @@
 <h1><%= t('.title') %></h1>
 <hr class="my-4">
 
-<%= render 'form', url: user_company_payment_method_boleto_accounts_path(@company.token, @payment_method), 
+<%= render 'form', url: user_company_payment_method_boleto_account_path(@company.token, @payment_method), 
                    boleto_account: @boleto_account, company: @company, 
                    payment_method: @payment_method, bank_codes: @bank_codes %>

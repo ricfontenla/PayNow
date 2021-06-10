@@ -4,7 +4,14 @@ pt-BR:
     boleto_accounts:
       new:
         title: 'Dados Bancários para Boleto'
+      form:
         submit: 'Enviar'
+      edit:
+        title: 'Editar Dados Bancários'
+      update:
+        success: 'Dados bancários atualizados com sucesso'
+      destroy:
+        success: 'Dados de boleto apagados com sucesso'
   activerecord:
     attributes:
       boleto_account:

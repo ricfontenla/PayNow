@@ -37,7 +37,7 @@ describe 'user creates boleto account' do
     click_on 'Enviar'
 
     expect(page).to have_content('não pode ficar em branco', count: 3)
-    expect(page).to have_content('não possui o tamanho esperado')
+    expect(page).to have_content('não possui o tamanho esperado', count: 2)
   end
 
   it 'and must be unique' do
@@ -69,6 +69,6 @@ describe 'user creates boleto account' do
     fill_in 'Conta bancária', with: '123456789'
     click_on 'Enviar'
 
-    expect(page).to have_content('já está em uso', count: 3)
+    expect(page).to have_content('já está em uso', count: 1)
   end
 end

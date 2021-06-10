@@ -27,5 +27,17 @@ describe 'user authentication' do
 
       expect(response).to redirect_to(new_user_session_path)
     end
+
+    it 'cannot acces update withou login' do
+      put user_company_payment_method_boleto_account_path(1, 1, 1)
+
+      expect(response).to redirect_to(new_user_session_path)
+    end
+
+    it 'cannot acces destroy withou login' do
+      delete user_company_payment_method_boleto_account_path(1, 1, 1)
+
+      expect(response).to redirect_to(new_user_session_path)
+    end
   end
 end

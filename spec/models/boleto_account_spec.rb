@@ -33,9 +33,7 @@ describe BoletoAccount do
                             company: company,
                             payment_method: boleto)
 
-      should validate_uniqueness_of(:bank_code).case_insensitive.with_message('já está em uso')
-      should validate_uniqueness_of(:agency_number).case_insensitive.with_message('já está em uso')
-      should validate_uniqueness_of(:bank_account).case_insensitive.with_message('já está em uso')
+      should validate_uniqueness_of(:bank_account).scoped_to(:bank_code).case_insensitive.with_message('já está em uso')
     end
   end
   

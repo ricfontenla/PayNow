@@ -1,0 +1,26 @@
+<div>
+  <% if boleto_account.errors.any? %>
+    <p>Foram encontrados <%= boleto_account.errors.count %> error(s): </p>
+    <ul>
+      <% boleto_account.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>
+
+<%= form_with url: url, 
+              model: [:user, company, payment_method, boleto_account] do |form| %>
+  <dl>
+    <dt><%= form.label :bank_code %></dt>
+    <dd><%= form.select :bank_code, bank_codes, include_blank: true %></dd>
+
+    <dt><%= form.label :agency_number %></dt>
+    <dd><%= form.number_field :agency_number, min: 0, step: 1 %></dd>
+
+    <dt><%= form.label :bank_account %></dt>
+    <dd><%= form.number_field :bank_account, min: 0, step: 1 %></dd>
+  </dl>
+
+  <%= form.submit t('.submit'), class: 'btn btn-dark' %>
+<% end %>

@@ -20,6 +20,12 @@
                 <dt>Conta Bancária</dt>
                 <dd><%= boleto.bank_account %></dd>
               </dl>
+              <%= link_to 'Editar', 
+                  edit_user_company_payment_method_boleto_account_path(@company.token, boleto.payment_method, boleto), 
+                    class: 'btn btn-dark' %>
+              <%= link_to 'Deletar', 
+                  user_company_payment_method_boleto_account_path(@company.token, boleto.payment_method, boleto), 
+                    method: :delete, data: { confirm: 'Tem certeza?'}, class: 'btn btn-dark' %>
             </div>
           </div>
         <% end %>
