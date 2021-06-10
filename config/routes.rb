@@ -14,7 +14,10 @@ Rails.application.routes.draw do
   namespace :user do
     resources :companies, only: [:show, :new, :create, :edit, :update], param: :token do
       put 'generate_token', on: :member
-      resources :payment_methods, only: [:index, :show]
+      get 'my_payment_methods', on: :member
+      resources :payment_methods, only: [:index, :show] do
+        resources :boleto_accounts, only: [:new, :create]
+      end
     end
   end
 end

@@ -20,4 +20,12 @@ describe 'user authentication' do
       expect(response).to redirect_to(new_user_session_path)
     end
   end
+
+  context 'for boleto_account' do
+    it 'cannot access create without login' do
+      post user_company_payment_method_boleto_accounts_path(1, 1)
+
+      expect(response).to redirect_to(new_user_session_path)
+    end
+  end
 end

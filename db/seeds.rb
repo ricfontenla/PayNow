@@ -38,6 +38,13 @@ company = Company.create!(email_domain: 'codeplay.com.br',
                           billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
                           billing_email: 'financas@codeplay.com.br',
                           token: SecureRandom.base58(20))
+
+
+BoletoAccount.create!(bank_code:  479,
+                      agency_number:  1234,
+                      bank_account: 123456789,
+                      company: company,
+                      payment_method: boleto)
                           
 User.create!(email: 'john_doe@codeplay.com.br', 
              password: '123456',

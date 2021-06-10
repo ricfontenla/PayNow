@@ -3,7 +3,7 @@ class User::CompaniesController < User::UserController
   before_action :is_customer_admin?, only: [:edit, :update, :generate_token]
   before_action :associated?, only: [:new, :create]
   before_action :has_company?, only: [:show, :edit, :update]
-  before_action :set_company, only: [:show, :edit, :update, :generate_token]
+  before_action :set_company, only: [:show, :edit, :update, :generate_token, :my_payment_methods]
  
   def show
   end
@@ -45,6 +45,9 @@ class User::CompaniesController < User::UserController
       flash[:alert] = t('.fail')
       redirect_to user_company_path(@company.token)
     end
+  end
+
+  def my_payment_methods
   end
 
   private

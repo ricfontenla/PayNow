@@ -1,0 +1,13 @@
+---
+pt-BR:
+  user:
+    boleto_accounts:
+      new:
+        title: 'Dados Bancários para Boleto'
+        submit: 'Enviar'
+  activerecord:
+    attributes:
+      boleto_account:
+        bank_code: 'Código do banco'
+        agency_number: 'Número da agência'
+        bank_account: 'Conta bancária'

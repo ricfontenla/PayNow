@@ -4,6 +4,7 @@ class Company < ApplicationRecord
   validates :cnpj, length: { is: 14 }
 
   has_many :users
+  has_many :boleto_accounts
 
   before_validation :generate_token
 

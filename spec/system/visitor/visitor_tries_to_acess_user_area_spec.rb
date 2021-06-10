@@ -19,6 +19,12 @@ describe 'visitor tries to access user area' do
 
       expect(current_path).to eq(new_user_session_path)
     end
+
+    it 'and cannor view companys payment methods' do
+      visit my_payment_methods_user_company_path(1)
+
+      expect(current_path).to eq(new_user_session_path)
+    end
   end
 
   context 'of payment methods' do
@@ -30,6 +36,14 @@ describe 'visitor tries to access user area' do
 
     it 'and cannot view show' do
       visit user_company_payment_method_path(1, 1)
+
+      expect(current_path).to eq(new_user_session_path)
+    end
+  end
+
+  context 'of boleto_account' do
+    it 'and cannot view new' do
+      visit new_user_company_payment_method_boleto_account_path(1, 1)
 
       expect(current_path).to eq(new_user_session_path)
     end

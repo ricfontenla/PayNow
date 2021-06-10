@@ -4,9 +4,6 @@ pt-BR:
     payment_methods:
       index: 
         title: 'Escolha um Método de Pagamento'
-        boleto: 'Boleto'
-        card: 'Cartão'
-        pix: 'PIX'
   admin:
     payment_methods:
       index:

@@ -6,6 +6,7 @@
           update_info: 'Atualizar dados'
           new_token: 'Gerar novo token'
           new_payment_method: 'Novo Método de Pagamento'
+          my_payment_methods: 'Meus Métodos de Pagamento'
         new:
           title: 'Seja um cliente da PayNow'
           submit: 'Cadastrar'
@@ -18,6 +19,8 @@
         generate_token:
           success: 'Novo token gerado com sucesso'
           fail: 'Algo deu errado, não foi possivel realizar esta ação'
+        my_payment_methods:
+          title: 'Meus Métodos de Pagamento'
     admin:
       companies:
         index:

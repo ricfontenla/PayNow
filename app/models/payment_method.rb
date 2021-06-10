@@ -1,5 +1,7 @@
 class PaymentMethod < ApplicationRecord
   has_one_attached :category_icon
+  has_many :boleto_accounts
+
   validates :name, :billing_fee, :max_fee, :category, presence: true
   validates :name, uniqueness: true
   validates :billing_fee, :max_fee, numericality: { greater_than_or_equal_to: 0 }
