@@ -4,7 +4,6 @@ class User::BoletoAccountsController < User::UserController
   before_action :authenticate_user!
   before_action :set_company
   before_action :set_paymen_method, only: [:new, :create, :edit, :update]
-  before_action :payment_method_boleto?, only: [:new, :create]
   before_action :set_boleto_account, only: [:edit, :update, :destroy]
   before_action :bank_codes, only: [:new, :create, :edit, :update]
 
@@ -16,7 +15,7 @@ class User::BoletoAccountsController < User::UserController
     @boleto_account = @company.boleto_accounts.build(boleto_params)
     @boleto_account.payment_method_id = @payment_method.id
     if @boleto_account.save
-      redirect_to my_payment_methods_user_company_path(@company.token, @boleto_account)
+      redirect_to my_payment_methods_user_company_path(@company.token)
     else
       render :new
     end
@@ -28,7 +27,7 @@ class User::BoletoAccountsController < User::UserController
   def update
     if @boleto_account.update(boleto_params)
       flash[:notice] = t('.success')
-      redirect_to my_payment_methods_user_company_path(@company.token, @boleto_account)
+      redirect_to my_payment_methods_user_company_path(@company.token)
     else
       render :edit
     end
@@ -56,13 +55,10 @@ class User::BoletoAccountsController < User::UserController
 
   def set_paymen_method
     @payment_method = PaymentMethod.find(params[:payment_method_id])
+    redirect_to root_path unless @payment_method.boleto?
   end
 
   def set_boleto_account
     @boleto_account = BoletoAccount.find(params[:id])
-  end
-
-  def payment_method_boleto?
-    redirect_to root_path unless @payment_method.boleto?
   end
 end

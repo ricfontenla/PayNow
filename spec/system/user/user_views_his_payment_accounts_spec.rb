@@ -19,11 +19,19 @@ describe 'user views his payment accounts' do
                                    max_fee: 100.0,
                                    status: true,
                                    category: :boleto)
+    card = PaymentMethod.create!(name: 'PISA', 
+                                   billing_fee: 3, 
+                                   max_fee: 500.0,
+                                   status: true,
+                                   category: :boleto)
     BoletoAccount.create!(bank_code:  479,
                           agency_number:  1234,
                           bank_account: 123456789,
                           company: company,
                           payment_method: boleto)
+    CardAccount.create!(credit_code: '9876543210ABCDEfghij',
+                        company: company,
+                        payment_method: card)
 
     login_as user, scope: :user
     visit root_path
@@ -34,6 +42,8 @@ describe 'user views his payment accounts' do
     expect(page).to have_content('479')
     expect(page).to have_content('1234')
     expect(page).to have_content('123456789')
+    expect(page).to have_content('PISA')
+    expect(page).to have_content('9876543210ABCDEfghij')
   end
 
   it 'and no accounts registered' do
@@ -43,5 +53,6 @@ describe 'user views his payment accounts' do
     click_on 'Meus Métodos de Pagamento'
 
     expect(page).to have_content('Nenhum dado para recebimento via boletos cadastrado')
+    expect(page).to have_content('Nenhum dado para recebimento via cartão cadastrado')
   end
 end

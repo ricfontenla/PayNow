@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_09_182412) do
+ActiveRecord::Schema.define(version: 2021_06_10_165519) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -64,6 +64,16 @@ ActiveRecord::Schema.define(version: 2021_06_09_182412) do
     t.index ["payment_method_id"], name: "index_boleto_accounts_on_payment_method_id"
   end
 
+  create_table "card_accounts", force: :cascade do |t|
+    t.string "credit_code"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "company_id", null: false
+    t.integer "payment_method_id", null: false
+    t.index ["company_id"], name: "index_card_accounts_on_company_id"
+    t.index ["payment_method_id"], name: "index_card_accounts_on_payment_method_id"
+  end
+
   create_table "companies", force: :cascade do |t|
     t.string "email_domain"
     t.string "cnpj"
@@ -105,5 +115,7 @@ ActiveRecord::Schema.define(version: 2021_06_09_182412) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "boleto_accounts", "companies"
   add_foreign_key "boleto_accounts", "payment_methods"
+  add_foreign_key "card_accounts", "companies"
+  add_foreign_key "card_accounts", "payment_methods"
   add_foreign_key "users", "companies"
 end

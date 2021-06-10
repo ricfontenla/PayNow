@@ -1,0 +1,6 @@
+<h1><%= t('.title') %></h1>
+<hr class="my-4">
+
+<%= render 'form', url: user_company_payment_method_card_accounts_path(@company.token, @payment_method), 
+                   card_account: @card_account, company: @company, 
+                   payment_method: @payment_method %>

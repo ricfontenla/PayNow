@@ -9,7 +9,7 @@ pt-BR:
       edit:
         title: 'Editar Dados Bancários'
       update:
-        success: 'Dados bancários atualizados com sucesso'
+        success: 'Dados para boleto atualizados com sucesso'
       destroy:
         success: 'Dados de boleto apagados com sucesso'
   activerecord:

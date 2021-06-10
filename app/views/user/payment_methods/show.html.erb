@@ -14,9 +14,13 @@
 </dl>
 
 <% if @payment_method.boleto? %>
-  <%= link_to 'Cadastrar Dados Para Boleto', new_user_company_payment_method_boleto_account_path(@company.token, @payment_method), class: 'btn btn-dark' %>
+  <%= link_to 'Cadastrar Dados Para Boleto', 
+      new_user_company_payment_method_boleto_account_path(@company.token, @payment_method), 
+          class: 'btn btn-dark' %>
 <% elsif @payment_method.card? %>
-  <%= link_to 'Cadastrar Dados Para Cartão', '#', class: 'btn btn-dark' %>
+  <%= link_to 'Cadastrar Dados Para Cartão', 
+      new_user_company_payment_method_card_account_path(@company.token, @payment_method), 
+          class: 'btn btn-dark' %>
 <% else %>
   <%= link_to 'Cadastrar Dados Para PIX', '#', class: 'btn btn-dark' %>
 <% end %>

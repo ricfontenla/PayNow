@@ -21,6 +21,8 @@
           fail: 'Algo deu errado, não foi possivel realizar esta ação'
         my_payment_methods:
           title: 'Meus Métodos de Pagamento'
+          edit: 'Editar'
+          delete: 'Deletar'
     admin:
       companies:
         index:

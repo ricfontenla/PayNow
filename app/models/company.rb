@@ -5,6 +5,7 @@ class Company < ApplicationRecord
 
   has_many :users
   has_many :boleto_accounts
+  has_many :card_accounts
 
   before_validation :generate_token
 
@@ -14,7 +15,7 @@ class Company < ApplicationRecord
     unless self.token
       new_token = SecureRandom.base58(20)
       duplicity = Company.where(token: new_token)
-      create_unique_token if duplicity.any?
+      generate_token if duplicity.any?
       self.token = new_token    
     end
   end

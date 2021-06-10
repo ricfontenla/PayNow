@@ -20,10 +20,10 @@
                 <dt>Conta Bancária</dt>
                 <dd><%= boleto.bank_account %></dd>
               </dl>
-              <%= link_to 'Editar', 
+              <%= link_to t('.edit'), 
                   edit_user_company_payment_method_boleto_account_path(@company.token, boleto.payment_method, boleto), 
                     class: 'btn btn-dark' %>
-              <%= link_to 'Deletar', 
+              <%= link_to t('.delete'), 
                   user_company_payment_method_boleto_account_path(@company.token, boleto.payment_method, boleto), 
                     method: :delete, data: { confirm: 'Tem certeza?'}, class: 'btn btn-dark' %>
             </div>
@@ -35,6 +35,27 @@
     </div>
     <div class="col">
       <h3 class="py-3">Cartões:</h3>
+      <% if @company.card_accounts.any? %>
+        <% @company.card_accounts.each do |card| %>
+          <div class="card">
+            <div class="card-body">
+              <h5><%= card.payment_method.name %></h5>
+              <dl>
+                <dt>Conta referente a operadora do cartão:</dt>
+                <dd><%= card.credit_code %></dd>
+              </dl>
+              <%= link_to t('.edit'), 
+                  edit_user_company_payment_method_card_account_path(@company.token, card.payment_method, card), 
+                    class: 'btn btn-dark' %>
+              <%= link_to t('.delete'), 
+                  user_company_payment_method_card_account_path(@company.token, card.payment_method, card), 
+                    method: :delete, data: { confirm: 'Tem certeza?'}, class: 'btn btn-dark' %>
+            </div>
+          </div>
+        <% end %>
+      <% else %> 
+        <p>Nenhum dado para recebimento via cartão cadastrado</p>
+      <% end %>
     </div>
     <div class="col">
       <h3 class="py-3">PIX:</h3>

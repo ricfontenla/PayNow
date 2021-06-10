@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       get 'my_payment_methods', on: :member
       resources :payment_methods, only: [:index, :show] do
         resources :boleto_accounts, only: [:new, :create, :edit, :update, :destroy]
+        resources :card_accounts, only: [:new, :create, :edit, :update, :destroy]
       end
     end
   end
