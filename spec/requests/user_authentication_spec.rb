@@ -60,4 +60,24 @@ describe 'user authentication' do
       expect(response).to redirect_to(new_user_session_path)
     end
   end
+
+  context 'for pix_account' do
+    it 'cannot access create without login' do
+      post user_company_payment_method_pix_accounts_path(1, 1)
+
+      expect(response).to redirect_to(new_user_session_path)
+    end
+
+    it 'cannot access update withou login' do
+      put user_company_payment_method_pix_account_path(1, 1, 1)
+
+      expect(response).to redirect_to(new_user_session_path)
+    end
+
+    it 'cannot access destroy withou login' do
+      delete user_company_payment_method_pix_account_path(1, 1, 1)
+
+      expect(response).to redirect_to(new_user_session_path)
+    end
+  end
 end

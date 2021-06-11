@@ -59,6 +59,30 @@
     </div>
     <div class="col">
       <h3 class="py-3">PIX:</h3>
+      <% if @company.pix_accounts.any? %>
+        <% @company.pix_accounts.each do |pix| %>
+          <div class="card">
+            <div class="card-body">
+              <h5><%= pix.payment_method.name %></h5>
+              <dl>
+                <dt>Chave PIX:</dt>
+                <dd><%= pix.pix_key %></dd>
+
+                <dt>Código do banco:</dt>
+                <dd><%= pix.bank_code %></dd>
+              </dl>
+              <%= link_to t('.edit'), 
+                  edit_user_company_payment_method_pix_account_path(@company.token, pix.payment_method, pix), 
+                    class: 'btn btn-dark' %>
+              <%= link_to t('.delete'), 
+                  user_company_payment_method_pix_account_path(@company.token, pix.payment_method, pix), 
+                    method: :delete, data: { confirm: 'Tem certeza?'}, class: 'btn btn-dark' %>
+            </div>
+          </div>
+        <% end %>
+      <% else %> 
+        <p>Nenhum dado para recebimento via PIX cadastrado</p>
+      <% end %>
     </div>
   </div>
 </div>

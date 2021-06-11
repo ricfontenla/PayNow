@@ -68,4 +68,18 @@ describe 'visitor tries to access user area' do
       expect(current_path).to eq(new_user_session_path)
     end
   end
+
+  context 'of pix_account' do
+    it 'and cannot view new' do
+      visit new_user_company_payment_method_pix_account_path(1, 1)
+
+      expect(current_path).to eq(new_user_session_path)
+    end
+
+    it 'and cannot view edit' do
+      visit edit_user_company_payment_method_pix_account_path(1, 1, 1)
+
+      expect(current_path).to eq(new_user_session_path)
+    end
+  end
 end

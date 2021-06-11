@@ -73,11 +73,6 @@ describe 'user creates boleto account' do
   end
 
   it 'and cannot register a boleto account in a different payment method' do
-    boleto = PaymentMethod.create!(name: 'Boleto do Banco Laranja', 
-                                   billing_fee: 2.5, 
-                                   max_fee: 100.0,
-                                   status: true,
-                                   category: :boleto)
     card = PaymentMethod.create!(name: 'PISA', 
                                  billing_fee: 5, 
                                  max_fee: 250,

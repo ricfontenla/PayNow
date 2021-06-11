@@ -22,5 +22,5 @@
       new_user_company_payment_method_card_account_path(@company.token, @payment_method), 
           class: 'btn btn-dark' %>
 <% else %>
-  <%= link_to 'Cadastrar Dados Para PIX', '#', class: 'btn btn-dark' %>
+  <%= link_to 'Cadastrar Dados Para PIX', new_user_company_payment_method_pix_account_path(@company.token, @payment_method), class: 'btn btn-dark' %>
 <% end %>

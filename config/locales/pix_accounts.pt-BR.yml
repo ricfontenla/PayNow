@@ -1,0 +1,19 @@
+---
+pt-BR:
+  user:
+    pix_accounts:
+      new:
+        title: 'Dados Bancários para PIX'
+      edit:
+        title: 'Alterar dados para recebimento com PIX'
+      form:
+        submit: 'Enviar'
+      update:
+        success: 'Dados para PIX atualizados com sucesso'
+      destroy:
+        success: 'Dados de PIX apagados com sucesso'
+  activerecord:
+    attributes:
+      pix_account:
+        bank_code: 'Código do banco'
+        pix_key: 'Chave PIX'

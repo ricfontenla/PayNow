@@ -7,5 +7,5 @@ class CardAccount < ApplicationRecord
   validates :credit_code, presence: true
   validates :credit_code, length: { is: 20 }
   validates :credit_code, format: { with: ALPHANUMERIC }
-  validates :credit_code, uniqueness: { case_sensitive: false }
+  validates :credit_code, uniqueness: true
 end

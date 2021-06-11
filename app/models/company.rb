@@ -6,6 +6,7 @@ class Company < ApplicationRecord
   has_many :users
   has_many :boleto_accounts
   has_many :card_accounts
+  has_many :pix_accounts
 
   before_validation :generate_token
 

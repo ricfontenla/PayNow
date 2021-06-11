@@ -1,0 +1,5 @@
+class AddCompanyRefToPixAccount < ActiveRecord::Migration[6.1]
+  def change
+    add_reference :pix_accounts, :company, null: false, foreign_key: true
+  end
+end

@@ -1,7 +1,8 @@
 class PaymentMethod < ApplicationRecord
   has_one_attached :category_icon
   has_many :boleto_accounts, dependent: :destroy
-  has_many :card_accounts
+  has_many :card_accounts, dependent: :destroy
+  has_many :pix_accounts, dependent: :destroy
 
   validates :name, :billing_fee, :max_fee, :category, presence: true
   validates :name, uniqueness: true

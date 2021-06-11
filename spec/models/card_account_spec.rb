@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 describe CardAccount do
-  it { should validate_presence_of(:credit_code).
-      with_message('não pode ficar em branco') }
+  it { should validate_presence_of(:credit_code)
+      .with_message('não pode ficar em branco') }
 
   it { should validate_length_of(:credit_code).is_equal_to(20)
       .with_message('não possui o tamanho esperado (20 caracteres)') }
@@ -33,7 +33,7 @@ describe CardAccount do
                           company: company,
                           payment_method: card)
     
-      should validate_uniqueness_of(:credit_code).case_insensitive
+      should validate_uniqueness_of(:credit_code)
               .with_message('já está em uso')
     end
   end

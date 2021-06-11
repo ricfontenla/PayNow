@@ -1,5 +1,5 @@
 class User::CardAccountsController < User::UserController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :authenticate_user!
   before_action :set_company
   before_action :set_payment_method, only: [:new, :create, :edit, :update]
   before_action :set_card_account, only: [:edit, :update, :destroy]

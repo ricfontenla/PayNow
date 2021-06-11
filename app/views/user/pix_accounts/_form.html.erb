@@ -1,0 +1,22 @@
+<div>
+  <% if pix_account.errors.any? %>
+    <p>Foram encontrados <%= pix_account.errors.count %> error(s): </p>
+    <ul>
+      <% pix_account.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>
+
+<%= form_with url: url, model: [:user, company, payment_method, pix_account] do |form| %>
+  <dl>
+    <dt><%= form.label :bank_code %></dt>
+    <dd><%= form.select :bank_code, bank_codes, include_blank: true %></dd>
+
+    <dt><%= form.label :pix_key %></dt>
+    <dd><%= form.text_field :pix_key %></dd>
+  </dl>
+
+  <%= form.submit t('.submit'), class: 'btn btn-dark' %>
+<% end %>

@@ -36,6 +36,7 @@ describe 'User edits boleto account' do
     expect(page).to have_content('184')
     expect(page).to have_content('4321')
     expect(page).to have_content('987654321')
+    expect(page).to have_content('Dados para boleto atualizados com sucesso')
   end
 
   it 'and fields cannot be blank' do
@@ -105,6 +106,6 @@ describe 'User edits boleto account' do
     fill_in 'Conta bancária', with: '987654321'
     click_on 'Enviar'
 
-    expect(page).to have_content('já está em uso', count: 1)
+    expect(page).to have_content('já está em uso')
   end
 end
