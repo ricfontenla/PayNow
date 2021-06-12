@@ -1,0 +1,18 @@
+<h1><%= t('.title') %></h1>
+<hr class="my-4">
+
+<div class="py-3">
+  <%= link_to 'Cadastrar novo Produto', 
+        new_user_company_product_path(@company.token), class: 'btn btn-dark'%>
+</div>
+
+<% if @products.any? %>
+  <% @products.each do |product| %>
+  <div class="py-3">
+      <h3><%= link_to product.name, 
+              user_company_product_path(@company.token, product) %></h3>   
+  </div>
+  <% end %>  
+<% else %>
+  <p>Nenhum produto disponível</p>
+<%end%>

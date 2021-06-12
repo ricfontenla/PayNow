@@ -1,0 +1,22 @@
+<h1><%= @product.name %></h1>
+<hr class="my-4">
+
+<dl>
+  <dt>Preço:</dt>
+  <dd><%= number_to_currency @product.price %></dd>
+
+  <dt>Desconto PIX:</dt>
+  <dd><%= number_to_percentage @product.pix_discount, precision: 2 %></dd>
+
+  <dt>Desconto cartão:</dt>
+  <dd><%= number_to_percentage @product.card_discount, precision: 2 %></dd>
+
+  <dt>Desconto boleto:</dt>
+  <dd><%= number_to_percentage @product.boleto_discount, precision: 2 %></dd>
+
+  <dt>Token:</dt>
+  <dd><%= @product.token %></dd>
+</dl>
+
+<%= link_to t('.edit'), edit_user_company_product_path(@company.token, @product), class: 'btn btn-dark' %>
+<%= link_to t('.delete'), user_company_product_path(@company.token, @product), method: :delete, class: 'btn btn-dark' %>

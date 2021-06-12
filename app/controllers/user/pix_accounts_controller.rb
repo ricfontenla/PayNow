@@ -5,10 +5,10 @@ class User::PixAccountsController < User::UserController
   before_action :set_company
   before_action :set_payment_method, only: [:new, :create, :edit, :update]
   before_action :set_pix_account, only: [:edit, :update, :destroy]
+  before_action :bank_codes, only: [:new, :create, :edit, :update]
 
   def new
     @pix_account = PixAccount.new
-    bank_codes
   end
 
   def create
@@ -17,17 +17,14 @@ class User::PixAccountsController < User::UserController
     if @pix_account.save
       redirect_to my_payment_methods_user_company_path(@company.token)
     else
-      bank_codes
       render :new
     end
   end
 
   def edit
-    bank_codes
   end
 
   def update
-    bank_codes
     if @pix_account.update(pix_params)
       flash[:notice] = t('.success')
       redirect_to my_payment_methods_user_company_path(@company.token)

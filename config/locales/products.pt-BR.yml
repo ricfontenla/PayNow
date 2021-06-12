@@ -1,0 +1,27 @@
+---
+pt-BR:
+  user:
+    products:
+      index:
+        title: 'Meu Catálogo de Produtos'
+      show:
+        edit: 'Editar'
+        delete: 'Deletar'
+      new: 
+        title: 'Cadastro de Produto'
+      edit:
+        title: 'Editar dados do Produto'
+      update:
+        success: 'Produto editado com sucesso'
+      destroy:
+        success: 'Produto deletado com sucesso'
+      form:
+        submit: 'Enviar'
+  activerecord:
+    attributes:
+      product:
+        name: 'Nome'
+        price: 'Preço'
+        pix_discount: 'Desconto PIX'
+        card_discount: 'Desconto cartão'
+        boleto_discount: 'Desconto boleto'

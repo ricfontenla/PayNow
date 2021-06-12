@@ -80,4 +80,24 @@ describe 'user authentication' do
       expect(response).to redirect_to(new_user_session_path)
     end
   end
+
+  context 'for product'do
+    it 'cannot access create without login' do
+      post user_company_products_path(1)
+
+      expect(response).to redirect_to(new_user_session_path)
+    end
+
+    it 'cannot access update without login' do
+      put user_company_product_path(1, 1)
+
+      expect(response).to redirect_to(new_user_session_path)
+    end
+
+    it 'cannot access destroy without login' do
+      delete user_company_product_path(1, 1)
+
+      expect(response).to redirect_to(new_user_session_path)
+    end
+  end
 end

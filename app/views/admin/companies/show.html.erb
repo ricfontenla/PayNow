@@ -14,16 +14,16 @@
   <dt>Email de cobrança:</dt>
   <dd><%= @company.billing_email %></dd>
 
-<div class="row justify-content-start">
-  <div class="col-4">
-    <dt>Token de autenticação:</dt>
-    <dd><%= @company.token %></dd>
-  </div>
-  <div class="col-4">
-    <dd><%= link_to t('.new_token'), generate_token_admin_company_path(@company), method: :put, 
+  <div class="row justify-content-start">
+    <div class="col-4">
+      <dt>Token de autenticação:</dt>
+      <dd><%= @company.token %></dd>
+    </div>
+    <div class="col-4">
+      <dd><%= link_to t('.new_token'), generate_token_admin_company_path(@company), method: :put, 
                     data: { confirm: 'Tem certeza?' }, class: 'btn btn-dark' %>
+    </div>
   </div>
-</div>
 </dl>
 
 <div>

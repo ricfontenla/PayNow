@@ -1,0 +1,31 @@
+<div>
+  <% if product.errors.any? %>
+    <p>Foram encontrados <%= product.errors.count %> error(s): </p>
+    <ul>
+      <% product.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>
+
+<%= form_with url: url, model: [:user, company, product] do |form| %>
+  <dl>
+    <dt><%= form.label :name %></dt>
+    <dd><%= form.text_field :name %></dd>
+
+    <dt><%= form.label :price %></dt>
+    <dd><%= form.number_field :price, min: 0 %></dd>
+
+    <dt><%= form.label :pix_discount %></dt>
+    <dd><%= form.number_field :pix_discount, min: 0 %></dd>
+
+    <dt><%= form.label :card_discount %></dt>
+    <dd><%= form.number_field :card_discount, min: 0 %></dd>
+
+    <dt><%= form.label :boleto_discount %></dt>
+    <dd><%= form.number_field :boleto_discount, min: 0 %></dd>
+
+    <%= form.submit t('.submit'), class: 'btn btn-dark' %>
+  </dl>
+<% end %>

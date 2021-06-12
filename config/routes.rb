@@ -20,6 +20,7 @@ Rails.application.routes.draw do
         resources :card_accounts, only: [:new, :create, :edit, :update, :destroy]
         resources :pix_accounts, only: [:new, :create, :edit, :update, :destroy]
       end
+      resources :products
     end
   end
 end

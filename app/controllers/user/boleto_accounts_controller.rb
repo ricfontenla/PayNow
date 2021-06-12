@@ -3,7 +3,7 @@ require 'csv'
 class User::BoletoAccountsController < User::UserController
   before_action :authenticate_user!
   before_action :set_company
-  before_action :set_paymen_method, only: [:new, :create, :edit, :update]
+  before_action :set_payment_method, only: [:new, :create, :edit, :update]
   before_action :set_boleto_account, only: [:edit, :update, :destroy]
   before_action :bank_codes, only: [:new, :create, :edit, :update]
 
@@ -53,7 +53,7 @@ class User::BoletoAccountsController < User::UserController
     @company = Company.find_by(token: params[:company_token])
   end
 
-  def set_paymen_method
+  def set_payment_method
     @payment_method = PaymentMethod.find(params[:payment_method_id])
     redirect_to root_path unless @payment_method.boleto?
   end

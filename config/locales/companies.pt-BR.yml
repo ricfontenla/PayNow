@@ -7,6 +7,7 @@
           new_token: 'Gerar novo token'
           new_payment_method: 'Novo Método de Pagamento'
           my_payment_methods: 'Meus Métodos de Pagamento'
+          my_products: 'Meus Produtos'
         new:
           title: 'Seja um cliente da PayNow'
           submit: 'Cadastrar'
