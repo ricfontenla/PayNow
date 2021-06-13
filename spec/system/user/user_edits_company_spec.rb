@@ -47,8 +47,7 @@ it 'successfully' do
                               cnpj: '99999999999999', 
                               name: 'Cookbook LTDA', 
                               billing_adress: 'Rua Cereja, numero 99 - Bairro Limão, 11111-111',
-                              billing_email: 'financas@cookbook.com.br', 
-                              token: SecureRandom.base58(20))
+                              billing_email: 'financas@cookbook.com.br')
 
     user_customer_admin_login
     visit edit_user_company_path(Company.last.token)

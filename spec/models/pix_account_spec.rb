@@ -24,8 +24,7 @@ describe PixAccount do
                                 cnpj: '00000000000000', 
                                 name: 'Codeplay Cursos SA', 
                                 billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
-                                billing_email: 'financas@codeplay.com.br',
-                                token: SecureRandom.base58(20))
+                                billing_email: 'financas@codeplay.com.br')
       PixAccount.create!(pix_key: '12345abcde67890FGHIJ',
                          bank_code: '001',
                          company: company,

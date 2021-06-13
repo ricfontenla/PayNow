@@ -6,14 +6,11 @@ describe 'user views his payment accounts' do
                           cnpj: '00000000000000', 
                           name: 'Codeplay Cursos SA', 
                           billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
-                          billing_email: 'financas@codeplay.com.br',
-                          token: SecureRandom.base58(20))
-                          
+                          billing_email: 'financas@codeplay.com.br')   
     user =  User.create!(email: 'john_doe@codeplay.com.br', 
                          password: '123456',
                          role: 10,
                          company: company)
-
     boleto = PaymentMethod.create!(name: 'Boleto do Banco Laranja', 
                                    billing_fee: 2.5, 
                                    max_fee: 100.0,

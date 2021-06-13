@@ -6,14 +6,12 @@ describe 'Admin views companies' do
                     cnpj: '00000000000000', 
                     name: 'Codeplay Cursos SA', 
                     billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
-                    billing_email: 'financas@codeplay.com.br',
-                    token: SecureRandom.base58(20))
+                    billing_email: 'financas@codeplay.com.br')
     Company.create!(email_domain: 'cookbook.com.br', 
                     cnpj: '99999999999999', 
                     name: 'Cookbook LTDA', 
                     billing_adress: 'Rua Cereja, numero 99 - Bairro Limão, 11111-111',
-                    billing_email: 'financas@cookbook.com.br', 
-                    token: SecureRandom.base58(20))
+                    billing_email: 'financas@cookbook.com.br')
     
     admin_login
     visit root_path
@@ -36,14 +34,12 @@ describe 'Admin views companies' do
                               cnpj: '00000000000000', 
                               name: 'Codeplay Cursos SA', 
                               billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
-                              billing_email: 'financas@codeplay.com.br',
-                              token: SecureRandom.base58(20))
+                              billing_email: 'financas@codeplay.com.br')
     Company.create!(email_domain: 'cookbook.com.br', 
                     cnpj: '99999999999999', 
                     name: 'Cookbook LTDA', 
                     billing_adress: 'Rua Cereja, numero 99 - Bairro Limão, 11111-111',
-                    billing_email: 'financas@cookbook.com.br', 
-                    token: SecureRandom.base58(20))
+                    billing_email: 'financas@cookbook.com.br')
 
     admin_login
     visit admin_companies_path

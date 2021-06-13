@@ -2,31 +2,31 @@ require 'rails_helper'
 
 describe 'user views only available payment methods' do
   it 'successfully' do
-    boleto = PaymentMethod.create!(name: 'Boleto do Banco Laranja', 
-                               billing_fee: 2.5, 
-                               max_fee: 100.0,
-                               status: true,
-                               category: :boleto)
-    card = PaymentMethod.create!(name: 'PISA', 
-                                 billing_fee: 5, 
-                                 max_fee: 250,
-                                 status: false,
-                                 category: 2)
-    pix = PaymentMethod.create!(name: 'PIX Banco Roxinho', 
-                                billing_fee: 1, 
-                                max_fee: 150,
-                                status: true,
-                                category: 3)
-    card = PaymentMethod.create!(name: 'MESTRECARD', 
-                                 billing_fee: 3, 
-                                 max_fee: 1000,
-                                 status: true,
-                                 category: 2)
-    pix = PaymentMethod.create!(name: 'PIX Banco SantoAndré', 
-                                billing_fee: 1.5, 
-                                max_fee: 200,
-                                status: false,
-                                category: 3)
+    PaymentMethod.create!(name: 'Boleto do Banco Laranja', 
+                          billing_fee: 2.5, 
+                          max_fee: 100.0,
+                          status: true,
+                          category: :boleto)
+    PaymentMethod.create!(name: 'PISA', 
+                          billing_fee: 5, 
+                          max_fee: 250,
+                          status: false,
+                          category: 2)
+    PaymentMethod.create!(name: 'PIX Banco Roxinho', 
+                          billing_fee: 1, 
+                          max_fee: 150,
+                          status: true,
+                          category: 3)
+    PaymentMethod.create!(name: 'MESTRECARD', 
+                          billing_fee: 3, 
+                          max_fee: 1000,
+                          status: true,
+                          category: 2)
+    PaymentMethod.create!(name: 'PIX Banco SantoAndré', 
+                          billing_fee: 1.5, 
+                          max_fee: 200,
+                          status: false,
+                          category: 3)
 
     user_customer_admin_login
     visit root_path
@@ -45,11 +45,11 @@ describe 'user views only available payment methods' do
   end
 
   it 'and view details' do
-    boleto = PaymentMethod.create!(name: 'Boleto do Banco Laranja', 
-                                   billing_fee: 2.5, 
-                                   max_fee: 100.0,
-                                   status: true,
-                                   category: :boleto)
+    PaymentMethod.create!(name: 'Boleto do Banco Laranja', 
+                          billing_fee: 2.5, 
+                          max_fee: 100.0,
+                          status: true,
+                          category: :boleto)
 
     user_customer_admin_login
     visit root_path

@@ -7,9 +7,6 @@ describe 'Admin edits payment method' do
                                  max_fee: 250,
                                  status: false,
                                  category: 2)
-    card.category_icon
-          .attach(io: File.open(Rails.root.join('app/assets/images/icons/card.png')), 
-                  filename: 'card.png')
 
     admin_login
     visit root_path
@@ -35,9 +32,6 @@ describe 'Admin edits payment method' do
                                  max_fee: 250,
                                  status: false,
                                  category: 2)
-    card.category_icon
-          .attach(io: File.open(Rails.root.join('app/assets/images/icons/card.png')), 
-                  filename: 'card.png')
 
     admin_login
     visit edit_admin_payment_method_path(card)

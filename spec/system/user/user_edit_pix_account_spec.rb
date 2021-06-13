@@ -6,8 +6,7 @@ describe 'User edits pix account' do
                               cnpj: '00000000000000', 
                               name: 'Codeplay Cursos SA', 
                               billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
-                              billing_email: 'financas@codeplay.com.br',
-                              token: SecureRandom.base58(20))                          
+                              billing_email: 'financas@codeplay.com.br')
     user =  User.create!(email: 'john_doe@codeplay.com.br', 
                          password: '123456',
                          role: 10,
@@ -41,8 +40,7 @@ describe 'User edits pix account' do
                         cnpj: '00000000000000', 
                         name: 'Codeplay Cursos SA', 
                         billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
-                        billing_email: 'financas@codeplay.com.br',
-                        token: SecureRandom.base58(20))                          
+                        billing_email: 'financas@codeplay.com.br')
     user =  User.create!(email: 'john_doe@codeplay.com.br', 
                          password: '123456',
                          role: 10,
@@ -73,8 +71,7 @@ describe 'User edits pix account' do
                               cnpj: '00000000000000', 
                               name: 'Codeplay Cursos SA', 
                               billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
-                              billing_email: 'financas@codeplay.com.br',
-                              token: SecureRandom.base58(20))
+                              billing_email: 'financas@codeplay.com.br')
     pix = PaymentMethod.create!(name: 'PIX Banco Roxinho', 
                                 billing_fee: 1, 
                                 max_fee: 250,

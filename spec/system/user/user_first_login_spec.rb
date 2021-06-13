@@ -38,8 +38,7 @@ describe "user logins for the first time" do
                       cnpj: '00000000000000', 
                       name: 'Codeplay Cursos SA', 
                       billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
-                      billing_email: 'financas@codeplay.com.br',
-                      token: SecureRandom.base58(20))
+                      billing_email: 'financas@codeplay.com.br')
 
       user_first_login
       visit root_path
@@ -60,8 +59,7 @@ describe "user logins for the first time" do
                                 cnpj: '00000000000000', 
                                 name: 'Codeplay Cursos SA', 
                                 billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
-                                billing_email: 'financas@codeplay.com.br',
-                                token: SecureRandom.base58(20))
+                                billing_email: 'financas@codeplay.com.br')
 
       user_first_login
       visit root_path
