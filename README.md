@@ -50,3 +50,43 @@ CodePlay no nosso contexto.
 * Administrador gerado: email: ```ademir@paynow.com.br```, senha: ```123456```
 * Usuario administrador de empresa cliente gerado: email: ```john_doe@codeplay.com.br```, senha: ```123456```
 * Usuario funcionario de empresa cliente gerado: email: ```john_doe2@codeplay.com.br```, password: ```123456```
+
+## API
+### Registro de cliente final
+#### __post '/api/v1/final_customers'__
+* o endpoint para criação e associação de um cliente final e uma empresa cliente PayNow, espera receber os seguintes parâmetros:
+```
+{
+	'final_customer':
+	{
+		'name': 'Nome do cliente',
+		'cpf': 'Apenas números e com 11 caractéres'
+	},
+	'company_token': 'Token alfanumérido da empresa já cadastrada'
+}
+```
+#### Possíveis Respostas
+* HTTP Status: 201 - Cliente registrado com sucesso
+Exemplo:
+```
+{
+	name: "Fulano Sicrano",
+	cpf: "98765432101",
+	token: "txrzoRCiGngB8Fr6zgKB"
+}
+```
+* HTTP Status: 412 - Parâmetros inválidos para criação de cliente
+Exemplo:
+```
+{
+	message: 'Parâmetros Inválidos'
+}
+```
+* HTTP Status: 412 - Token Inválido
+Exemplo:
+```
+{
+	message: 'Token Inválido'
+}
+```
+```

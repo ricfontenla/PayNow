@@ -8,6 +8,8 @@ class Company < ApplicationRecord
   has_many :card_accounts
   has_many :pix_accounts
   has_many :products
+  has_many :company_final_customers
+  has_many :final_customers, through: :company_final_customers
 
   before_validation :generate_token
 
