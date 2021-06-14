@@ -67,6 +67,7 @@ CodePlay no nosso contexto.
 ```
 #### Possíveis Respostas
 * HTTP Status: 201 - Cliente registrado com sucesso
+
 Exemplo:
 ```
 {
@@ -76,6 +77,7 @@ Exemplo:
 }
 ```
 * HTTP Status: 412 - Parâmetros inválidos para criação de cliente (parametros em branco ou não respeitando as validações)
+
 Exemplo:
 ```
 {
@@ -83,6 +85,7 @@ Exemplo:
 }
 ```
 * HTTP Status: 412 - Token Inválido (da empresa)
+
 Exemplo:
 ```
 {
@@ -91,6 +94,7 @@ Exemplo:
 ```
 #### __post '/api/v1/orders'__
 * o endpoint para criação e associação de um cliente final e uma empresa cliente PayNow, espera receber os seguintes parâmetros:
+
 * Para Boletos:
 ```
 {
@@ -104,6 +108,7 @@ Exemplo:
   }
 }
 ```
+
 * Para Cartão:
 ```
 {
@@ -119,6 +124,7 @@ Exemplo:
   }
 }
 ```
+
 * Para PIX:
 ```
 {
@@ -132,7 +138,8 @@ Exemplo:
 }
 ```
 #### Possíveis Respostas
-* HTTP Status: 201 - Compra registrada com sucesso
+* HTTP Status: 201 - Compra registrada com sucesso.
+
 Exemplo boleto:
 ```
 {
@@ -147,6 +154,7 @@ Exemplo boleto:
 	final_customer: { token: "CAjaMeHyKD3P74jWyE9E }
 }
 ```
+
 Exemplo cartão:
 ```
 {
@@ -163,6 +171,7 @@ Exemplo cartão:
 	final_customer: { token: "tZ5qW2jR78ZQpKwUextV" }
 }
 ```
+
 Exemplo PIX:
 ```
 {
@@ -177,6 +186,7 @@ Exemplo PIX:
 }
 ```
 * HTTP Status: 412 - Parâmetros inválidos para criação da compra (parametros em branco ou não respeitando validações)
+
 Exemplo:
 ```
 {
@@ -184,6 +194,7 @@ Exemplo:
 }
 ```
 * HTTP Status: 412 - Token Inválido (da empresa, cliente ou produto)
+
 Exemplo:
 ```
 {
