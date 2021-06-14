@@ -75,18 +75,118 @@ Exemplo:
 	token: "txrzoRCiGngB8Fr6zgKB"
 }
 ```
-* HTTP Status: 412 - Parâmetros inválidos para criação de cliente
+* HTTP Status: 412 - Parâmetros inválidos para criação de cliente (parametros em branco ou não respeitando as validações)
 Exemplo:
 ```
 {
 	message: 'Parâmetros Inválidos'
 }
 ```
-* HTTP Status: 412 - Token Inválido
+* HTTP Status: 412 - Token Inválido (da empresa)
 Exemplo:
 ```
 {
 	message: 'Token Inválido'
 }
 ```
+#### __post '/api/v1/orders'__
+* o endpoint para criação e associação de um cliente final e uma empresa cliente PayNow, espera receber os seguintes parâmetros:
+* Para Boletos:
+```
+{
+  order: 
+  {
+    company_token: Token da empresa cliente, 
+    product_token: Token do produto a ser vendido, 
+    final_customer_token: Token do cliente final,
+    choosen_payment: "boleto",
+    adress: Endereço a ser enviado o boleto
+  }
+}
+```
+* Para Cartão:
+```
+{
+  order: 
+  {
+    company_token: Token da empresa cliente, 
+    product_token: Token do produto a ser vendido, 
+    final_customer_token: Token do cliente final,
+    choosen_payment: "card",
+    card_number: Numero do cartão, com 16 dígitos, apenas numeros
+    printed_name: Nume impresso no cartão,
+    verification_code: Código de segurança, com 3 digitos, apenas numeros
+  }
+}
+```
+* Para PIX:
+```
+{
+  order: 
+  {
+    company_token: Token da empresa cliente, 
+    product_token: Token do produto a ser vendido, 
+    final_customer_token: Token do cliente final,
+    choosen_payment: "pix",
+  }
+}
+```
+#### Possíveis Respostas
+* HTTP Status: 201 - Compra registrada com sucesso
+Exemplo boleto:
+```
+{
+	token: "dwx5UBuwxZgqaN9hawgo", 
+	status: "pendente", 
+	original_price: "100.0",
+	final_price: "95.0", 
+	choosen_payment: "boleto", 
+	adress": "fulano_sicrano@gmail.com", 
+	company: { token: "y3vxtTPta2ykM64o2PL9" },
+	product: { token: "o49aXMmnTVrET2GEFHfM" },
+	final_customer: { token: "CAjaMeHyKD3P74jWyE9E }
+}
+```
+Exemplo cartão:
+```
+{
+	token: "N3zs82YGaX6hyeXfFxVP",
+	status: "pendente", 
+	original_price: "100.0", 
+	final_price: "100.0", 
+	choosen_payment: "card", 
+	card_number: "9876543210123456", 
+	printed_name: "Fulano Sicrano", 
+	verification_code: "000", 
+	company: { token: "LP4s3FwvntrGfm6UokkL" }, 
+	product: { token: "1JawCh5m2qiYEkn5ucav" },
+	final_customer: { token: "tZ5qW2jR78ZQpKwUextV" }
+}
+```
+Exemplo PIX:
+```
+{
+	token: "GtLsEJpmFYkRfSXWTu2r",
+	status: "pendente", 
+	original_price: "100.0", 
+	final_price: "90.0", 
+	choosen_payment: "pix", 
+	company: { token: "uZGAM86JoyHmBv3WdnSg" },
+	product: { token: "mPZEmrARA7fgLAL3LzPr" },
+	final_customer: { token: "3nbAU317qitpUaXMEgEm"}
+}
+```
+* HTTP Status: 412 - Parâmetros inválidos para criação da compra (parametros em branco ou não respeitando validações)
+Exemplo:
+```
+{
+	message: 'Parâmetros Inválidos'
+}
+```
+* HTTP Status: 412 - Token Inválido (da empresa, cliente ou produto)
+Exemplo:
+```
+{
+	message: 'Token Inválido'
+}
 ```

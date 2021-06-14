@@ -1,6 +1,7 @@
 class FinalCustomer < ApplicationRecord
   has_many :company_final_customers
   has_many :companies, through: :company_final_customers
+  has_many :orders
 
   before_validation :generate_token
 

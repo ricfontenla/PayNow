@@ -1,5 +1,6 @@
 class Product < ApplicationRecord
   belongs_to :company
+  has_many :orders
 
   before_validation :generate_token
 
