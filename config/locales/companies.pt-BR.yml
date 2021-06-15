@@ -32,6 +32,7 @@
           new_token: 'Gerar novo token'
           update_info: 'Atualizar dados'
           return: 'Voltar'
+          orders_index: 'Consultar Pedidos'
         edit:
           title: 'Atualização de Dados de Cliente'
           submit: 'Atualizar Dados'

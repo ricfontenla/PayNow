@@ -1,0 +1,121 @@
+<h1><%= t('.title') %></h1>
+<hr class="my-4">
+
+<% if @order.boleto? %>
+  <dl>
+    <dt>Produto:</dt>
+    <dd><%= @order.product.name %></dd>
+
+    <dt>Comprador:</dt>
+    <dd><%= @order.final_customer.name %></dd>
+
+    <dt>CPF:</dt>
+    <dd><%= @order.final_customer.cpf %></dd>
+
+    <dt>Preço original:</dt>
+    <dd><%= number_to_currency @order.original_price %></dd>
+
+    <dt>Preço com desconto:</dt>
+    <dd><%= number_to_currency @order.final_price %></dd>
+
+    <dt>Método de pagamento:</dt>
+    <dd><%= Order.human_attribute_name(".choosen_payment.#{@order.choosen_payment}") %></dd> 
+
+    <dt>Endereço de envio do boleto:</dt>
+    <dd><%= @order.adress %></dd>
+
+    <dt>Data da compra:</dt>
+    <dd><%= I18n.l(Order.first.created_at, format: :long) %></dd>
+
+    <dt>Status da cobrança:</dt>
+    <dd><%= Order.human_attribute_name(".status.#{@order.status}") %></dd> 
+  </dl>
+
+<% elsif @order.card? %>
+  <dl>
+    <dt>Produto:</dt>
+    <dd><%= @order.product.name %></dd>
+
+    <dt>Comprador:</dt>
+    <dd><%= @order.final_customer.name %></dd>
+
+    <dt>CPF:</dt>
+    <dd><%= @order.final_customer.cpf %></dd>
+
+    <dt>Preço original:</dt>
+    <dd><%= number_to_currency @order.original_price %></dd>
+
+    <dt>Preço com desconto:</dt>
+    <dd><%= number_to_currency @order.final_price %></dd>
+
+    <dt>Método de pagamento:</dt>
+    <dd><%= Order.human_attribute_name("choosen_payment.#{@order.choosen_payment}") %></dd> 
+
+    <dt>Número do cartão:</dt>
+    <dd><%= @order.card_number %></dd>
+
+    <dt>Nome do titular:</dt>
+    <dd><%= @order.printed_name %></dd>
+
+    <dt>Código de segurança:</dt>
+    <dd><%= @order.verification_code %></dd>
+
+    <dt>Data da compra:</dt>
+    <dd><%= I18n.l(Order.first.created_at, format: :long) %></dd>
+
+    <dt>Status da cobrança:</dt>
+    <dd><%= Order.human_attribute_name("status.#{@order.status}") %></dd> 
+  </dl>
+<% elsif @order.pix? %>
+  <dl>
+    <dt>Produto:</dt>
+    <dd><%= @order.product.name %></dd>
+
+    <dt>Comprador:</dt>
+    <dd><%= @order.final_customer.name %></dd>
+
+    <dt>CPF:</dt>
+    <dd><%= @order.final_customer.cpf %></dd>
+
+    <dt>Preço original:</dt>
+    <dd><%= number_to_currency @order.original_price %></dd>
+
+    <dt>Preço com desconto:</dt>
+    <dd><%= number_to_currency @order.final_price %></dd>
+
+    <dt>Método de pagamento:</dt>
+    <dd><%= Order.human_attribute_name("choosen_payment.#{@order.choosen_payment}") %></dd> 
+
+    <dt>Data da compra:</dt>
+    <dd><%= I18n.l(Order.first.created_at, format: :long) %></dd>
+
+    <dt>Status da cobrança:</dt>
+    <dd><%= Order.human_attribute_name("status.#{@order.status}") %></dd> 
+  </dl>
+<% end %>
+
+<div>
+  <%= link_to 'Atualizar status de cobrança', edit_admin_company_order_path(@company, @order), class: 'btn btn-dark' %>
+</div>
+
+<h5 class="py-3">Histórico do pedido</h5>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Status</th>
+      <th scope="col">Código do Status</th>
+      <th scope="col">Data de alteração</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @order.order_histories.each_with_index do |history, index| %>
+      <tr>
+        <th scope="row"><%= index + 1 %></th>
+        <td><%= OrderHistory.human_attribute_name("status.#{history.status}") %></td>
+        <td><%= history.response_code %></td>
+        <td><%= I18n.l(history.created_at, format: :long) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

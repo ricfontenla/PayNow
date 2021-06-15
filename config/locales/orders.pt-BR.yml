@@ -1,0 +1,25 @@
+---
+pt-BR:
+  admin:
+    orders:
+      index:
+        title: 'Pedidos'
+      show:
+        title: 'Detalhes do Pedido'
+      edit:
+        title: 'Atualização de status'
+        submit: 'Enviar'
+      update:
+        success: 'Status de cobrança atualizado com sucesso'
+  activerecord:
+    attributes:
+      order/status:
+        pendente: 'Pendente'
+        aprovado: 'Aprovado'
+      order/choosen_payment:
+        boleto: 'Boleto'
+        card: 'Cartão'
+        pix: 'PIX'
+      order:
+        status: 'Status'
+        response_code: 'Código de status'

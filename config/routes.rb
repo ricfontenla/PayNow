@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     resources :payment_methods
     resources :companies, only: [:index, :show, :edit, :update] do
       put 'generate_token', on: :member
+      resources :orders, only: [:index, :show, :edit, :update]
     end
   end
 

@@ -29,6 +29,7 @@
 <div>
   <%= link_to t('.update_info'), edit_admin_company_path(@company), class: 'btn btn-dark' %>
   <%= link_to t('.return'), admin_companies_path, class: 'btn btn-dark' %>
+  <%= link_to t('.orders_index'), admin_company_orders_path(@company), class: 'btn btn-dark' %>
 </div>
 
 <h3 class="py-3">Membros da empresa:</h3>

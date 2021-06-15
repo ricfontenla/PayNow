@@ -3,8 +3,10 @@ class Order < ApplicationRecord
   belongs_to :final_customer
   belongs_to :product
 
+  has_many :order_histories
+
   enum choosen_payment: { boleto: 1, card: 2, pix: 3 }
-  enum status: { cancelado: 0, pendente: 1, aprovado: 2 }
+  enum status: { pendente: 1, aprovado: 2 }
 
   before_validation :generate_token
 
