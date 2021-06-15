@@ -2,6 +2,7 @@ class Admin::OrdersController < Admin::AdminController
   before_action :authenticate_admin!, only: [:index, :show, :edit, :update]
   before_action :set_company, only: [:index, :show, :edit, :update]
   before_action :set_order, only: [:show, :edit, :update]
+  before_action :status_verification, only: [:update]
 
   def index
     @orders = @company.orders.order(id: :desc)
@@ -46,5 +47,9 @@ class Admin::OrdersController < Admin::AdminController
 
   def set_order
     @order = Order.find(params[:id])
+  end
+
+  def status_verification
+    redirect_to root_path unless @order.pendente?
   end
 end

@@ -94,9 +94,11 @@
   </dl>
 <% end %>
 
-<div>
-  <%= link_to 'Atualizar status de cobrança', edit_admin_company_order_path(@company, @order), class: 'btn btn-dark' %>
-</div>
+<% unless @order.aprovado? %>
+  <div>
+    <%= link_to 'Atualizar status de cobrança', edit_admin_company_order_path(@company, @order), class: 'btn btn-dark' %>
+  </div>
+<% end %>
 
 <h5 class="py-3">Histórico do pedido</h5>
 <table class="table">
