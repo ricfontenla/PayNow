@@ -9,6 +9,7 @@ class Api::V1::OrdersController < ActionController::API
       @order.final_customer = @final_customer
       set_boleto_price
       @order.save!
+      @order.order_histories.create
       render json: @order.as_json(except: [:id, :created_at, :updated_at, 
                                            :card_number, :printed_name, 
                                            :verification_code, :company_id, 
@@ -23,6 +24,7 @@ class Api::V1::OrdersController < ActionController::API
       @order.final_customer = @final_customer
       set_card_price
       @order.save!
+      @order.order_histories.create
       render json: @order.as_json(except: [:id, :created_at, :updated_at, 
                                            :adress, :company_id, :product_id, 
                                            :final_customer_id], 
@@ -36,6 +38,7 @@ class Api::V1::OrdersController < ActionController::API
       @order.final_customer = @final_customer
       set_pix_price
       @order.save!
+      @order.order_histories.create
       render json: @order.as_json(except: [:id, :created_at, :updated_at, 
                                            :adress, :card_number, :printed_name, 
                                            :verification_code, :company_id, 

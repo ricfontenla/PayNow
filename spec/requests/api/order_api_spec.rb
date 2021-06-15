@@ -52,6 +52,7 @@ describe "Orders API" do
       expect(parsed_body['company']['token']).to eq(Company.last.token)
       expect(parsed_body['product']['token']).to eq(Product.last.token)
       expect(parsed_body['final_customer']['token']).to eq(FinalCustomer.last.token)
+      expect(Order.last.order_histories.count).to eq(1)
     end
 
     it 'and should create a new order for card and associate with company and final customer' do
@@ -106,6 +107,7 @@ describe "Orders API" do
       expect(parsed_body['company']['token']).to eq(Company.last.token)
       expect(parsed_body['product']['token']).to eq(Product.last.token)
       expect(parsed_body['final_customer']['token']).to eq(FinalCustomer.last.token)
+      expect(Order.last.order_histories.count).to eq(1)
     end
 
     it 'and should create a new order for pix and associate with company and final customer' do
@@ -155,6 +157,7 @@ describe "Orders API" do
       expect(parsed_body['company']['token']).to eq(Company.last.token)
       expect(parsed_body['product']['token']).to eq(Product.last.token)
       expect(parsed_body['final_customer']['token']).to eq(FinalCustomer.last.token)
+      expect(Order.last.order_histories.count).to eq(1)
     end
 
     it 'and company not found' do
