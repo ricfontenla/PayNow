@@ -34,4 +34,12 @@ describe 'admin authentication' do
       expect(response).to redirect_to(new_admin_session_path)
     end
   end
+
+  context 'for orders' do
+    it 'and cannot access update without login' do
+      put admin_company_order_path(1, 1)
+      
+      expect(response).to redirect_to(new_admin_session_path)
+    end
+  end
 end

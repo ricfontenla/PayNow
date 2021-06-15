@@ -1,23 +1,20 @@
 class Admin::OrdersController < Admin::AdminController
+  before_action :authenticate_admin!, only: [:index, :show, :edit, :update]
+  before_action :set_company, only: [:index, :show, :edit, :update]
+  before_action :set_order, only: [:show, :edit, :update]
+
   def index
-    @company = Company.find(params[:company_id])
     @orders = @company.orders.order(id: :desc)
   end
 
   def show
-    @company = Company.find(params[:company_id])
-    @order = Order.find(params[:id])
   end
 
   def edit
-    @company = Company.find(params[:company_id])
-    @order = Order.find(params[:id])
     response_list
   end
 
   def update
-    @company = Company.find(params[:company_id])
-    @order = Order.find(params[:id])
     @order_history = @order.order_histories.new(order_histories_params)
     if @order.update(order_params) && @order_history.save
       flash[:notice] = t('.success')
@@ -41,5 +38,13 @@ class Admin::OrdersController < Admin::AdminController
                       '09 - Cobrança recusada por falta de créditos', 
                       '10 - Cobrança recusada por dados incorretos para cobrança', 
                       '11 - Cobrança recusada sem motivo especificado']
+  end
+
+  def set_company
+    @company = Company.find(params[:company_id])
+  end
+
+  def set_order
+    @order = Order.find(params[:id])
   end
 end
