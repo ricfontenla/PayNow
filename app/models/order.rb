@@ -4,6 +4,7 @@ class Order < ApplicationRecord
   belongs_to :product
 
   has_many :order_histories
+  has_one :receipt
 
   enum choosen_payment: { boleto: 1, card: 2, pix: 3 }
   enum status: { pendente: 1, aprovado: 2 }

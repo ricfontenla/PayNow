@@ -18,6 +18,7 @@ class Admin::OrdersController < Admin::AdminController
   def update
     @order_history = @order.order_histories.new(order_histories_params)
     if @order.update(order_params) && @order_history.save
+      Receipt.create(order: @order) if @order.aprovado?
       flash[:notice] = t('.success')
       redirect_to admin_company_order_path(@company, @order)
     end

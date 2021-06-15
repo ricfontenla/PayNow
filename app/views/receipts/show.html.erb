@@ -1,0 +1,37 @@
+<h1><%= @receipt.order.company.name %></h1>
+<hr class="my-4">
+
+<dl>
+  <dt>CNPJ:</dt>
+  <dd><%= @receipt.order.company.cnpj %></dd>
+
+  <dt>CNPJ:</dt>
+  <dd><%= @receipt.order.company.billing_adress %></dd>
+
+  <dt>Nome do cliente:</dt>
+  <dd><%= @receipt.order.final_customer.name %></dd>
+
+  <dt>CPF do cliente:</dt>
+  <dd><%= @receipt.order.final_customer.cpf %></dd>
+
+  <dt>Produto:</dt>
+  <dd><%= @receipt.order.product.name %></dd>
+
+  <dt>Preço do produto:</dt>
+  <dd><%= number_to_currency @receipt.order.original_price %></dd>
+
+  <dt>Preço com desconto:</dt>
+  <dd><%= number_to_currency @receipt.order.final_price %></dd>
+
+  <dt>Forma de pagamento escolhida:</dt>
+  <dd><%= Order.human_attribute_name("choosen_payment.#{@receipt.order.choosen_payment}") %></dd>
+
+  <dt>Vencimento da cobrança:</dt>
+  <dd><%= I18n.l @receipt.order.order_histories.first.created_at.to_date.next_month %></dd>
+
+  <dt>Data do pagamento:</dt>
+  <dd><%= I18n.l @receipt.order.order_histories.first.created_at, format: :long %></dd>
+
+  <dt>Código do recibo:</dt>
+  <dd><%= @receipt.token %></dd>
+</dl>
