@@ -388,4 +388,135 @@ describe "Orders API" do
       expect(response.body).to include('Parâmetros Inválidos')
     end
   end
+
+  context 'GET api/v1/orders/:id' do
+    it 'it should get order' do
+      company = Company.create!(email_domain: 'codeplay.com.br', 
+                                cnpj: '00000000000000', 
+                                name: 'Codeplay Cursos SA', 
+                                billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
+                                billing_email: 'financas@codeplay.com.br')
+      final_customer = FinalCustomer.create!(name: 'Fulano Sicrano',
+                                             cpf: '54321012345')
+      CompanyFinalCustomer.create!(company: company,
+                                   final_customer: final_customer)
+      product1 = Product.create!(name: 'Curso Ruby Básico',
+                                 price:100,
+                                 pix_discount: 10,
+                                 card_discount: 0,
+                                 boleto_discount: 5, 
+                                 company: company)
+      product2 = Product.create!(name: 'Curso HTML5',
+                                 price:75,
+                                 pix_discount: 10,
+                                 card_discount: 0,
+                                 boleto_discount: 5, 
+                                 company: company)
+      boleto = PaymentMethod.create!(name: 'Boleto do Banco Laranja', 
+                                   billing_fee: 2.5, 
+                                   max_fee: 100.0,
+                                   status: true,
+                                   category: :boleto)
+      BoletoAccount.create!(bank_code:  479,
+                            agency_number:  1234,
+                            bank_account: 123456789,
+                            company: company,
+                            payment_method: boleto)
+      Order.create!(original_price: 100.0, 
+                    final_price: 95.0, 
+                    choosen_payment: "boleto",
+                    adress: "fulano_sicrano@gmail.com", 
+                    company: company, 
+                    final_customer: final_customer, 
+                    product: product1)
+      Order.create!(original_price: 75.0, 
+                    final_price: 75.0, 
+                    choosen_payment: "card",
+                    card_number: "9876543210123456",
+                    verification_code: '000',
+                    printed_name: 'Fulano Sicrano',
+                    company: company, 
+                    final_customer: final_customer, 
+                    product: product2)
+
+      get "/api/v1/orders/", params: 
+      {
+        company: { token: Company.last.token },
+        created_at: Date.current,
+        choosen_payment: 'boleto'
+      }
+      
+      expect(response.content_type).to include('application/json')
+      expect(response).to have_http_status(200)
+      expect(parsed_body[0]['token']).to eq(Order.first.token)
+      expect(parsed_body[0]['status']).to eq('pendente')
+      expect(parsed_body[0]['original_price']).to eq('100.0')
+      expect(parsed_body[0]['final_price']).to eq('95.0')
+      expect(parsed_body[0]['choosen_payment']).to eq('boleto')
+      expect(parsed_body[0]['adress']).to eq('fulano_sicrano@gmail.com')
+      expect(parsed_body[0]['adress']).to eq('fulano_sicrano@gmail.com')
+      expect(parsed_body[0]['company']['token']).to eq(Company.first.token)
+      expect(parsed_body[0]['product']['token']).to eq(Product.first.token)
+      expect(parsed_body[0]['final_customer']['token']).to eq(FinalCustomer.first.token)
+    end
+
+    it 'wrong or missing company token' do
+      get "/api/v1/orders/", params: 
+      {
+        company: { token: '' },
+        created_at: Date.current,
+        choosen_payment: 'boleto'
+      }
+
+      expect(response.content_type).to include('application/json')
+      expect(response).to have_http_status(404)
+      expect(response.body).to include('Token Inválido')
+    end
+
+    it 'and no results match' do
+      company = Company.create!(email_domain: 'codeplay.com.br', 
+                                cnpj: '00000000000000', 
+                                name: 'Codeplay Cursos SA', 
+                                billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
+                                billing_email: 'financas@codeplay.com.br')
+      final_customer = FinalCustomer.create!(name: 'Fulano Sicrano',
+                                             cpf: '54321012345')
+      CompanyFinalCustomer.create!(company: company,
+                                   final_customer: final_customer)
+      product1 = Product.create!(name: 'Curso Ruby Básico',
+                                 price:100,
+                                 pix_discount: 10,
+                                 card_discount: 0,
+                                 boleto_discount: 5, 
+                                 company: company)
+      boleto = PaymentMethod.create!(name: 'Boleto do Banco Laranja', 
+                                   billing_fee: 2.5, 
+                                   max_fee: 100.0,
+                                   status: true,
+                                   category: :boleto)
+      BoletoAccount.create!(bank_code:  479,
+                            agency_number:  1234,
+                            bank_account: 123456789,
+                            company: company,
+                            payment_method: boleto)
+      Order.create!(original_price: 100.0, 
+                    final_price: 95.0, 
+                    choosen_payment: "boleto",
+                    adress: "fulano_sicrano@gmail.com", 
+                    company: company, 
+                    final_customer: final_customer, 
+                    product: product1)
+
+      get "/api/v1/orders/", params: 
+      {
+        company: { token: company.token },
+        created_at: nil,
+        choosen_payment: nil
+      }
+
+      expect(response.content_type).to include('application/json')
+      expect(response).to have_http_status(200)
+      expect(response.body).to include('Nenhum resultado encontrado')
+    end
+  end
 end

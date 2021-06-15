@@ -201,3 +201,48 @@ Exemplo:
 	message: 'Token Inválido'
 }
 ```
+#### __get '/api/v1/orders'__
+* o endpoint para consulta de pedidos por tipo de pagamento e data de criação, espera os seguintes parametros:
+```
+{
+  company: { token: Token da empresa que deseja consultar },
+  created_at: Data a partir da qual deseja verificar,
+  choosen_payment: tipo de pagamento que deseja verificar
+}
+```
+#### Possíveis Respostas
+* HTTP Status: 200 - Busca realizada com sucesso.
+
+Exemplo:
+```
+[{
+	token: "PpfEBEbdRXGEhc5MX3sP",
+	status: "pendente", 
+	original_price: "100.0", 
+	final_price: "95.0", 
+	choosen_payment: "boleto", 
+	adress: "fulano_sicrano@gmail.com", 
+	card_number: null,
+	printed_name: null,
+	verification_code: null, 
+	created_at: "2021-06-15T20:29:21.921-03:00", 
+	updated_at: "2021-06-15T20:29:21.921-03:00",
+	company: { token: "uHaEH7qwA4Aad7voit1Y" },
+	product: { token: "NwriBSnC7jVNyF4WFpgi" },
+	final_customer: { token: "wGQxV4EeepNFS2Suo2Xk" }
+}]
+```
+* HTTP Status: 200 - Busca realizada com sucesso, mas sem resultados
+```
+{ 
+	message: 'Nenhum resultado encontrado' 
+}
+```
+* HTTP Status: 404 - Token Inválido (da empresa)
+
+Exemplo:
+```
+{
+	message: 'Token Inválido'
+}
+```

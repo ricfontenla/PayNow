@@ -1,4 +1,19 @@
 class Api::V1::OrdersController < ActionController::API
+
+  def index
+    @company = Company.find_by!(token: params[:company][:token])
+    @orders = @company.orders.where(created_at: params[:created_at].., choosen_payment: params[:choosen_payment])
+    render json: { message: 'Nenhum resultado encontrado' } and return unless @orders.any?
+    render json: @orders.as_json(except: [:id, :company_id, :product_id, :final_customer_id],
+                                 include: { 
+                                            company: { only: [:token] },
+                                            product: { only: [:token] },
+                                            final_customer: { only: [:token] 
+                                          }})
+  rescue ActiveRecord::RecordNotFound
+    render json: { message: 'Token Inválido' }, status: 404
+  end
+
   def create
     @company = Company.find_by!(token: params[:order][:company_token])
     @product = @company.products.find_by!(token: params[:order][:product_token])
