@@ -71,6 +71,23 @@ class Api::V1::OrdersController < ActionController::API
     render json: { message: 'Token Inválido' }, status: 412
   end
 
+  def update
+    @order = Order.find_by!(token: params[:token])
+    if @order.update!(update_order_params)
+      @order.order_histories.create!(order_history_params)
+      render json: @order.as_json(except: [:id, :company_id, :final_customer_id, 
+                                           :product_id, :created_at, :updated_at],
+                                  include: { company: { only: [:token] }, 
+                                             product: { only: [:token] },
+                                             final_customer: { only: [:token] },
+                                             order_histories: { only: [:response_code] }})
+    end
+  rescue ActiveRecord::RecordNotFound
+    render json: { message: 'Token Inválido' }, status: 404
+  rescue ActiveRecord::RecordInvalid
+    render json: { message: 'Parâmetros Inválidos' }, status: 412
+  end
+
   private
 
   def order_boleto_params
@@ -99,5 +116,13 @@ class Api::V1::OrdersController < ActionController::API
   def set_pix_price
     @order.original_price = @product.price
     @order.final_price = @product.price - (@product.price * @product.pix_discount/100)
+  end
+
+  def update_order_params
+    params.require(:order).permit(:status)
+  end
+
+  def order_history_params
+    params.require(:order).permit(:status, :response_code)
   end
 end

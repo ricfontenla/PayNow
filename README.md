@@ -246,3 +246,49 @@ Exemplo:
 	message: 'Token Inválido'
 }
 ```
+#### __put "/api/v1/orders/#{order.token}"__
+* o endpoint para atualizar do status de pedidos , espera os seguintes parametros:
+```
+{
+  order: {
+          status: Status a ser enviado
+          response_code: Código do banco referente ao status do pagamento
+         }
+}
+```
+* HTTP Status: 200 - Status atualizado com sucesso:
+
+Exemplo:
+```
+{
+	status: "aprovado",
+	choosen_payment: "boleto",
+	token: "aBv7Faaq3r3jK8Bp5Uvs",
+	original_price: "100.0",
+	final_price: "95.0",
+	adress: "fulano_sicrano@gmail.com",
+	card_number: nil,
+	printed_name: nil,
+	verification_code: nil,
+	company: { token: "428VxSpNtsqM6K8hX81k" },
+	product: {token: "LMnxyjwMXS5PuR4qAjev"}, 
+	final_customer: { token: "hnEQzZW3agK5iCmYw8f1" }, 
+	order_histories: [{ response_code: "05 - Cobrança efetivada com sucesso" }]
+}
+	```
+* HTTP Status: 404 - Token Inválido (da compra)
+
+Exemplo:
+```
+{
+	message: "Token Inválido"
+}
+```
+* HTTP Status: 412 - Parâmetros Inválidos
+
+Exemplo:
+```
+{
+	message: "Parâmetros Inválidos"
+}
+```
