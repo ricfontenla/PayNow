@@ -28,6 +28,7 @@ it 'successfully' do
     expect(current_path).to eq(user_company_path(Company.last.token))
     expect(page).to have_content('Novo token gerado com sucesso')
     expect(page).to have_content(Company.last.token)
+    expect(Company.last.company_histories.last.token).to eq(Company.last.token)
   end
 
   it 'and fields cannot be blank' do
@@ -64,5 +65,22 @@ it 'successfully' do
 
     expect(page).to_not have_content('Gerar novo token')
     expect(page).to_not have_content('Atualizar dados')
+  end
+
+  it 'and generates a new company history' do
+    user_customer_admin_login
+
+    visit root_path
+    click_on 'Minha Empresa'
+    click_on 'Atualizar dados'
+    fill_in 'Endereço de cobrança', with: 'Rua Abacaxi, numero 11 - Bairro Maça, 55555-555'
+    fill_in 'Email de cobrança', with: 'cobrancas@paynow.com.br'
+    click_on 'Atualizar'
+    
+    expect(Company.last.company_histories.last.name).to eq('Codeplay Cursos SA')
+    expect(Company.last.company_histories.last.cnpj).to eq('00000000000000')
+    expect(Company.last.company_histories.last.billing_adress).to eq('Rua Abacaxi, numero 11 - Bairro Maça, 55555-555')
+    expect(Company.last.company_histories.last.billing_email).to eq('cobrancas@paynow.com.br')
+    expect(Company.last.company_histories.last.token).to eq(Company.last.token)
   end
 end

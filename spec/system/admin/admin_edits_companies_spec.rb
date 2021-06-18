@@ -45,6 +45,7 @@ describe 'admin edits company' do
     expect(page).to have_content('Novo token gerado com sucesso')
     expect(page).to have_content(Company.last.token)
     expect(Company.last.token).to_not eq(first_token)
+    expect(company.company_histories.last.token).to eq(Company.last.token)
   end
 
   it 'and fields cannot be blank' do
@@ -102,5 +103,29 @@ describe 'admin edits company' do
     click_on 'Atualizar Dados'
 
     expect(page).to have_content('não possui o tamanho esperado')
+  end
+
+  it 'and generates a company history' do
+    company = Company.create!(email_domain: 'codeplay.com.br', 
+                              cnpj: '00000000000000', 
+                              name: 'Codeplay SA', 
+                              billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
+                              billing_email: 'financas@codeplay.com.br')
+
+    admin_login
+    visit root_path
+    click_on 'Clientes'
+    click_on 'Codeplay SA'
+    click_on 'Atualizar dados'
+    fill_in 'Nome', with: 'Codeplay Cursos SA'
+    fill_in 'CNPJ', with: '12345678987654'
+    fill_in 'Endereço de cobrança', with: 'Rua Batata Palha, número 9 - Bairro Strogonoff, 99999-777'
+    fill_in 'Email de cobrança', with: 'cobrancas@codeplay.com.br'
+    click_on 'Atualizar Dados'
+
+    expect(company.company_histories.last.name).to eq('Codeplay Cursos SA')
+    expect(company.company_histories.last.cnpj).to eq('12345678987654')
+    expect(company.company_histories.last.billing_adress).to eq('Rua Batata Palha, número 9 - Bairro Strogonoff, 99999-777')
+    expect(company.company_histories.last.billing_email).to eq('cobrancas@codeplay.com.br')
   end
 end

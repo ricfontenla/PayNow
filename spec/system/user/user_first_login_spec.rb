@@ -51,6 +51,23 @@ describe "user logins for the first time" do
 
       expect(page).to have_content('já está em uso', count: 4)
     end
+
+    it 'and generates a company history' do
+      user_first_login
+      visit root_path
+      click_on 'Cadastre sua Empresa'
+      fill_in 'Nome', with: 'Codeplay Cursos SA'
+      fill_in 'CNPJ', with: '00000000000000'
+      fill_in 'Endereço de cobrança', with: 'Rua banana, numero 00 - Bairro Laranja, 00000-000'
+      fill_in 'Email de cobrança', with: 'financas@codeplay.com.br'
+      click_on 'Cadastrar'
+
+      expect(Company.last.company_histories.last.name).to eq('Codeplay Cursos SA')
+      expect(Company.last.company_histories.last.cnpj).to eq('00000000000000')
+      expect(Company.last.company_histories.last.billing_adress).to eq('Rua banana, numero 00 - Bairro Laranja, 00000-000')
+      expect(Company.last.company_histories.last.billing_email).to eq('financas@codeplay.com.br')
+      expect(Company.last.company_histories.last.token).to eq(Company.last.token)
+    end
   end
 
   context 'and his company is already registered' do

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_15_184029) do
+ActiveRecord::Schema.define(version: 2021_06_18_193302) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -92,6 +92,18 @@ ActiveRecord::Schema.define(version: 2021_06_15_184029) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["company_id"], name: "index_company_final_customers_on_company_id"
     t.index ["final_customer_id"], name: "index_company_final_customers_on_final_customer_id"
+  end
+
+  create_table "company_histories", force: :cascade do |t|
+    t.string "name"
+    t.string "cnpj"
+    t.string "billing_adress"
+    t.string "billing_email"
+    t.string "token"
+    t.integer "company_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_company_histories_on_company_id"
   end
 
   create_table "final_customers", force: :cascade do |t|
@@ -197,6 +209,7 @@ ActiveRecord::Schema.define(version: 2021_06_15_184029) do
   add_foreign_key "card_accounts", "payment_methods"
   add_foreign_key "company_final_customers", "companies"
   add_foreign_key "company_final_customers", "final_customers"
+  add_foreign_key "company_histories", "companies"
   add_foreign_key "order_histories", "orders"
   add_foreign_key "orders", "companies"
   add_foreign_key "orders", "final_customers"
