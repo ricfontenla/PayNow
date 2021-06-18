@@ -2,8 +2,14 @@ class Api::V1::OrdersController < ActionController::API
 
   def index
     @company = Company.find_by!(token: params[:company][:token])
-    @orders = @company.orders.where(created_at: params[:created_at].., choosen_payment: params[:choosen_payment])
-    render json: { message: 'Nenhum resultado encontrado' } and return unless @orders.any?
+    if params[:created_at] && params[:choosen_payment]
+      @orders = @company.orders.by_date(params[:created_at]).by_type(params[:choosen_payment])
+    elsif params[:created_at] && (params[:choosen_payment] == nil)
+      @orders = @company.orders.by_date(params[:created_at])
+    elsif params[:choosen_payment] && (params[:created_at] == nil)
+      @orders = @company.orders.by_type(params[:choosen_payment])
+    end
+    render json: { message: 'Nenhum resultado encontrado' } and return unless @orders
     render json: @orders.as_json(except: [:id, :company_id, :product_id, :final_customer_id],
                                  include: { 
                                             company: { only: [:token] },

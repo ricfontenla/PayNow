@@ -23,6 +23,9 @@ class Order < ApplicationRecord
   validates :card_number,  length: { is: 16 }, if: :card?
   validates :verification_code,  length: { is: 3 }, if: :card?
 
+  scope :by_date, ->(date) { where(created_at: date..) }
+  scope :by_type, ->(type) { where(choosen_payment: type) }
+
   private
 
   def generate_token
