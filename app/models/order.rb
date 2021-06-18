@@ -10,6 +10,7 @@ class Order < ApplicationRecord
   enum status: { pendente: 1, aprovado: 2 }
 
   before_validation :generate_token
+  after_create :create_history
 
   ONLY_NUMBERS =  /\A[0-9]+\Z/
 
@@ -31,5 +32,9 @@ class Order < ApplicationRecord
       generate_token if duplicity.any?
       self.token = new_token 
     end
+  end
+
+  def create_history
+    self.order_histories.create
   end
 end

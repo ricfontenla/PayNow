@@ -574,7 +574,7 @@ describe "Orders API" do
       expect(parsed_body['company']['token']).to eq(Company.last.token)
       expect(parsed_body['product']['token']).to eq(Product.last.token)
       expect(parsed_body['final_customer']['token']).to eq(FinalCustomer.last.token)
-      expect(parsed_body['order_histories'][0]['response_code']).to eq('05 - Cobrança efetivada com sucesso')
+      expect(parsed_body['order_histories'][1]['response_code']).to eq('05 - Cobrança efetivada com sucesso')
     end
 
     it 'and wrong or missing order token' do
