@@ -57,4 +57,22 @@ describe 'user creates product' do
 
     expect(page).to have_content('já está em uso')
   end
+
+  it 'and generates an product history' do
+    user_customer_admin_login
+    visit user_company_products_path(Company.last.token)
+    click_on 'Cadastrar novo Produto'
+    fill_in 'Nome', with: 'Curso Ruby'
+    fill_in'Preço', with: 100
+    fill_in'Desconto PIX', with: 10
+    fill_in'Desconto cartão', with: 0
+    fill_in'Desconto boleto', with: 5
+    click_on 'Enviar'
+
+    expect(Product.last.product_histories.last.name).to eq('Curso Ruby')
+    expect(Product.last.product_histories.last.price).to eq(0.1e3)
+    expect(Product.last.product_histories.last.pix_discount).to eq(0.1e2)
+    expect(Product.last.product_histories.last.card_discount).to eq(0.0)
+    expect(Product.last.product_histories.last.boleto_discount).to eq(0.5e1)
+  end
 end

@@ -1,6 +1,7 @@
 class Product < ApplicationRecord
   belongs_to :company
   has_many :orders
+  has_many :product_histories, dependent: :destroy
 
   before_validation :generate_token
 
@@ -9,6 +10,8 @@ class Product < ApplicationRecord
   validates :price, :pix_discount, :card_discount, :boleto_discount, 
             numericality: { greater_than_or_equal_to: 0 }
 
+  after_create :create_history
+  after_update :create_history
 
   private
   def generate_token
@@ -18,5 +21,12 @@ class Product < ApplicationRecord
       generate_token if duplicity.any?
       self.token = new_token    
     end
+  end
+
+  def create_history
+    self.product_histories.create(name: self.name, price: self.price, 
+                                  pix_discount: self.pix_discount, 
+                                  card_discount: self.card_discount, 
+                                  boleto_discount: self.boleto_discount)
   end
 end
