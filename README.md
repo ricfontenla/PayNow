@@ -275,7 +275,7 @@ Exemplo:
 	final_customer: { token: "hnEQzZW3agK5iCmYw8f1" }, 
 	order_histories: [{ response_code: "05 - Cobrança efetivada com sucesso" }]
 }
-	```
+```
 * HTTP Status: 404 - Token Inválido (da compra)
 
 Exemplo:
