@@ -8,6 +8,7 @@
           new_payment_method: 'Novo Método de Pagamento'
           my_payment_methods: 'Meus Métodos de Pagamento'
           my_products: 'Meus Produtos'
+          my_orders: 'Minhas Vendas'
         new:
           title: 'Seja um cliente da PayNow'
           submit: 'Cadastrar'

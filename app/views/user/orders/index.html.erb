@@ -1,0 +1,33 @@
+
+<h1><%= t('.title') %></h1>
+<hr class="my-4">
+
+<%= link_to t('.last_30_days'), user_company_orders_path(@company.token), class: 'btn btn-dark' %>
+<%= link_to t('.last_90_days'), last_90_days_user_company_orders_path(@company.token), class: 'btn btn-dark' %>
+<%= link_to t('.all_orders'), all_orders_user_company_orders_path(@company.token), class: 'btn btn-dark' %>
+
+<% if @orders.any? %>
+  <% @orders.each do |order| %>
+    <dl>
+      <dt>Produto:</dt>
+      <dd><%= order.product.name %></dd>
+
+      <dt>Preço original:</dt>
+      <dd><%= number_to_currency order.original_price %></dd>
+
+      <dt>Preço com desconto:</dt>
+      <dd><%= number_to_currency order.final_price %></dd>
+
+      <dt>Método de pagamento escolhido</dt>
+      <dd><%= order.choosen_payment %></dd>
+
+      <dt>Status da cobrança:</dt>
+      <dd><%= order.status %></dd>
+
+      <dt>Data da venda:</dt>
+      <dd><%= I18n.l order.created_at, format: :long %></dd>
+    </dl>
+  <% end %>
+<% else %>
+  <p>Nenhuma venda registrada para este filtro</p>
+<% end %>

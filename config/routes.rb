@@ -22,6 +22,10 @@ Rails.application.routes.draw do
         resources :pix_accounts, only: [:new, :create, :edit, :update, :destroy]
       end
       resources :products
+      resources :orders, only: [:index] do
+        get 'last_90_days', on: :collection
+        get 'all_orders', on: :collection
+      end
     end
   end
 
