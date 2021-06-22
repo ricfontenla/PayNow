@@ -44,8 +44,18 @@
 <h3 class="py-3">Membros da empresa:</h3>
 <div>
   <% @company.users.each do |user| %>
-    <h5><%= user.email %></h5>
-    <p><%= User.human_attribute_name("role.#{user.role}") %></p>
-    <p><%= user.status ? 'Ativo' : 'Inativo' %></p>
+    <div class="row justify-content-start">
+      <div class="col-4">
+        <h5><%= user.email %></h5>
+        <p><%= User.human_attribute_name("role.#{user.role}") %></p>
+        <p><%= user.status ? 'Ativo' : 'Inativo' %></p>
+      </div>
+      <% unless user.customer_admin? %>
+        <div class="col-4">
+          <%= link_to t('.change_status'), user_company_user_path(@company.token, user), 
+                method: :put, data: { confirm: 'Tem certeza?' }, class: 'btn btn-dark' %>
+        </div>
+      <% end %>
+    </div>
   <% end %>
 <div>

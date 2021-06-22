@@ -23,4 +23,13 @@ describe 'user authentication' do
       expect(response).to redirect_to(root_path)
     end
   end
+
+  context 'for users' do
+    it 'cannot access update if not customer admin' do
+      user_customer_login
+      put user_company_user_path(1, 1)
+
+      expect(response).to redirect_to(root_path)
+    end
+  end
 end

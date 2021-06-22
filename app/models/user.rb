@@ -13,6 +13,10 @@ class User < ApplicationRecord
 
   enum role: { customer: 0, customer_admin: 10 }
 
+  def active_for_authentication?
+    super && status?
+  end
+
   private
   def verify_user_email_domain 
     domain = self.email.split('@').last

@@ -9,6 +9,7 @@
           my_payment_methods: 'Meus Métodos de Pagamento'
           my_products: 'Meus Produtos'
           my_orders: 'Minhas Vendas'
+          change_status: 'Alterar status'
         new:
           title: 'Seja um cliente da PayNow'
           submit: 'Cadastrar'

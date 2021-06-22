@@ -100,4 +100,12 @@ describe 'user authentication' do
       expect(response).to redirect_to(new_user_session_path)
     end
   end
+
+  context 'for users' do
+    it 'cannot access update without login' do
+      put user_company_user_path(1, 1)
+
+      expect(response).to redirect_to(new_user_session_path)
+    end
+  end
 end
