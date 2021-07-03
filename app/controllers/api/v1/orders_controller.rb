@@ -21,6 +21,9 @@ class Api::V1::OrdersController < ActionController::API
   end
 
   def create
+    unless params[:order]
+      return render json: { message: 'Parâmetros Inválidos' }, status: 412
+    end
     @company = Company.find_by!(token: params[:order][:company_token])
     @product = @company.products.find_by!(token: params[:order][:product_token])
     @final_customer = @company.final_customers.find_by!(token: params[:order][:final_customer_token])

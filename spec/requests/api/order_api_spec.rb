@@ -387,6 +387,14 @@ describe "Orders API" do
       expect(response).to have_http_status(412)
       expect(response.body).to include('Parâmetros Inválidos')
     end
+
+    it 'and params cannot be blank' do
+      post '/api/v1/orders', params: { }
+
+      expect(response.content_type).to include('application/json')
+      expect(response).to have_http_status(412)
+      expect(response.body).to include('Parâmetros Inválidos')
+    end
   end
 
   context 'GET api/v1/orders/:id' do
