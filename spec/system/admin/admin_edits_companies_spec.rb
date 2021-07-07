@@ -7,7 +7,7 @@ describe 'admin edits company' do
     admin_login
     visit root_path
     click_on 'Clientes'
-    click_on 'Codeplay SA'
+    click_on 'Codeplay Cursos SA'
     click_on 'Atualizar dados'
     fill_in 'Nome', with: 'Codeplay Cursos SA'
     fill_in 'CNPJ', with: '12345678987654'
