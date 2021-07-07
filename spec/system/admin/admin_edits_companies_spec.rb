@@ -2,11 +2,7 @@ require 'rails_helper'
 
 describe 'admin edits company' do
   it 'sucessfully' do
-    Company.create!(email_domain: 'codeplay.com.br', 
-                    cnpj: '00000000000000', 
-                    name: 'Codeplay SA', 
-                    billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
-                    billing_email: 'financas@codeplay.com.br')
+    create(:company)
 
     admin_login
     visit root_path
