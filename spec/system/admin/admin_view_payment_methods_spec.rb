@@ -1,22 +1,22 @@
 require 'rails_helper'
 
-describe "Admin view payment methods" do
+describe 'Admin view payment methods' do
   it 'sucessfully' do
-    boleto = PaymentMethod.create!(name: 'Boleto do Banco Laranja', 
-                                   billing_fee: 2.5, 
-                                   max_fee: 100.0,
-                                   status: true,
-                                   category: :boleto)
-    card = PaymentMethod.create!(name: 'PISA', 
-                                 billing_fee: 5, 
-                                 max_fee: 250,
-                                 status: false,
-                                 category: 2)
+    PaymentMethod.create!(name: 'Boleto do Banco Laranja',
+                          billing_fee: 2.5,
+                          max_fee: 100.0,
+                          status: true,
+                          category: :boleto)
+    PaymentMethod.create!(name: 'PISA',
+                          billing_fee: 5,
+                          max_fee: 250,
+                          status: false,
+                          category: 2)
 
     admin_login
     visit root_path
     click_on 'Métodos de Pagamento'
-    
+
     expect(page).to have_content('Gerenciar Métodos de Pagamentos')
     expect(page).to have_content('Boleto do Banco Laranja')
     expect(page).to have_content('Ativo')
@@ -27,21 +27,21 @@ describe "Admin view payment methods" do
   end
 
   it 'and view details' do
-    boleto = PaymentMethod.create!(name: 'Boleto do Banco Laranja', 
-                                   billing_fee: 2.5, 
-                                   max_fee: 100.0,
-                                   status: true,
-                                   category: :boleto)
-    card = PaymentMethod.create!(name: 'PISA', 
-                                 billing_fee: 5, 
-                                 max_fee: 250,
-                                 status: false,
-                                 category: 2)
+    PaymentMethod.create!(name: 'Boleto do Banco Laranja',
+                          billing_fee: 2.5,
+                          max_fee: 100.0,
+                          status: true,
+                          category: :boleto)
+    PaymentMethod.create!(name: 'PISA',
+                          billing_fee: 5,
+                          max_fee: 250,
+                          status: false,
+                          category: 2)
 
     admin_login
     visit admin_payment_methods_path
     click_on 'PISA'
-    
+
     expect(page).to have_content('PISA')
     expect(page).to_not have_content('Boleto')
     expect(page).to have_content('5,0')

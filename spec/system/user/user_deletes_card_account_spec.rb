@@ -2,17 +2,17 @@ require 'rails_helper'
 
 describe 'user deletes card account' do
   it 'successfully' do
-    company = Company.create!(email_domain: 'codeplay.com.br', 
-                          cnpj: '00000000000000', 
-                          name: 'Codeplay Cursos SA', 
-                          billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
-                          billing_email: 'financas@codeplay.com.br')
-    user =  User.create!(email: 'john_doe@codeplay.com.br', 
+    company = Company.create!(email_domain: 'codeplay.com.br',
+                              cnpj: '00000000000000',
+                              name: 'Codeplay Cursos SA',
+                              billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
+                              billing_email: 'financas@codeplay.com.br')
+    user =  User.create!(email: 'john_doe@codeplay.com.br',
                          password: '123456',
                          role: 10,
                          company: company)
-    card = PaymentMethod.create!(name: 'PISA', 
-                                 billing_fee: 5, 
+    card = PaymentMethod.create!(name: 'PISA',
+                                 billing_fee: 5,
                                  max_fee: 250,
                                  status: true,
                                  category: 2)

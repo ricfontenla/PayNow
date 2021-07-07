@@ -1,14 +1,12 @@
 class Admin::PaymentMethodsController < Admin::AdminController
   before_action :authenticate_admin!
-  before_action :set_payment_method, only: [:show, :edit, :update, :destroy]
-  
+  before_action :set_payment_method, only: %i[show edit update destroy]
 
   def index
     @payment_methods = PaymentMethod.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @payment_method = PaymentMethod.new
@@ -23,8 +21,7 @@ class Admin::PaymentMethodsController < Admin::AdminController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @payment_method.update(payment_method_update_params)

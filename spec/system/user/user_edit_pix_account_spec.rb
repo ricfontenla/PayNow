@@ -2,17 +2,17 @@ require 'rails_helper'
 
 describe 'User edits pix account' do
   it 'successfully' do
-    company = Company.create!(email_domain: 'codeplay.com.br', 
-                              cnpj: '00000000000000', 
-                              name: 'Codeplay Cursos SA', 
+    company = Company.create!(email_domain: 'codeplay.com.br',
+                              cnpj: '00000000000000',
+                              name: 'Codeplay Cursos SA',
                               billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
                               billing_email: 'financas@codeplay.com.br')
-    user =  User.create!(email: 'john_doe@codeplay.com.br', 
+    user =  User.create!(email: 'john_doe@codeplay.com.br',
                          password: '123456',
                          role: 10,
                          company: company)
-    pix = PaymentMethod.create!(name: 'PIX Banco Roxinho', 
-                                billing_fee: 1, 
+    pix = PaymentMethod.create!(name: 'PIX Banco Roxinho',
+                                billing_fee: 1,
                                 max_fee: 250,
                                 status: true,
                                 category: 3)
@@ -36,24 +36,24 @@ describe 'User edits pix account' do
   end
 
   it 'and fields cannot be blank' do
-    company = Company.create!(email_domain: 'codeplay.com.br', 
-                        cnpj: '00000000000000', 
-                        name: 'Codeplay Cursos SA', 
-                        billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
-                        billing_email: 'financas@codeplay.com.br')
-    user =  User.create!(email: 'john_doe@codeplay.com.br', 
+    company = Company.create!(email_domain: 'codeplay.com.br',
+                              cnpj: '00000000000000',
+                              name: 'Codeplay Cursos SA',
+                              billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
+                              billing_email: 'financas@codeplay.com.br')
+    user =  User.create!(email: 'john_doe@codeplay.com.br',
                          password: '123456',
                          role: 10,
                          company: company)
-    pix = PaymentMethod.create!(name: 'PIX Banco Roxinho', 
-                                billing_fee: 1, 
+    pix = PaymentMethod.create!(name: 'PIX Banco Roxinho',
+                                billing_fee: 1,
                                 max_fee: 250,
                                 status: true,
                                 category: 3)
     PixAccount.create!(pix_key: '12345abcde67890FGHIJ',
                        bank_code: '001',
                        company: company,
-                       payment_method: pix)       
+                       payment_method: pix)
 
     login_as user, scope: :user
     visit edit_user_company_payment_method_pix_account_path(company.token, pix, PixAccount.last.id)
@@ -67,13 +67,13 @@ describe 'User edits pix account' do
   end
 
   it 'and must be unique' do
-    company = Company.create!(email_domain: 'codeplay.com.br', 
-                              cnpj: '00000000000000', 
-                              name: 'Codeplay Cursos SA', 
+    company = Company.create!(email_domain: 'codeplay.com.br',
+                              cnpj: '00000000000000',
+                              name: 'Codeplay Cursos SA',
                               billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
                               billing_email: 'financas@codeplay.com.br')
-    pix = PaymentMethod.create!(name: 'PIX Banco Roxinho', 
-                                billing_fee: 1, 
+    pix = PaymentMethod.create!(name: 'PIX Banco Roxinho',
+                                billing_fee: 1,
                                 max_fee: 250,
                                 status: true,
                                 category: 3)
@@ -85,14 +85,14 @@ describe 'User edits pix account' do
                        bank_code: '246',
                        company: company,
                        payment_method: pix)
-    user = User.create!(email: 'jane_doe@codeplay.com.br', 
-                        password: '123456', 
+    user = User.create!(email: 'jane_doe@codeplay.com.br',
+                        password: '123456',
                         role: 0,
                         company: company)
 
     login_as user, scope: :user
     visit edit_user_company_payment_method_pix_account_path(Company.last.token, pix.id, PixAccount.last.id)
-     select '001 - Banco do Brasil S.A.', from: 'Código do banco'
+    select '001 - Banco do Brasil S.A.', from: 'Código do banco'
     fill_in 'Chave PIX', with: '12345abcde67890FGHIJ'
     click_on 'Enviar'
 

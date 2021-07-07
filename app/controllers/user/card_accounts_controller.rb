@@ -1,8 +1,8 @@
 class User::CardAccountsController < User::UserController
   before_action :authenticate_user!
   before_action :set_company
-  before_action :set_payment_method, only: [:new, :create, :edit, :update]
-  before_action :set_card_account, only: [:edit, :update, :destroy]
+  before_action :set_payment_method, only: %i[new create edit update]
+  before_action :set_card_account, only: %i[edit update destroy]
 
   def new
     @card_account = CardAccount.new
@@ -18,8 +18,7 @@ class User::CardAccountsController < User::UserController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @card_account.update(card_params)
@@ -37,6 +36,7 @@ class User::CardAccountsController < User::UserController
   end
 
   private
+
   def card_params
     params.require(:card_account).permit(:credit_code)
   end

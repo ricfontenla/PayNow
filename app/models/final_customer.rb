@@ -11,15 +11,15 @@ class FinalCustomer < ApplicationRecord
   validates :name, :cpf, :token, presence: true
   validates :cpf, length: { is: 11 }
   validates :cpf, :token, uniqueness: true
-  
+
   private
 
   def generate_token
-    unless self.token
+    unless token
       new_token = SecureRandom.base58(20)
       duplicity = FinalCustomer.where(token: new_token)
       generate_token if duplicity.any?
-      self.token = new_token    
+      self.token = new_token
     end
   end
 end

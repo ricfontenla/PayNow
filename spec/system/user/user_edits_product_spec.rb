@@ -2,20 +2,20 @@ require 'rails_helper'
 
 describe 'user edits product' do
   it 'successfully' do
-    company = Company.create!(email_domain: 'codeplay.com.br', 
-                              cnpj: '00000000000000', 
-                              name: 'Codeplay Cursos SA', 
+    company = Company.create!(email_domain: 'codeplay.com.br',
+                              cnpj: '00000000000000',
+                              name: 'Codeplay Cursos SA',
                               billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
                               billing_email: 'financas@codeplay.com.br')
-    user = User.create!(email: 'jane_doe@codeplay.com.br', 
-                        password: '123456', 
+    user = User.create!(email: 'jane_doe@codeplay.com.br',
+                        password: '123456',
                         role: 0,
                         company: company)
     Product.create!(name: 'Curso Ruby Básico',
-                    price:100,
+                    price: 100,
                     pix_discount: 10,
                     card_discount: 0,
-                    boleto_discount: 5, 
+                    boleto_discount: 5,
                     company: company)
 
     login_as user, scope: :user
@@ -38,20 +38,20 @@ describe 'user edits product' do
   end
 
   it 'and fields cannot be blank' do
-    company = Company.create!(email_domain: 'codeplay.com.br', 
-                              cnpj: '00000000000000', 
-                              name: 'Codeplay Cursos SA', 
+    company = Company.create!(email_domain: 'codeplay.com.br',
+                              cnpj: '00000000000000',
+                              name: 'Codeplay Cursos SA',
                               billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
                               billing_email: 'financas@codeplay.com.br')
-    user = User.create!(email: 'jane_doe@codeplay.com.br', 
-                        password: '123456', 
+    user = User.create!(email: 'jane_doe@codeplay.com.br',
+                        password: '123456',
                         role: 0,
                         company: company)
     Product.create!(name: 'Curso Ruby Básico',
-                    price:100,
+                    price: 100,
                     pix_discount: 10,
                     card_discount: 0,
-                    boleto_discount: 5, 
+                    boleto_discount: 5,
                     company: company)
 
     login_as user, scope: :user
@@ -69,26 +69,26 @@ describe 'user edits product' do
   end
 
   it 'and must be unique' do
-    company = Company.create!(email_domain: 'codeplay.com.br', 
-                              cnpj: '00000000000000', 
-                              name: 'Codeplay Cursos SA', 
+    company = Company.create!(email_domain: 'codeplay.com.br',
+                              cnpj: '00000000000000',
+                              name: 'Codeplay Cursos SA',
                               billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
                               billing_email: 'financas@codeplay.com.br')
-    user = User.create!(email: 'jane_doe@codeplay.com.br', 
-                        password: '123456', 
+    user = User.create!(email: 'jane_doe@codeplay.com.br',
+                        password: '123456',
                         role: 0,
                         company: company)
     Product.create!(name: 'Curso Ruby Básico',
                     price: 100,
                     pix_discount: 10,
                     card_discount: 0,
-                    boleto_discount: 5, 
+                    boleto_discount: 5,
                     company: company)
     Product.create!(name: 'Curso HTML5',
                     price: 75,
                     pix_discount: 9,
                     card_discount: 1.5,
-                    boleto_discount: 3, 
+                    boleto_discount: 3,
                     company: company)
 
     login_as user, scope: :user
@@ -101,20 +101,20 @@ describe 'user edits product' do
   end
 
   it 'and generates a new product history' do
-    company = Company.create!(email_domain: 'codeplay.com.br', 
-                              cnpj: '00000000000000', 
-                              name: 'Codeplay Cursos SA', 
+    company = Company.create!(email_domain: 'codeplay.com.br',
+                              cnpj: '00000000000000',
+                              name: 'Codeplay Cursos SA',
                               billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
                               billing_email: 'financas@codeplay.com.br')
-    user = User.create!(email: 'jane_doe@codeplay.com.br', 
-                        password: '123456', 
+    user = User.create!(email: 'jane_doe@codeplay.com.br',
+                        password: '123456',
                         role: 0,
                         company: company)
     Product.create!(name: 'Curso Ruby Básico',
-                    price:100,
+                    price: 100,
                     pix_discount: 10,
                     card_discount: 0,
-                    boleto_discount: 5, 
+                    boleto_discount: 5,
                     company: company)
 
     login_as user, scope: :user
@@ -128,9 +128,9 @@ describe 'user edits product' do
     click_on 'Enviar'
 
     expect(Product.last.product_histories.last.name).to eq('Curso de HTML5')
-    expect(Product.last.product_histories.last.price).to eq(0.75e2)
-    expect(Product.last.product_histories.last.pix_discount).to eq(0.95e1)
-    expect(Product.last.product_histories.last.card_discount).to eq(0.1e1)
-    expect(Product.last.product_histories.last.boleto_discount).to eq(0.314e1)
+    expect(Product.last.product_histories.last.price).to eq(75)
+    expect(Product.last.product_histories.last.pix_discount).to eq(9.5)
+    expect(Product.last.product_histories.last.card_discount).to eq(1)
+    expect(Product.last.product_histories.last.boleto_discount).to eq(3.14)
   end
 end

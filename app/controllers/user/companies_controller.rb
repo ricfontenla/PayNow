@@ -1,12 +1,11 @@
 class User::CompaniesController < User::UserController
   before_action :authenticate_user!
-  before_action :is_customer_admin?, only: [:edit, :update, :generate_token]
-  before_action :associated?, only: [:new, :create]
-  before_action :has_company?, only: [:show, :edit, :update]
-  before_action :set_company, only: [:show, :edit, :update, :generate_token, :my_payment_methods]
- 
-  def show
-  end
+  before_action :is_customer_admin?, only: %i[edit update generate_token]
+  before_action :associated?, only: %i[new create]
+  before_action :has_company?, only: %i[show edit update]
+  before_action :set_company, only: %i[show edit update generate_token my_payment_methods]
+
+  def show; end
 
   def new
     @company = Company.new
@@ -24,8 +23,7 @@ class User::CompaniesController < User::UserController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @company.update(update_company_params)
@@ -40,15 +38,13 @@ class User::CompaniesController < User::UserController
     @company.token = create_unique_token
     if @company.save
       flash[:notice] = t('.success')
-      redirect_to user_company_path(@company.token)
     else
       flash[:alert] = t('.fail')
-      redirect_to user_company_path(@company.token)
     end
+    redirect_to user_company_path(@company.token)
   end
 
-  def my_payment_methods
-  end
+  def my_payment_methods; end
 
   private
 

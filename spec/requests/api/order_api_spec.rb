@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-describe "Orders API" do
+describe 'Orders API' do
   context 'POST api/v1/orders' do
     it 'and should create a new order for boleto and associate with company and final customer' do
-      company = Company.create!(email_domain: 'codeplay.com.br', 
-                                cnpj: '00000000000000', 
-                                name: 'Codeplay Cursos SA', 
+      company = Company.create!(email_domain: 'codeplay.com.br',
+                                cnpj: '00000000000000',
+                                name: 'Codeplay Cursos SA',
                                 billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
                                 billing_email: 'financas@codeplay.com.br')
       final_customer = FinalCustomer.create!(name: 'Fulano Sicrano',
@@ -13,31 +13,31 @@ describe "Orders API" do
       CompanyFinalCustomer.create!(company: company,
                                    final_customer: final_customer)
       Product.create!(name: 'Curso Ruby Básico',
-                    price:'100',
-                    pix_discount: 10,
-                    card_discount: 0,
-                    boleto_discount: 5, 
-                    company: company)
-      boleto = PaymentMethod.create!(name: 'Boleto do Banco Laranja', 
-                                   billing_fee: 2.5, 
-                                   max_fee: 100.0,
-                                   status: true,
-                                   category: :boleto)
-      BoletoAccount.create!(bank_code:  479,
-                            agency_number:  1234,
-                            bank_account: 123456789,
+                      price: '100',
+                      pix_discount: 10,
+                      card_discount: 0,
+                      boleto_discount: 5,
+                      company: company)
+      boleto = PaymentMethod.create!(name: 'Boleto do Banco Laranja',
+                                     billing_fee: 2.5,
+                                     max_fee: 100.0,
+                                     status: true,
+                                     category: :boleto)
+      BoletoAccount.create!(bank_code: 479,
+                            agency_number: 1234,
+                            bank_account: 123_456_789,
                             company: company,
                             payment_method: boleto)
 
       post '/api/v1/orders', params:
       {
-        order: 
+        order:
         {
-          company_token: "#{company.token}", 
-          product_token: "#{Product.last.token}", 
-          final_customer_token: "#{final_customer.token}",
-          choosen_payment: "boleto",
-          adress: "fulano_sicrano@gmail.com"
+          company_token: company.token.to_s,
+          product_token: Product.last.token.to_s,
+          final_customer_token: final_customer.token.to_s,
+          choosen_payment: 'boleto',
+          adress: 'fulano_sicrano@gmail.com'
         }
       }
 
@@ -56,9 +56,9 @@ describe "Orders API" do
     end
 
     it 'and should create a new order for card and associate with company and final customer' do
-      company = Company.create!(email_domain: 'codeplay.com.br', 
-                                cnpj: '00000000000000', 
-                                name: 'Codeplay Cursos SA', 
+      company = Company.create!(email_domain: 'codeplay.com.br',
+                                cnpj: '00000000000000',
+                                name: 'Codeplay Cursos SA',
                                 billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
                                 billing_email: 'financas@codeplay.com.br')
       final_customer = FinalCustomer.create!(name: 'Fulano Sicrano',
@@ -66,13 +66,13 @@ describe "Orders API" do
       CompanyFinalCustomer.create!(company: company,
                                    final_customer: final_customer)
       Product.create!(name: 'Curso Ruby Básico',
-                    price:'100',
-                    pix_discount: 10,
-                    card_discount: 0,
-                    boleto_discount: 5, 
-                    company: company)
-      card = PaymentMethod.create!(name: 'PISA', 
-                                   billing_fee: 5, 
+                      price: '100',
+                      pix_discount: 10,
+                      card_discount: 0,
+                      boleto_discount: 5,
+                      company: company)
+      card = PaymentMethod.create!(name: 'PISA',
+                                   billing_fee: 5,
                                    max_fee: 250,
                                    status: true,
                                    category: 2)
@@ -82,12 +82,12 @@ describe "Orders API" do
 
       post '/api/v1/orders', params:
       {
-        order: 
+        order:
         {
-          company_token: "#{company.token}", 
-          product_token: "#{Product.last.token}", 
-          final_customer_token: "#{final_customer.token}",
-          choosen_payment: "card",
+          company_token: company.token.to_s,
+          product_token: Product.last.token.to_s,
+          final_customer_token: final_customer.token.to_s,
+          choosen_payment: 'card',
           card_number: '9876543210123456',
           printed_name: 'Fulano Sicrano',
           verification_code: '000'
@@ -111,9 +111,9 @@ describe "Orders API" do
     end
 
     it 'and should create a new order for pix and associate with company and final customer' do
-      company = Company.create!(email_domain: 'codeplay.com.br', 
-                                cnpj: '00000000000000', 
-                                name: 'Codeplay Cursos SA', 
+      company = Company.create!(email_domain: 'codeplay.com.br',
+                                cnpj: '00000000000000',
+                                name: 'Codeplay Cursos SA',
                                 billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
                                 billing_email: 'financas@codeplay.com.br')
       final_customer = FinalCustomer.create!(name: 'Fulano Sicrano',
@@ -121,16 +121,16 @@ describe "Orders API" do
       CompanyFinalCustomer.create!(company: company,
                                    final_customer: final_customer)
       Product.create!(name: 'Curso Ruby Básico',
-                    price:'100',
-                    pix_discount: 10,
-                    card_discount: 0,
-                    boleto_discount: 5, 
-                    company: company)
-      pix = PaymentMethod.create!(name: 'PIX Banco Roxinho', 
-                                billing_fee: 1, 
-                                max_fee: 250,
-                                status: true,
-                                category: 3)
+                      price: '100',
+                      pix_discount: 10,
+                      card_discount: 0,
+                      boleto_discount: 5,
+                      company: company)
+      pix = PaymentMethod.create!(name: 'PIX Banco Roxinho',
+                                  billing_fee: 1,
+                                  max_fee: 250,
+                                  status: true,
+                                  category: 3)
       PixAccount.create!(pix_key: '12345abcde67890FGHIJ',
                          bank_code: '001',
                          company: company,
@@ -138,12 +138,12 @@ describe "Orders API" do
 
       post '/api/v1/orders', params:
       {
-        order: 
+        order:
         {
-          company_token: "#{company.token}", 
-          product_token: "#{Product.last.token}", 
-          final_customer_token: "#{final_customer.token}",
-          choosen_payment: "pix"
+          company_token: company.token.to_s,
+          product_token: Product.last.token.to_s,
+          final_customer_token: final_customer.token.to_s,
+          choosen_payment: 'pix'
         }
       }
 
@@ -163,13 +163,13 @@ describe "Orders API" do
     it 'and company not found' do
       post '/api/v1/orders', params:
       {
-        order: 
+        order:
         {
-          company_token: "", 
-          product_token: "#{SecureRandom.base58(20)}", 
-          final_customer_token: "#{SecureRandom.base58(20)}",
-          choosen_payment: "boleto",
-          adress: "fulano_sicrano@gmail.com"
+          company_token: '',
+          product_token: SecureRandom.base58(20).to_s,
+          final_customer_token: SecureRandom.base58(20).to_s,
+          choosen_payment: 'boleto',
+          adress: 'fulano_sicrano@gmail.com'
         }
       }
 
@@ -179,35 +179,35 @@ describe "Orders API" do
     end
 
     it 'and product not found' do
-      company = Company.create!(email_domain: 'codeplay.com.br', 
-                                cnpj: '00000000000000', 
-                                name: 'Codeplay Cursos SA', 
+      company = Company.create!(email_domain: 'codeplay.com.br',
+                                cnpj: '00000000000000',
+                                name: 'Codeplay Cursos SA',
                                 billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
                                 billing_email: 'financas@codeplay.com.br')
       final_customer = FinalCustomer.create!(name: 'Fulano Sicrano',
                                              cpf: '54321012345')
       CompanyFinalCustomer.create!(company: company,
                                    final_customer: final_customer)
-      boleto = PaymentMethod.create!(name: 'Boleto do Banco Laranja', 
-                                   billing_fee: 2.5, 
-                                   max_fee: 100.0,
-                                   status: true,
-                                   category: :boleto)
-      BoletoAccount.create!(bank_code:  479,
-                            agency_number:  1234,
-                            bank_account: 123456789,
+      boleto = PaymentMethod.create!(name: 'Boleto do Banco Laranja',
+                                     billing_fee: 2.5,
+                                     max_fee: 100.0,
+                                     status: true,
+                                     category: :boleto)
+      BoletoAccount.create!(bank_code: 479,
+                            agency_number: 1234,
+                            bank_account: 123_456_789,
                             company: company,
                             payment_method: boleto)
 
       post '/api/v1/orders', params:
       {
-        order: 
+        order:
         {
-          company_token: "#{company.token}", 
-          product_token: "", 
-          final_customer_token: "#{final_customer.token}",
-          choosen_payment: "boleto",
-          adress: "fulano_sicrano@gmail.com"
+          company_token: company.token.to_s,
+          product_token: '',
+          final_customer_token: final_customer.token.to_s,
+          choosen_payment: 'boleto',
+          adress: 'fulano_sicrano@gmail.com'
         }
       }
 
@@ -217,37 +217,37 @@ describe "Orders API" do
     end
 
     it 'and final_customer not found' do
-      company = Company.create!(email_domain: 'codeplay.com.br', 
-                                cnpj: '00000000000000', 
-                                name: 'Codeplay Cursos SA', 
+      company = Company.create!(email_domain: 'codeplay.com.br',
+                                cnpj: '00000000000000',
+                                name: 'Codeplay Cursos SA',
                                 billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
                                 billing_email: 'financas@codeplay.com.br')
       Product.create!(name: 'Curso Ruby Básico',
-                    price:'100',
-                    pix_discount: 10,
-                    card_discount: 0,
-                    boleto_discount: 5, 
-                    company: company)
-      boleto = PaymentMethod.create!(name: 'Boleto do Banco Laranja', 
-                                   billing_fee: 2.5, 
-                                   max_fee: 100.0,
-                                   status: true,
-                                   category: :boleto)
-      BoletoAccount.create!(bank_code:  479,
-                            agency_number:  1234,
-                            bank_account: 123456789,
+                      price: '100',
+                      pix_discount: 10,
+                      card_discount: 0,
+                      boleto_discount: 5,
+                      company: company)
+      boleto = PaymentMethod.create!(name: 'Boleto do Banco Laranja',
+                                     billing_fee: 2.5,
+                                     max_fee: 100.0,
+                                     status: true,
+                                     category: :boleto)
+      BoletoAccount.create!(bank_code: 479,
+                            agency_number: 1234,
+                            bank_account: 123_456_789,
                             company: company,
                             payment_method: boleto)
 
       post '/api/v1/orders', params:
       {
-        order: 
+        order:
         {
-          company_token: "#{company.token}", 
-          product_token: "#{Product.last.token}", 
-          final_customer_token: "",
-          choosen_payment: "boleto",
-          adress: "fulano_sicrano@gmail.com"
+          company_token: company.token.to_s,
+          product_token: Product.last.token.to_s,
+          final_customer_token: '',
+          choosen_payment: 'boleto',
+          adress: 'fulano_sicrano@gmail.com'
         }
       }
 
@@ -257,9 +257,9 @@ describe "Orders API" do
     end
 
     it 'and choose_payment cannot be blank' do
-      company = Company.create!(email_domain: 'codeplay.com.br', 
-                                cnpj: '00000000000000', 
-                                name: 'Codeplay Cursos SA', 
+      company = Company.create!(email_domain: 'codeplay.com.br',
+                                cnpj: '00000000000000',
+                                name: 'Codeplay Cursos SA',
                                 billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
                                 billing_email: 'financas@codeplay.com.br')
       final_customer = FinalCustomer.create!(name: 'Fulano Sicrano',
@@ -267,31 +267,31 @@ describe "Orders API" do
       CompanyFinalCustomer.create!(company: company,
                                    final_customer: final_customer)
       Product.create!(name: 'Curso Ruby Básico',
-                    price:'100',
-                    pix_discount: 10,
-                    card_discount: 0,
-                    boleto_discount: 5, 
-                    company: company)
-      boleto = PaymentMethod.create!(name: 'Boleto do Banco Laranja', 
-                                   billing_fee: 2.5, 
-                                   max_fee: 100.0,
-                                   status: true,
-                                   category: :boleto)
-      BoletoAccount.create!(bank_code:  479,
-                            agency_number:  1234,
-                            bank_account: 123456789,
+                      price: '100',
+                      pix_discount: 10,
+                      card_discount: 0,
+                      boleto_discount: 5,
+                      company: company)
+      boleto = PaymentMethod.create!(name: 'Boleto do Banco Laranja',
+                                     billing_fee: 2.5,
+                                     max_fee: 100.0,
+                                     status: true,
+                                     category: :boleto)
+      BoletoAccount.create!(bank_code: 479,
+                            agency_number: 1234,
+                            bank_account: 123_456_789,
                             company: company,
                             payment_method: boleto)
 
       post '/api/v1/orders', params:
       {
-        order: 
+        order:
         {
-          company_token: "#{company.token}", 
-          product_token: "#{Product.last.token}", 
-          final_customer_token: "#{final_customer.token}",
-          choosen_payment: "",
-          adress: "fulano_sicrano@gmail.com"
+          company_token: company.token.to_s,
+          product_token: Product.last.token.to_s,
+          final_customer_token: final_customer.token.to_s,
+          choosen_payment: '',
+          adress: 'fulano_sicrano@gmail.com'
         }
       }
 
@@ -301,9 +301,9 @@ describe "Orders API" do
     end
 
     it 'and adress cannot be blank for boleto' do
-      company = Company.create!(email_domain: 'codeplay.com.br', 
-                                cnpj: '00000000000000', 
-                                name: 'Codeplay Cursos SA', 
+      company = Company.create!(email_domain: 'codeplay.com.br',
+                                cnpj: '00000000000000',
+                                name: 'Codeplay Cursos SA',
                                 billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
                                 billing_email: 'financas@codeplay.com.br')
       final_customer = FinalCustomer.create!(name: 'Fulano Sicrano',
@@ -311,31 +311,31 @@ describe "Orders API" do
       CompanyFinalCustomer.create!(company: company,
                                    final_customer: final_customer)
       Product.create!(name: 'Curso Ruby Básico',
-                    price:'100',
-                    pix_discount: 10,
-                    card_discount: 0,
-                    boleto_discount: 5, 
-                    company: company)
-      boleto = PaymentMethod.create!(name: 'Boleto do Banco Laranja', 
-                                   billing_fee: 2.5, 
-                                   max_fee: 100.0,
-                                   status: true,
-                                   category: :boleto)
-      BoletoAccount.create!(bank_code:  479,
-                            agency_number:  1234,
-                            bank_account: 123456789,
+                      price: '100',
+                      pix_discount: 10,
+                      card_discount: 0,
+                      boleto_discount: 5,
+                      company: company)
+      boleto = PaymentMethod.create!(name: 'Boleto do Banco Laranja',
+                                     billing_fee: 2.5,
+                                     max_fee: 100.0,
+                                     status: true,
+                                     category: :boleto)
+      BoletoAccount.create!(bank_code: 479,
+                            agency_number: 1234,
+                            bank_account: 123_456_789,
                             company: company,
                             payment_method: boleto)
 
       post '/api/v1/orders', params:
       {
-        order: 
+        order:
         {
-          company_token: "#{company.token}", 
-          product_token: "#{Product.last.token}", 
-          final_customer_token: "#{final_customer.token}",
-          choosen_payment: "boleto",
-          adress: ""
+          company_token: company.token.to_s,
+          product_token: Product.last.token.to_s,
+          final_customer_token: final_customer.token.to_s,
+          choosen_payment: 'boleto',
+          adress: ''
         }
       }
 
@@ -345,9 +345,9 @@ describe "Orders API" do
     end
 
     it 'and card_number, printed_name, verification_code cannot be blank for card' do
-      company = Company.create!(email_domain: 'codeplay.com.br', 
-                                cnpj: '00000000000000', 
-                                name: 'Codeplay Cursos SA', 
+      company = Company.create!(email_domain: 'codeplay.com.br',
+                                cnpj: '00000000000000',
+                                name: 'Codeplay Cursos SA',
                                 billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
                                 billing_email: 'financas@codeplay.com.br')
       final_customer = FinalCustomer.create!(name: 'Fulano Sicrano',
@@ -355,13 +355,13 @@ describe "Orders API" do
       CompanyFinalCustomer.create!(company: company,
                                    final_customer: final_customer)
       Product.create!(name: 'Curso Ruby Básico',
-                    price:'100',
-                    pix_discount: 10,
-                    card_discount: 0,
-                    boleto_discount: 5, 
-                    company: company)
-      card = PaymentMethod.create!(name: 'PISA', 
-                                   billing_fee: 5, 
+                      price: '100',
+                      pix_discount: 10,
+                      card_discount: 0,
+                      boleto_discount: 5,
+                      company: company)
+      card = PaymentMethod.create!(name: 'PISA',
+                                   billing_fee: 5,
                                    max_fee: 250,
                                    status: true,
                                    category: 2)
@@ -371,12 +371,12 @@ describe "Orders API" do
 
       post '/api/v1/orders', params:
       {
-        order: 
+        order:
         {
-          company_token: "#{company.token}", 
-          product_token: "#{Product.last.token}", 
-          final_customer_token: "#{final_customer.token}",
-          choosen_payment: "card",
+          company_token: company.token.to_s,
+          product_token: Product.last.token.to_s,
+          final_customer_token: final_customer.token.to_s,
+          choosen_payment: 'card',
           card_number: '',
           printed_name: '',
           verification_code: ''
@@ -389,7 +389,7 @@ describe "Orders API" do
     end
 
     it 'and params cannot be blank' do
-      post '/api/v1/orders', params: { }
+      post '/api/v1/orders', params: {}
 
       expect(response.content_type).to include('application/json')
       expect(response).to have_http_status(412)
@@ -399,9 +399,9 @@ describe "Orders API" do
 
   context 'GET api/v1/orders/:id' do
     it 'it should get order by date' do
-      company = Company.create!(email_domain: 'codeplay.com.br', 
-                                cnpj: '00000000000000', 
-                                name: 'Codeplay Cursos SA', 
+      company = Company.create!(email_domain: 'codeplay.com.br',
+                                cnpj: '00000000000000',
+                                name: 'Codeplay Cursos SA',
                                 billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
                                 billing_email: 'financas@codeplay.com.br')
       final_customer = FinalCustomer.create!(name: 'Fulano Sicrano',
@@ -409,51 +409,51 @@ describe "Orders API" do
       CompanyFinalCustomer.create!(company: company,
                                    final_customer: final_customer)
       product1 = Product.create!(name: 'Curso Ruby Básico',
-                                 price:100,
+                                 price: 100,
                                  pix_discount: 10,
                                  card_discount: 0,
-                                 boleto_discount: 5, 
+                                 boleto_discount: 5,
                                  company: company)
       product2 = Product.create!(name: 'Curso HTML5',
-                                 price:75,
+                                 price: 75,
                                  pix_discount: 10,
                                  card_discount: 0,
-                                 boleto_discount: 5, 
+                                 boleto_discount: 5,
                                  company: company)
-      boleto = PaymentMethod.create!(name: 'Boleto do Banco Laranja', 
-                                   billing_fee: 2.5, 
-                                   max_fee: 100.0,
-                                   status: true,
-                                   category: :boleto)
-      BoletoAccount.create!(bank_code:  479,
-                            agency_number:  1234,
-                            bank_account: 123456789,
+      boleto = PaymentMethod.create!(name: 'Boleto do Banco Laranja',
+                                     billing_fee: 2.5,
+                                     max_fee: 100.0,
+                                     status: true,
+                                     category: :boleto)
+      BoletoAccount.create!(bank_code: 479,
+                            agency_number: 1234,
+                            bank_account: 123_456_789,
                             company: company,
                             payment_method: boleto)
-      Order.create!(original_price: 100.0, 
-                    final_price: 95.0, 
-                    choosen_payment: "boleto",
-                    adress: "fulano_sicrano@gmail.com", 
-                    company: company, 
-                    final_customer: final_customer, 
+      Order.create!(original_price: 100.0,
+                    final_price: 95.0,
+                    choosen_payment: 'boleto',
+                    adress: 'fulano_sicrano@gmail.com',
+                    company: company,
+                    final_customer: final_customer,
                     product: product1)
-      Order.create!(original_price: 75.0, 
-                    final_price: 75.0, 
-                    choosen_payment: "card",
-                    card_number: "9876543210123456",
+      Order.create!(original_price: 75.0,
+                    final_price: 75.0,
+                    choosen_payment: 'card',
+                    card_number: '9876543210123456',
                     verification_code: '000',
                     printed_name: 'Fulano Sicrano',
-                    company: company, 
-                    final_customer: final_customer, 
+                    company: company,
+                    final_customer: final_customer,
                     product: product2,
                     created_at: 1.day.ago)
 
-      get "/api/v1/orders/", params: 
+      get '/api/v1/orders/', params:
       {
         company: { token: Company.last.token },
-        created_at: Date.current,
+        created_at: Date.current
       }
-      
+
       expect(response.content_type).to include('application/json')
       expect(response).to have_http_status(200)
       expect(parsed_body[0]['token']).to eq(Order.first.token)
@@ -468,9 +468,9 @@ describe "Orders API" do
     end
 
     it 'it should get order by payment type' do
-      company = Company.create!(email_domain: 'codeplay.com.br', 
-                                cnpj: '00000000000000', 
-                                name: 'Codeplay Cursos SA', 
+      company = Company.create!(email_domain: 'codeplay.com.br',
+                                cnpj: '00000000000000',
+                                name: 'Codeplay Cursos SA',
                                 billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
                                 billing_email: 'financas@codeplay.com.br')
       final_customer = FinalCustomer.create!(name: 'Fulano Sicrano',
@@ -478,51 +478,51 @@ describe "Orders API" do
       CompanyFinalCustomer.create!(company: company,
                                    final_customer: final_customer)
       product1 = Product.create!(name: 'Curso Ruby Básico',
-                                 price:100,
+                                 price: 100,
                                  pix_discount: 10,
                                  card_discount: 0,
-                                 boleto_discount: 5, 
+                                 boleto_discount: 5,
                                  company: company)
       product2 = Product.create!(name: 'Curso HTML5',
-                                 price:75,
+                                 price: 75,
                                  pix_discount: 10,
                                  card_discount: 0,
-                                 boleto_discount: 5, 
+                                 boleto_discount: 5,
                                  company: company)
-      boleto = PaymentMethod.create!(name: 'Boleto do Banco Laranja', 
-                                   billing_fee: 2.5, 
-                                   max_fee: 100.0,
-                                   status: true,
-                                   category: :boleto)
-      BoletoAccount.create!(bank_code:  479,
-                            agency_number:  1234,
-                            bank_account: 123456789,
+      boleto = PaymentMethod.create!(name: 'Boleto do Banco Laranja',
+                                     billing_fee: 2.5,
+                                     max_fee: 100.0,
+                                     status: true,
+                                     category: :boleto)
+      BoletoAccount.create!(bank_code: 479,
+                            agency_number: 1234,
+                            bank_account: 123_456_789,
                             company: company,
                             payment_method: boleto)
-      Order.create!(original_price: 100.0, 
-                    final_price: 95.0, 
-                    choosen_payment: "boleto",
-                    adress: "fulano_sicrano@gmail.com", 
-                    company: company, 
-                    final_customer: final_customer, 
+      Order.create!(original_price: 100.0,
+                    final_price: 95.0,
+                    choosen_payment: 'boleto',
+                    adress: 'fulano_sicrano@gmail.com',
+                    company: company,
+                    final_customer: final_customer,
                     product: product1)
-      Order.create!(original_price: 75.0, 
-                    final_price: 75.0, 
-                    choosen_payment: "card",
-                    card_number: "9876543210123456",
+      Order.create!(original_price: 75.0,
+                    final_price: 75.0,
+                    choosen_payment: 'card',
+                    card_number: '9876543210123456',
                     verification_code: '000',
                     printed_name: 'Fulano Sicrano',
-                    company: company, 
-                    final_customer: final_customer, 
+                    company: company,
+                    final_customer: final_customer,
                     product: product2,
                     created_at: 1.day.ago)
 
-      get "/api/v1/orders/", params: 
+      get '/api/v1/orders/', params:
       {
         company: { token: Company.last.token },
-        choosen_payment: "card",
+        choosen_payment: 'card'
       }
-      
+
       expect(response.content_type).to include('application/json')
       expect(response).to have_http_status(200)
       expect(parsed_body[0]['token']).to eq(Order.last.token)
@@ -539,9 +539,9 @@ describe "Orders API" do
     end
 
     it 'it should get orders by date and payment type' do
-      company = Company.create!(email_domain: 'codeplay.com.br', 
-                                cnpj: '00000000000000', 
-                                name: 'Codeplay Cursos SA', 
+      company = Company.create!(email_domain: 'codeplay.com.br',
+                                cnpj: '00000000000000',
+                                name: 'Codeplay Cursos SA',
                                 billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
                                 billing_email: 'financas@codeplay.com.br')
       final_customer = FinalCustomer.create!(name: 'Fulano Sicrano',
@@ -549,51 +549,51 @@ describe "Orders API" do
       CompanyFinalCustomer.create!(company: company,
                                    final_customer: final_customer)
       product1 = Product.create!(name: 'Curso Ruby Básico',
-                                 price:100,
+                                 price: 100,
                                  pix_discount: 10,
                                  card_discount: 0,
-                                 boleto_discount: 5, 
+                                 boleto_discount: 5,
                                  company: company)
       product2 = Product.create!(name: 'Curso HTML5',
-                                 price:75,
+                                 price: 75,
                                  pix_discount: 10,
                                  card_discount: 0,
-                                 boleto_discount: 5, 
+                                 boleto_discount: 5,
                                  company: company)
-      boleto = PaymentMethod.create!(name: 'Boleto do Banco Laranja', 
-                                   billing_fee: 2.5, 
-                                   max_fee: 100.0,
-                                   status: true,
-                                   category: :boleto)
-      BoletoAccount.create!(bank_code:  479,
-                            agency_number:  1234,
-                            bank_account: 123456789,
+      boleto = PaymentMethod.create!(name: 'Boleto do Banco Laranja',
+                                     billing_fee: 2.5,
+                                     max_fee: 100.0,
+                                     status: true,
+                                     category: :boleto)
+      BoletoAccount.create!(bank_code: 479,
+                            agency_number: 1234,
+                            bank_account: 123_456_789,
                             company: company,
                             payment_method: boleto)
-      Order.create!(original_price: 100.0, 
-                    final_price: 95.0, 
-                    choosen_payment: "boleto",
-                    adress: "fulano_sicrano@gmail.com", 
-                    company: company, 
-                    final_customer: final_customer, 
+      Order.create!(original_price: 100.0,
+                    final_price: 95.0,
+                    choosen_payment: 'boleto',
+                    adress: 'fulano_sicrano@gmail.com',
+                    company: company,
+                    final_customer: final_customer,
                     product: product1)
-      Order.create!(original_price: 75.0, 
-                    final_price: 67.5, 
-                    choosen_payment: "boleto",
-                    adress: "fulano_sicrano@gmail.com", 
-                    company: company, 
-                    final_customer: final_customer, 
+      Order.create!(original_price: 75.0,
+                    final_price: 67.5,
+                    choosen_payment: 'boleto',
+                    adress: 'fulano_sicrano@gmail.com',
+                    company: company,
+                    final_customer: final_customer,
                     product: product2,
                     created_at: 1.day.ago)
 
-      get "/api/v1/orders/", params: 
+      get '/api/v1/orders/', params:
       {
         company: { token: Company.last.token },
         created_at: Date.current,
-        choosen_payment: "boleto"
+        choosen_payment: 'boleto'
 
       }
-      
+
       expect(response.content_type).to include('application/json')
       expect(response).to have_http_status(200)
       expect(parsed_body[0]['token']).to eq(Order.first.token)
@@ -609,7 +609,7 @@ describe "Orders API" do
     end
 
     it 'wrong or missing company token' do
-      get "/api/v1/orders/", params: 
+      get '/api/v1/orders/', params:
       {
         company: { token: '' },
         created_at: Date.current,
@@ -622,9 +622,9 @@ describe "Orders API" do
     end
 
     it 'and no results match' do
-      company = Company.create!(email_domain: 'codeplay.com.br', 
-                                cnpj: '00000000000000', 
-                                name: 'Codeplay Cursos SA', 
+      company = Company.create!(email_domain: 'codeplay.com.br',
+                                cnpj: '00000000000000',
+                                name: 'Codeplay Cursos SA',
                                 billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
                                 billing_email: 'financas@codeplay.com.br')
       final_customer = FinalCustomer.create!(name: 'Fulano Sicrano',
@@ -632,30 +632,30 @@ describe "Orders API" do
       CompanyFinalCustomer.create!(company: company,
                                    final_customer: final_customer)
       product1 = Product.create!(name: 'Curso Ruby Básico',
-                                 price:100,
+                                 price: 100,
                                  pix_discount: 10,
                                  card_discount: 0,
-                                 boleto_discount: 5, 
+                                 boleto_discount: 5,
                                  company: company)
-      boleto = PaymentMethod.create!(name: 'Boleto do Banco Laranja', 
-                                   billing_fee: 2.5, 
-                                   max_fee: 100.0,
-                                   status: true,
-                                   category: :boleto)
-      BoletoAccount.create!(bank_code:  479,
-                            agency_number:  1234,
-                            bank_account: 123456789,
+      boleto = PaymentMethod.create!(name: 'Boleto do Banco Laranja',
+                                     billing_fee: 2.5,
+                                     max_fee: 100.0,
+                                     status: true,
+                                     category: :boleto)
+      BoletoAccount.create!(bank_code: 479,
+                            agency_number: 1234,
+                            bank_account: 123_456_789,
                             company: company,
                             payment_method: boleto)
-      Order.create!(original_price: 100.0, 
-                    final_price: 95.0, 
-                    choosen_payment: "boleto",
-                    adress: "fulano_sicrano@gmail.com", 
-                    company: company, 
-                    final_customer: final_customer, 
+      Order.create!(original_price: 100.0,
+                    final_price: 95.0,
+                    choosen_payment: 'boleto',
+                    adress: 'fulano_sicrano@gmail.com',
+                    company: company,
+                    final_customer: final_customer,
                     product: product1)
 
-      get "/api/v1/orders/", params: 
+      get '/api/v1/orders/', params:
       {
         company: { token: company.token },
         created_at: nil,
@@ -670,9 +670,9 @@ describe "Orders API" do
 
   context 'PUT /api/v1/orders/:token' do
     it 'should update status' do
-      company = Company.create!(email_domain: 'codeplay.com.br', 
-                                cnpj: '00000000000000', 
-                                name: 'Codeplay Cursos SA', 
+      company = Company.create!(email_domain: 'codeplay.com.br',
+                                cnpj: '00000000000000',
+                                name: 'Codeplay Cursos SA',
                                 billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
                                 billing_email: 'financas@codeplay.com.br')
       final_customer = FinalCustomer.create!(name: 'Fulano Sicrano',
@@ -680,35 +680,35 @@ describe "Orders API" do
       CompanyFinalCustomer.create!(company: company,
                                    final_customer: final_customer)
       product1 = Product.create!(name: 'Curso Ruby Básico',
-                                 price:100,
+                                 price: 100,
                                  pix_discount: 10,
                                  card_discount: 0,
-                                 boleto_discount: 5, 
+                                 boleto_discount: 5,
                                  company: company)
-      boleto = PaymentMethod.create!(name: 'Boleto do Banco Laranja', 
-                                   billing_fee: 2.5, 
-                                   max_fee: 100.0,
-                                   status: true,
-                                   category: :boleto)
-      BoletoAccount.create!(bank_code:  479,
-                            agency_number:  1234,
-                            bank_account: 123456789,
+      boleto = PaymentMethod.create!(name: 'Boleto do Banco Laranja',
+                                     billing_fee: 2.5,
+                                     max_fee: 100.0,
+                                     status: true,
+                                     category: :boleto)
+      BoletoAccount.create!(bank_code: 479,
+                            agency_number: 1234,
+                            bank_account: 123_456_789,
                             company: company,
                             payment_method: boleto)
-      Order.create!(original_price: 100.0, 
-                    final_price: 95.0, 
-                    choosen_payment: "boleto",
-                    adress: "fulano_sicrano@gmail.com", 
-                    company: company, 
-                    final_customer: final_customer, 
+      Order.create!(original_price: 100.0,
+                    final_price: 95.0,
+                    choosen_payment: 'boleto',
+                    adress: 'fulano_sicrano@gmail.com',
+                    company: company,
+                    final_customer: final_customer,
                     product: product1)
 
       put "/api/v1/orders/#{Order.last.token}", params:
       {
         order: {
-                status: 'aprovado',
-                response_code: '05 - Cobrança efetivada com sucesso'
-               }
+          status: 'aprovado',
+          response_code: '05 - Cobrança efetivada com sucesso'
+        }
       }
 
       expect(response.content_type).to include('application/json')
@@ -726,12 +726,12 @@ describe "Orders API" do
     end
 
     it 'and wrong or missing order token' do
-      put "/api/v1/orders/123456", params:
+      put '/api/v1/orders/123456', params:
       {
         order: {
-                status: 'aprovado',
-                response_code: '05 - Cobrança efetivada com sucesso'
-               }
+          status: 'aprovado',
+          response_code: '05 - Cobrança efetivada com sucesso'
+        }
       }
 
       expect(response.content_type).to include('application/json')
@@ -740,9 +740,9 @@ describe "Orders API" do
     end
 
     it 'should update status' do
-      company = Company.create!(email_domain: 'codeplay.com.br', 
-                                cnpj: '00000000000000', 
-                                name: 'Codeplay Cursos SA', 
+      company = Company.create!(email_domain: 'codeplay.com.br',
+                                cnpj: '00000000000000',
+                                name: 'Codeplay Cursos SA',
                                 billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
                                 billing_email: 'financas@codeplay.com.br')
       final_customer = FinalCustomer.create!(name: 'Fulano Sicrano',
@@ -750,35 +750,35 @@ describe "Orders API" do
       CompanyFinalCustomer.create!(company: company,
                                    final_customer: final_customer)
       product1 = Product.create!(name: 'Curso Ruby Básico',
-                                 price:100,
+                                 price: 100,
                                  pix_discount: 10,
                                  card_discount: 0,
-                                 boleto_discount: 5, 
+                                 boleto_discount: 5,
                                  company: company)
-      boleto = PaymentMethod.create!(name: 'Boleto do Banco Laranja', 
-                                   billing_fee: 2.5, 
-                                   max_fee: 100.0,
-                                   status: true,
-                                   category: :boleto)
-      BoletoAccount.create!(bank_code:  479,
-                            agency_number:  1234,
-                            bank_account: 123456789,
+      boleto = PaymentMethod.create!(name: 'Boleto do Banco Laranja',
+                                     billing_fee: 2.5,
+                                     max_fee: 100.0,
+                                     status: true,
+                                     category: :boleto)
+      BoletoAccount.create!(bank_code: 479,
+                            agency_number: 1234,
+                            bank_account: 123_456_789,
                             company: company,
                             payment_method: boleto)
-      Order.create!(original_price: 100.0, 
-                    final_price: 95.0, 
-                    choosen_payment: "boleto",
-                    adress: "fulano_sicrano@gmail.com", 
-                    company: company, 
-                    final_customer: final_customer, 
+      Order.create!(original_price: 100.0,
+                    final_price: 95.0,
+                    choosen_payment: 'boleto',
+                    adress: 'fulano_sicrano@gmail.com',
+                    company: company,
+                    final_customer: final_customer,
                     product: product1)
 
       put "/api/v1/orders/#{Order.last.token}", params:
       {
         order: {
-                status: '',
-                response_code: ''
-               }
+          status: '',
+          response_code: ''
+        }
       }
 
       expect(response.content_type).to include('application/json')

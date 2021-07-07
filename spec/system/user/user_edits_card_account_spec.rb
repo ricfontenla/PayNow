@@ -2,24 +2,24 @@ require 'rails_helper'
 
 describe 'User edits card account' do
   it 'successfully' do
-    company = Company.create!(email_domain: 'codeplay.com.br', 
-                              cnpj: '00000000000000', 
-                              name: 'Codeplay Cursos SA', 
+    company = Company.create!(email_domain: 'codeplay.com.br',
+                              cnpj: '00000000000000',
+                              name: 'Codeplay Cursos SA',
                               billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
                               billing_email: 'financas@codeplay.com.br')
-    user =  User.create!(email: 'john_doe@codeplay.com.br', 
+    user =  User.create!(email: 'john_doe@codeplay.com.br',
                          password: '123456',
                          role: 10,
                          company: company)
-    card = PaymentMethod.create!(name: 'PISA', 
-                                 billing_fee: 5, 
+    card = PaymentMethod.create!(name: 'PISA',
+                                 billing_fee: 5,
                                  max_fee: 250,
                                  status: true,
                                  category: 2)
-    CardAccount.create!(credit_code:  '9876543210ABCDEfghij',
+    CardAccount.create!(credit_code: '9876543210ABCDEfghij',
                         company: company,
                         payment_method: card)
-                          
+
     login_as user, scope: :user
     visit user_company_path(company.token)
     click_on 'Meus Métodos de Pagamento'
@@ -33,21 +33,21 @@ describe 'User edits card account' do
   end
 
   it 'and fields cannot be blank' do
-    company = Company.create!(email_domain: 'codeplay.com.br', 
-                              cnpj: '00000000000000', 
-                              name: 'Codeplay Cursos SA', 
+    company = Company.create!(email_domain: 'codeplay.com.br',
+                              cnpj: '00000000000000',
+                              name: 'Codeplay Cursos SA',
                               billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
                               billing_email: 'financas@codeplay.com.br')
-    user =  User.create!(email: 'john_doe@codeplay.com.br', 
+    user =  User.create!(email: 'john_doe@codeplay.com.br',
                          password: '123456',
                          role: 10,
                          company: company)
-    card = PaymentMethod.create!(name: 'PISA', 
-                                 billing_fee: 5, 
+    card = PaymentMethod.create!(name: 'PISA',
+                                 billing_fee: 5,
                                  max_fee: 250,
                                  status: true,
                                  category: 2)
-    CardAccount.create!(credit_code:  '9876543210ABCDEfghij',
+    CardAccount.create!(credit_code: '9876543210ABCDEfghij',
                         company: company,
                         payment_method: card)
 
@@ -62,14 +62,14 @@ describe 'User edits card account' do
   end
 
   it 'and must be unique' do
-    card = PaymentMethod.create!(name: 'PISA', 
-                                 billing_fee: 5, 
+    card = PaymentMethod.create!(name: 'PISA',
+                                 billing_fee: 5,
                                  max_fee: 250,
                                  status: true,
                                  category: 2)
-    company = Company.create!(email_domain: 'codeplay.com.br', 
-                              cnpj: '00000000000000', 
-                              name: 'Codeplay Cursos SA', 
+    company = Company.create!(email_domain: 'codeplay.com.br',
+                              cnpj: '00000000000000',
+                              name: 'Codeplay Cursos SA',
                               billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
                               billing_email: 'financas@codeplay.com.br')
     CardAccount.create!(credit_code: '9876543210ABCDEfghij',
@@ -78,8 +78,8 @@ describe 'User edits card account' do
     CardAccount.create!(credit_code: '1234567890zxcvbNMASD',
                         company: company,
                         payment_method: card)
-    user = User.create!(email: 'jane_doe@codeplay.com.br', 
-                        password: '123456', 
+    user = User.create!(email: 'jane_doe@codeplay.com.br',
+                        password: '123456',
                         role: 0,
                         company: company)
 

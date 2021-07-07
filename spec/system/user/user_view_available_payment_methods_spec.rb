@@ -2,28 +2,28 @@ require 'rails_helper'
 
 describe 'user views only available payment methods' do
   it 'successfully' do
-    PaymentMethod.create!(name: 'Boleto do Banco Laranja', 
-                          billing_fee: 2.5, 
+    PaymentMethod.create!(name: 'Boleto do Banco Laranja',
+                          billing_fee: 2.5,
                           max_fee: 100.0,
                           status: true,
                           category: :boleto)
-    PaymentMethod.create!(name: 'PISA', 
-                          billing_fee: 5, 
+    PaymentMethod.create!(name: 'PISA',
+                          billing_fee: 5,
                           max_fee: 250,
                           status: false,
                           category: 2)
-    PaymentMethod.create!(name: 'PIX Banco Roxinho', 
-                          billing_fee: 1, 
+    PaymentMethod.create!(name: 'PIX Banco Roxinho',
+                          billing_fee: 1,
                           max_fee: 150,
                           status: true,
                           category: 3)
-    PaymentMethod.create!(name: 'MESTRECARD', 
-                          billing_fee: 3, 
+    PaymentMethod.create!(name: 'MESTRECARD',
+                          billing_fee: 3,
                           max_fee: 1000,
                           status: true,
                           category: 2)
-    PaymentMethod.create!(name: 'PIX Banco SantoAndré', 
-                          billing_fee: 1.5, 
+    PaymentMethod.create!(name: 'PIX Banco SantoAndré',
+                          billing_fee: 1.5,
                           max_fee: 200,
                           status: false,
                           category: 3)
@@ -45,8 +45,8 @@ describe 'user views only available payment methods' do
   end
 
   it 'and view details' do
-    PaymentMethod.create!(name: 'Boleto do Banco Laranja', 
-                          billing_fee: 2.5, 
+    PaymentMethod.create!(name: 'Boleto do Banco Laranja',
+                          billing_fee: 2.5,
                           max_fee: 100.0,
                           status: true,
                           category: :boleto)
@@ -56,7 +56,7 @@ describe 'user views only available payment methods' do
     click_on 'Minha Empresa'
     click_on 'Novo Método de Pagamento'
     click_on 'Boleto do Banco Laranja'
-    
+
     expect(page).to have_content('Boleto do Banco Laranja')
     expect(page).to have_content('2,5')
     expect(page).to have_content('R$ 100,00')

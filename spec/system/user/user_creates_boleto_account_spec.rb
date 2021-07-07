@@ -2,11 +2,11 @@ require 'rails_helper'
 
 describe 'user creates boleto account' do
   it 'and registers it successfully' do
-    boleto = PaymentMethod.create!(name: 'Boleto do Banco Laranja', 
-                                   billing_fee: 2.5, 
-                                   max_fee: 100.0,
-                                   status: true,
-                                   category: :boleto)
+    PaymentMethod.create!(name: 'Boleto do Banco Laranja',
+                          billing_fee: 2.5,
+                          max_fee: 100.0,
+                          status: true,
+                          category: :boleto)
 
     user_customer_admin_login
     visit root_path
@@ -26,8 +26,8 @@ describe 'user creates boleto account' do
   end
 
   it 'and fields cannot be blank' do
-    boleto = PaymentMethod.create!(name: 'Boleto do Banco Laranja', 
-                                   billing_fee: 2.5, 
+    boleto = PaymentMethod.create!(name: 'Boleto do Banco Laranja',
+                                   billing_fee: 2.5,
                                    max_fee: 100.0,
                                    status: true,
                                    category: :boleto)
@@ -41,24 +41,24 @@ describe 'user creates boleto account' do
   end
 
   it 'and must be unique' do
-    boleto = PaymentMethod.create!(name: 'Boleto do Banco Laranja', 
-                                   billing_fee: 2.5, 
+    boleto = PaymentMethod.create!(name: 'Boleto do Banco Laranja',
+                                   billing_fee: 2.5,
                                    max_fee: 100.0,
                                    status: true,
                                    category: :boleto)
-    company = Company.create!(email_domain: 'codeplay.com.br', 
-                              cnpj: '00000000000000', 
-                              name: 'Codeplay Cursos SA', 
+    company = Company.create!(email_domain: 'codeplay.com.br',
+                              cnpj: '00000000000000',
+                              name: 'Codeplay Cursos SA',
                               billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
                               billing_email: 'financas@codeplay.com.br',
                               token: SecureRandom.base58(20))
-    BoletoAccount.create!(bank_code:  479,
-                          agency_number:  1234,
-                          bank_account: 123456789,
+    BoletoAccount.create!(bank_code: 479,
+                          agency_number: 1234,
+                          bank_account: 123_456_789,
                           company: company,
                           payment_method: boleto)
-    user = User.create!(email: 'jane_doe@codeplay.com.br', 
-                        password: '123456', 
+    user = User.create!(email: 'jane_doe@codeplay.com.br',
+                        password: '123456',
                         role: 0,
                         company: company)
 
@@ -73,24 +73,24 @@ describe 'user creates boleto account' do
   end
 
   it 'and cannot register a boleto account in a different payment method' do
-    card = PaymentMethod.create!(name: 'PISA', 
-                                 billing_fee: 5, 
+    card = PaymentMethod.create!(name: 'PISA',
+                                 billing_fee: 5,
                                  max_fee: 250,
                                  status: true,
                                  category: 2)
-    company = Company.create!(email_domain: 'codeplay.com.br', 
-                              cnpj: '00000000000000', 
-                              name: 'Codeplay Cursos SA', 
+    company = Company.create!(email_domain: 'codeplay.com.br',
+                              cnpj: '00000000000000',
+                              name: 'Codeplay Cursos SA',
                               billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
                               billing_email: 'financas@codeplay.com.br')
-    user = User.create!(email: 'jane_doe@codeplay.com.br', 
-                        password: '123456', 
+    user = User.create!(email: 'jane_doe@codeplay.com.br',
+                        password: '123456',
                         role: 0,
                         company: company)
 
     login_as user, scope: :user
     visit new_user_company_payment_method_boleto_account_path(Company.last.token, card.id)
-    
+
     expect(current_path).to eq(root_path)
   end
 end

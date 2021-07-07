@@ -26,13 +26,13 @@ describe 'admin edits company' do
   end
 
   it 'and generates a new token' do
-    company = Company.create!(email_domain: 'codeplay.com.br', 
-                              cnpj: '00000000000000', 
-                              name: 'Codeplay SA', 
+    company = Company.create!(email_domain: 'codeplay.com.br',
+                              cnpj: '00000000000000',
+                              name: 'Codeplay SA',
                               billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
                               billing_email: 'financas@codeplay.com.br')
     first_token = company.token
-    
+
     admin_login
     visit admin_company_path(company)
     click_on 'Gerar novo token'
@@ -45,9 +45,9 @@ describe 'admin edits company' do
   end
 
   it 'and fields cannot be blank' do
-    Company.create!(email_domain: 'codeplay.com.br', 
-                    cnpj: '00000000000000', 
-                    name: 'Codeplay SA', 
+    Company.create!(email_domain: 'codeplay.com.br',
+                    cnpj: '00000000000000',
+                    name: 'Codeplay SA',
                     billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
                     billing_email: 'financas@codeplay.com.br')
 
@@ -64,14 +64,14 @@ describe 'admin edits company' do
   end
 
   it 'and fields must be unique' do
-    company = Company.create!(email_domain: 'codeplay.com.br', 
-                              cnpj: '00000000000000', 
-                              name: 'Codeplay Cursos SA', 
+    company = Company.create!(email_domain: 'codeplay.com.br',
+                              cnpj: '00000000000000',
+                              name: 'Codeplay Cursos SA',
                               billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
                               billing_email: 'financas@codeplay.com.br')
-    Company.create!(email_domain: 'cookbook.com.br', 
-                    cnpj: '99999999999999', 
-                    name: 'Cookbook LTDA', 
+    Company.create!(email_domain: 'cookbook.com.br',
+                    cnpj: '99999999999999',
+                    name: 'Cookbook LTDA',
                     billing_adress: 'Rua Cereja, numero 99 - Bairro Limão, 11111-111',
                     billing_email: 'financas@cookbook.com.br')
 
@@ -87,9 +87,9 @@ describe 'admin edits company' do
   end
 
   it 'and CNPJ must have 14 characters' do
-    Company.create!(email_domain: 'codeplay.com.br', 
-                    cnpj: '00000000000000', 
-                    name: 'Codeplay SA', 
+    Company.create!(email_domain: 'codeplay.com.br',
+                    cnpj: '00000000000000',
+                    name: 'Codeplay SA',
                     billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
                     billing_email: 'financas@codeplay.com.br')
 
@@ -102,9 +102,9 @@ describe 'admin edits company' do
   end
 
   it 'and generates a company history' do
-    company = Company.create!(email_domain: 'codeplay.com.br', 
-                              cnpj: '00000000000000', 
-                              name: 'Codeplay SA', 
+    company = Company.create!(email_domain: 'codeplay.com.br',
+                              cnpj: '00000000000000',
+                              name: 'Codeplay SA',
                               billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
                               billing_email: 'financas@codeplay.com.br')
 
@@ -121,7 +121,8 @@ describe 'admin edits company' do
 
     expect(company.company_histories.last.name).to eq('Codeplay Cursos SA')
     expect(company.company_histories.last.cnpj).to eq('12345678987654')
-    expect(company.company_histories.last.billing_adress).to eq('Rua Batata Palha, número 9 - Bairro Strogonoff, 99999-777')
+    expect(company.company_histories.last.billing_adress)
+      .to eq('Rua Batata Palha, número 9 - Bairro Strogonoff, 99999-777')
     expect(company.company_histories.last.billing_email).to eq('cobrancas@codeplay.com.br')
   end
 end

@@ -13,7 +13,7 @@ describe 'user authentication' do
 
       expect(response).to redirect_to(new_user_session_path)
     end
-    
+
     it 'cannot access generate_token whithout login' do
       put generate_token_user_company_path(1)
 
@@ -81,7 +81,7 @@ describe 'user authentication' do
     end
   end
 
-  context 'for product'do
+  context 'for product' do
     it 'cannot access create without login' do
       post user_company_products_path(1)
 

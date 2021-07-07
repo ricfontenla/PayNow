@@ -3,9 +3,9 @@ require 'csv'
 class User::PixAccountsController < User::UserController
   before_action :authenticate_user!
   before_action :set_company
-  before_action :set_payment_method, only: [:new, :create, :edit, :update]
-  before_action :set_pix_account, only: [:edit, :update, :destroy]
-  before_action :bank_codes, only: [:new, :create, :edit, :update]
+  before_action :set_payment_method, only: %i[new create edit update]
+  before_action :set_pix_account, only: %i[edit update destroy]
+  before_action :bank_codes, only: %i[new create edit update]
 
   def new
     @pix_account = PixAccount.new
@@ -21,8 +21,7 @@ class User::PixAccountsController < User::UserController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @pix_account.update(pix_params)
@@ -40,13 +39,14 @@ class User::PixAccountsController < User::UserController
   end
 
   private
+
   def pix_params
     params.require(:pix_account).permit(:bank_code, :pix_key)
   end
 
   def bank_codes
     csv = File.read(Rails.root.join('lib/assets/csv/bancos_associados.csv'))
-    @bank_codes = CSV.parse(csv).map { |key, value| [key + ' - ' + value, key] }
+    @bank_codes = CSV.parse(csv).map { |key, value| ["#{key} - #{value}", key] }
   end
 
   def set_company

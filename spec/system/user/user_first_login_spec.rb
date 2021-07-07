@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "user logins for the first time" do
+describe 'user logins for the first time' do
   context 'and registers a company' do
     it 'sucessfully' do
       user_first_login
@@ -28,15 +28,15 @@ describe "user logins for the first time" do
       visit root_path
       click_on 'Cadastre sua Empresa'
       click_on 'Cadastrar'
-  
+
       expect(page).to have_content('não pode ficar em branco', count: 4)
       expect(page).to have_content('não possui o tamanho esperado')
     end
 
     it 'and fields must be unique' do
-      Company.create!(email_domain: 'teste.com.br', 
-                      cnpj: '00000000000000', 
-                      name: 'Codeplay Cursos SA', 
+      Company.create!(email_domain: 'teste.com.br',
+                      cnpj: '00000000000000',
+                      name: 'Codeplay Cursos SA',
                       billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
                       billing_email: 'financas@codeplay.com.br')
 
@@ -64,17 +64,19 @@ describe "user logins for the first time" do
 
       expect(Company.last.company_histories.last.name).to eq('Codeplay Cursos SA')
       expect(Company.last.company_histories.last.cnpj).to eq('00000000000000')
-      expect(Company.last.company_histories.last.billing_adress).to eq('Rua banana, numero 00 - Bairro Laranja, 00000-000')
-      expect(Company.last.company_histories.last.billing_email).to eq('financas@codeplay.com.br')
+      expect(Company.last.company_histories.last.billing_adress)
+        .to eq('Rua banana, numero 00 - Bairro Laranja, 00000-000')
+      expect(Company.last.company_histories.last.billing_email)
+        .to eq('financas@codeplay.com.br')
       expect(Company.last.company_histories.last.token).to eq(Company.last.token)
     end
   end
 
   context 'and his company is already registered' do
     it 'and he continues as a customer and is automatically associated with the company' do
-      company = Company.create!(email_domain: 'codeplay.com.br', 
-                                cnpj: '00000000000000', 
-                                name: 'Codeplay Cursos SA', 
+      company = Company.create!(email_domain: 'codeplay.com.br',
+                                cnpj: '00000000000000',
+                                name: 'Codeplay Cursos SA',
                                 billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
                                 billing_email: 'financas@codeplay.com.br')
 

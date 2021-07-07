@@ -33,8 +33,8 @@ describe 'Admin creates payment method' do
   end
 
   it 'and name must be unique' do
-    PaymentMethod.create!(name: 'Boleto do Banco Laranja', 
-                          billing_fee: 2.5, 
+    PaymentMethod.create!(name: 'Boleto do Banco Laranja',
+                          billing_fee: 2.5,
                           max_fee: 100.0,
                           status: true,
                           category: :boleto)

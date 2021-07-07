@@ -2,12 +2,12 @@ require 'rails_helper'
 
 describe 'user views his company details' do
   it 'as customer admin successfully' do
-    company = Company.create!(email_domain: 'codeplay.com.br', 
-                             cnpj: '00000000000000', 
-                             name: 'Codeplay Cursos SA', 
-                             billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
-                             billing_email: 'financas@codeplay.com.br')
-    customer_admin = User.create!(email: 'john_doe@codeplay.com.br', 
+    company = Company.create!(email_domain: 'codeplay.com.br',
+                              cnpj: '00000000000000',
+                              name: 'Codeplay Cursos SA',
+                              billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
+                              billing_email: 'financas@codeplay.com.br')
+    customer_admin = User.create!(email: 'john_doe@codeplay.com.br',
                                   password: '123456',
                                   role: 10,
                                   company: company)
@@ -28,7 +28,7 @@ describe 'user views his company details' do
   it 'and is not a customer admin' do
     user_customer_login
     visit user_company_path(Company.last.token)
-    
+
     expect(page).to_not have_content('Atualizar dados')
     expect(page).to_not have_content('Gerar novo token')
   end

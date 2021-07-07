@@ -1,15 +1,14 @@
 class Admin::OrdersController < Admin::AdminController
-  before_action :authenticate_admin!, only: [:index, :show, :edit, :update]
-  before_action :set_company, only: [:index, :show, :edit, :update]
-  before_action :set_order, only: [:show, :edit, :update]
+  before_action :authenticate_admin!, only: %i[index show edit update]
+  before_action :set_company, only: %i[index show edit update]
+  before_action :set_order, only: %i[show edit update]
   before_action :status_verification, only: [:update]
 
   def index
     @orders = @company.orders.order(id: :desc)
   end
 
-  def show
-  end
+  def show; end
 
   def edit
     response_list
@@ -33,12 +32,12 @@ class Admin::OrdersController < Admin::AdminController
   def order_histories_params
     params.require(:order).permit(:status, :response_code)
   end
-  
+
   def response_list
-    @response_code = ['01 - Pendente de cobrança', 
-                      '05 - Cobrança efetivada com sucesso', 
-                      '09 - Cobrança recusada por falta de créditos', 
-                      '10 - Cobrança recusada por dados incorretos para cobrança', 
+    @response_code = ['01 - Pendente de cobrança',
+                      '05 - Cobrança efetivada com sucesso',
+                      '09 - Cobrança recusada por falta de créditos',
+                      '10 - Cobrança recusada por dados incorretos para cobrança',
                       '11 - Cobrança recusada sem motivo especificado']
   end
 

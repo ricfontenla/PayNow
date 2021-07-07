@@ -1,16 +1,14 @@
 class Admin::CompaniesController < Admin::AdminController
   before_action :authenticate_admin!
-  before_action :set_company, only: [:show, :edit, :update, :generate_token]
+  before_action :set_company, only: %i[show edit update generate_token]
 
   def index
-    @companies = Company.all.sort_by { |company| company.name }
+    @companies = Company.all.sort_by(&:name)
   end
 
-  def show
-  end
+  def show; end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @company.update(company_params)
@@ -25,14 +23,14 @@ class Admin::CompaniesController < Admin::AdminController
     @company.token = create_unique_token
     if @company.save
       flash[:notice] = t('.success')
-      redirect_to [:admin, @company]
     else
       flash[:alert] = t('.fail')
-      redirect_to [:admin, @company]
     end
+    redirect_to [:admin, @company]
   end
 
   private
+
   def company_params
     params.require(:company).permit(:name, :cnpj, :billing_adress, :billing_email)
   end

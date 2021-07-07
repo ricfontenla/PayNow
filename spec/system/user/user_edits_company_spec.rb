@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'User edits company' do
-it 'successfully' do
+  it 'successfully' do
     user_customer_admin_login
 
     visit root_path
@@ -10,7 +10,7 @@ it 'successfully' do
     fill_in 'Endereço de cobrança', with: 'Rua Abacaxi, numero 11 - Bairro Maça, 55555-555'
     fill_in 'Email de cobrança', with: 'cobrancas@paynow.com.br'
     click_on 'Atualizar'
-    
+
     expect(page).to have_content('Codeplay Cursos SA')
     expect(page).to have_content('codeplay.com.br')
     expect(page).to have_content('00000000000000')
@@ -23,8 +23,8 @@ it 'successfully' do
   it 'and generates a new token' do
     user_customer_admin_login
     visit user_company_path(Company.last.token)
-    
-    expect { click_on 'Gerar novo token' }.to change { Company.last.token }
+
+    expect { click_on 'Gerar novo token' }.to(change { Company.last.token })
     expect(current_path).to eq(user_company_path(Company.last.token))
     expect(page).to have_content('Novo token gerado com sucesso')
     expect(page).to have_content(Company.last.token)
@@ -43,12 +43,11 @@ it 'successfully' do
   end
 
   it 'and fields must be unique' do
-
-    company = Company.create!(email_domain: 'cookbook.com.br', 
-                              cnpj: '99999999999999', 
-                              name: 'Cookbook LTDA', 
-                              billing_adress: 'Rua Cereja, numero 99 - Bairro Limão, 11111-111',
-                              billing_email: 'financas@cookbook.com.br')
+    Company.create!(email_domain: 'cookbook.com.br',
+                    cnpj: '99999999999999',
+                    name: 'Cookbook LTDA',
+                    billing_adress: 'Rua Cereja, numero 99 - Bairro Limão, 11111-111',
+                    billing_email: 'financas@cookbook.com.br')
 
     user_customer_admin_login
     visit edit_user_company_path(Company.last.token)
@@ -76,7 +75,7 @@ it 'successfully' do
     fill_in 'Endereço de cobrança', with: 'Rua Abacaxi, numero 11 - Bairro Maça, 55555-555'
     fill_in 'Email de cobrança', with: 'cobrancas@paynow.com.br'
     click_on 'Atualizar'
-    
+
     expect(Company.last.company_histories.last.name).to eq('Codeplay Cursos SA')
     expect(Company.last.company_histories.last.cnpj).to eq('00000000000000')
     expect(Company.last.company_histories.last.billing_adress).to eq('Rua Abacaxi, numero 11 - Bairro Maça, 55555-555')

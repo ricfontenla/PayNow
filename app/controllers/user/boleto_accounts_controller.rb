@@ -3,9 +3,9 @@ require 'csv'
 class User::BoletoAccountsController < User::UserController
   before_action :authenticate_user!
   before_action :set_company
-  before_action :set_payment_method, only: [:new, :create, :edit, :update]
-  before_action :set_boleto_account, only: [:edit, :update, :destroy]
-  before_action :bank_codes, only: [:new, :create, :edit, :update]
+  before_action :set_payment_method, only: %i[new create edit update]
+  before_action :set_boleto_account, only: %i[edit update destroy]
+  before_action :bank_codes, only: %i[new create edit update]
 
   def new
     @boleto_account = BoletoAccount.new
@@ -21,8 +21,7 @@ class User::BoletoAccountsController < User::UserController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @boleto_account.update(boleto_params)
@@ -40,9 +39,10 @@ class User::BoletoAccountsController < User::UserController
   end
 
   private
+
   def bank_codes
     csv = File.read(Rails.root.join('lib/assets/csv/bancos_associados.csv'))
-    @bank_codes = CSV.parse(csv).map { |key, value| [key + ' - ' + value, key] }
+    @bank_codes = CSV.parse(csv).map { |key, value| ["#{key} - #{value}", key] }
   end
 
   def boleto_params

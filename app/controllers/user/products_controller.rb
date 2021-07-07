@@ -1,14 +1,13 @@
-class User:: ProductsController < User::UserController
+class User::ProductsController < User::UserController
   before_action :authenticate_user!
   before_action :set_company
-  before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :set_product, only: %i[show edit update destroy]
 
   def index
-    @products = @company.products.sort_by { |product| product.name }
+    @products = @company.products.sort_by(&:name)
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @product = Product.new
@@ -23,8 +22,7 @@ class User:: ProductsController < User::UserController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @product.update(product_params)
@@ -42,8 +40,9 @@ class User:: ProductsController < User::UserController
   end
 
   private
+
   def product_params
-    params.require(:product).permit(:name, :price, :pix_discount, 
+    params.require(:product).permit(:name, :price, :pix_discount,
                                     :card_discount, :boleto_discount)
   end
 

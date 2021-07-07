@@ -1,4 +1,4 @@
-class User::UserController < ActionController::Base
+class User::UserController < ApplicationController
   layout 'user'
 
   def is_customer_admin?

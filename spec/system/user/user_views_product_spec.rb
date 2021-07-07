@@ -1,27 +1,27 @@
 require 'rails_helper'
 
-describe "user views product" do
+describe 'user views product' do
   it 'successfully' do
-    company = Company.create!(email_domain: 'codeplay.com.br', 
-                              cnpj: '00000000000000', 
-                              name: 'Codeplay Cursos SA', 
+    company = Company.create!(email_domain: 'codeplay.com.br',
+                              cnpj: '00000000000000',
+                              name: 'Codeplay Cursos SA',
                               billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
                               billing_email: 'financas@codeplay.com.br')
-    user = User.create!(email: 'jane_doe@codeplay.com.br', 
-                        password: '123456', 
+    user = User.create!(email: 'jane_doe@codeplay.com.br',
+                        password: '123456',
                         role: 0,
                         company: company)
     Product.create!(name: 'Curso Ruby Básico',
-                    price:'100',
+                    price: '100',
                     pix_discount: 10,
                     card_discount: 0,
-                    boleto_discount: 5, 
+                    boleto_discount: 5,
                     company: company)
     Product.create!(name: 'Curso HTML5',
-                    price:'60',
+                    price: '60',
                     pix_discount: 8.5,
                     card_discount: 0,
-                    boleto_discount: 3.25, 
+                    boleto_discount: 3.25,
                     company: company)
 
     login_as user, scope: :user
@@ -42,20 +42,20 @@ describe "user views product" do
   end
 
   it 'and view details' do
-    company = Company.create!(email_domain: 'codeplay.com.br', 
-                              cnpj: '00000000000000', 
-                              name: 'Codeplay Cursos SA', 
+    company = Company.create!(email_domain: 'codeplay.com.br',
+                              cnpj: '00000000000000',
+                              name: 'Codeplay Cursos SA',
                               billing_adress: 'Rua banana, numero 00 - Bairro Laranja, 00000-000',
                               billing_email: 'financas@codeplay.com.br')
-    user = User.create!(email: 'jane_doe@codeplay.com.br', 
-                        password: '123456', 
+    user = User.create!(email: 'jane_doe@codeplay.com.br',
+                        password: '123456',
                         role: 0,
                         company: company)
     Product.create!(name: 'Curso Ruby Básico',
-                    price:'100',
+                    price: '100',
                     pix_discount: 10,
                     card_discount: 0,
-                    boleto_discount: 5, 
+                    boleto_discount: 5,
                     company: company)
 
     login_as user, scope: :user

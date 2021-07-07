@@ -3,7 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  
+
   belongs_to :company, optional: true
 
   before_create :verify_user_email_domain
@@ -18,11 +18,10 @@ class User < ApplicationRecord
   end
 
   private
-  def verify_user_email_domain 
-    domain = self.email.split('@').last
+
+  def verify_user_email_domain
+    domain = email.split('@').last
     registered_companies = Company.where(email_domain: domain)
-    if registered_companies.one?
-      self.company = registered_companies.last
-    end
+    self.company = registered_companies.last if registered_companies.one?
   end
 end

@@ -1,9 +1,7 @@
 class HomeController < ApplicationController
-
   layout :verify_layout
 
-  def index
-  end
+  def index; end
 
   private
 

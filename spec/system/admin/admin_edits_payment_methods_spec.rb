@@ -2,8 +2,8 @@ require 'rails_helper'
 
 describe 'Admin edits payment method' do
   it 'sucessfully' do
-    card = PaymentMethod.create!(name: 'PISA', 
-                                 billing_fee: 5, 
+    card = PaymentMethod.create!(name: 'PISA',
+                                 billing_fee: 5,
                                  max_fee: 250,
                                  status: false,
                                  category: 2)
@@ -26,9 +26,9 @@ describe 'Admin edits payment method' do
     expect(page).to have_content('atualizado com sucesso')
   end
 
-  it 'and attributes cannot be blank' do 
-    card = PaymentMethod.create!(name: 'PISA', 
-                                 billing_fee: 5, 
+  it 'and attributes cannot be blank' do
+    card = PaymentMethod.create!(name: 'PISA',
+                                 billing_fee: 5,
                                  max_fee: 250,
                                  status: false,
                                  category: 2)
